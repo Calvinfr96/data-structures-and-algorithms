@@ -24,6 +24,7 @@ function addUpTo(n) {
     }
     return total;
 }  
+```
 - The first implementation has a total of three simple operations:
     1. Multiplication
     2. Division
