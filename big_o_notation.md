@@ -131,3 +131,16 @@ function double(arr) {
 }
 ```
 - Within this algorithm, an array is declared and a number is declared (let I = 0). Within the loop, items are pushed onto the array and then the array is returned. The size of the array returned scales proportionally to the size of input array. This results in a space complexity of O(n + 2), which reduces to O(n).
+
+## Logarithms
+- Big O Complexities that aren’t O(1), O(n), or O(n^2) typically involve logarithms. Examples include O(log(n) and O(n*log(n)).
+- A logarithm is the inverse of exponentiation. This means the output of the logarithm is the exponent you would raise the base of the logarithm to get the input. Log base 2 of 8 equals 3 because 2^3 is 8.
+- For Big O Analysis, a base of 2 is typically used for logarithms.
+- O(log(n)) is the second-best time / space complexity you can achieve for a given algorithm. In order from best to worst, the most common complexities are: O(1), O(log(n)), O(n), O(n*log(n)), and O(n^2).
+- Certain searching and efficient sorting algorithms have logarithmic time complexities.
+- Recursion sometimes involves logarithmic space complexity.
+
+## Recap
+- To analyze performance of an algorithm, we use Big O Notation. We are mainly concerned with analyzing how the runtime and memory usage of an algorithm changes as the size of input changes.
+- Big O Notation is not concerned with precisely defining the number of operations. It is only concerned with the general trend of input size vs. runtime or memory usage.
+- Time and space complexity only depend on the algorithm, not on the hardware used to run the algorithm.
