@@ -1,5 +1,5 @@
 # Big O Notation
-- For all data structures and algorithms (DSA) problem you encounter, there will be many implementations that work. Big O notation is used to determine which implementation is best. It is a system of generalizing and comparing code in terms of their efficiency. It gives you a numeric representation of the efficiency of code.
+- For all data structures and algorithms (DSA) problems you encounter, there will be many implementations that work. Big O notation is used to determine which implementation is best. It is a system of generalizing and comparing code in terms of their efficiency. It gives you a numeric representation of the efficiency of code.
 - Big O notation is also useful for talking about the trade-offs between different approaches.
 - When trying to debug code, it helps to understand efficiency to pin point problems that make your code slower.
 
@@ -73,4 +73,32 @@ function printAllPairs(n) {
     }
 }
 ```
-- This function also involves two for loops which are O(n). However, because one loop is nested inside of the other, you multiply instead of adding, resulting in a complexity of O(n^2).
+- This function also involves two for loops which are O(n). However, because one loop is nested inside of the other, you multiply instead of adding, resulting in a complexity of O(n<sup>2</sup>).
+
+## Simplifying Big O Expressions
+- The exact number of operations required to execute an algorithm is not important for calculating the Big O of an algorithm. It’s more important how the number of operations scales with the input.
+- When determining the time complexity of an algorithm, there are some helpful rules for Big O Expressions: 
+    - Constants don’t matter. This means that O(2n) can be simplified to O(n) and O(500) can be simplified to O(1). O(13n^2) can be simplified to O(n^2).
+    - Smaller terms don’t matter either. This means if an algorithm contains 10n +2 operations, where n is the input, the algorithm has a Big O of O(n). If there are 5n^2 + n + 8 operations, the algorithm has a Big O of O(n^2). This is because the highest order term in the expression. In this case, that term is n^2.
+- There are also some helpful shortcuts you can take when performing Big O analysis:
+    - Arithmetic operations are constant. This means it takes a computer the same amount of time to do 2 + 2 as it does 1,000 + 1,000.
+    - Variable assignments are also constant.
+    - Accessing elements in an array using the index or accessing elements in an object using the key are also constant.
+    - In a loop, the complexity is the length of the loop multiplied by the complexity of whatever happens inside the loop.
+- The following examples show simple Big O analysis:
+```
+function logAtLeast5(n) {
+    for (let i = 0; i < Math.max(5, n)) {
+        console.log(n)
+    }
+}
+```  
+- In this function, as n grows, the number of operations grows proportionally. This means that the algorithm has a time complexity of O(n).
+```
+function logAtMost5(n) {
+    for (let i = 0; i < Math.min(5, n)) {
+        console.log(n)
+    }
+}
+```
+- In this function, as n grows, the number of operations remains constant because the maximum number of times it will log a number is 5. This means the algorithm has a time complexity of O(1).
