@@ -88,7 +88,7 @@ function printAllPairs(n) {
 - The following examples show simple Big O analysis:
 ```
 function logAtLeast5(n) {
-    for (let i = 0; i < Math.max(5, n)) {
+    for (let i = 0; i < Math.max(5, n); i++) {
         console.log(n)
     }
 }
@@ -96,9 +96,38 @@ function logAtLeast5(n) {
 - In this function, as n grows, the number of operations grows proportionally. This means that the algorithm has a time complexity of O(n).
 ```
 function logAtMost5(n) {
-    for (let i = 0; i < Math.min(5, n)) {
+    for (let i = 0; i < Math.min(5, n); i++) {
         console.log(n)
     }
 }
 ```
 - In this function, as n grows, the number of operations remains constant because the maximum number of times it will log a number is 5. This means the algorithm has a time complexity of O(1).
+
+Space Complexity
+- Time complexity is concerned with analyzing the runtime of an algorithm as the size of inputs increases.
+- Space complexity, which also uses Big O Notation, is concerned with analyzing how much additional memory we need to allocate to run the code in the algorithm.
+    - When analyzing the space complexity of an algorithm, the size of the input is not considered. The size of an algorithm, excluding the size of the input, is also known as auxiliary space complexity.
+- Things to consider when analyzing space complexity in JS:
+    - Most primitives (Booleans, numbers, undefined, and null) are constant space.
+    - Strings require O(n) space, where n is the string length. This means that 1 takes up the same amount of space as 1000 or that true takes up the same amount of space as false.
+    o	Reference types such as arrays and objects are generally O(n), where n is the number of elements in an array or the number of keys in an object. This means that an array of size 40 takes up twice as much space as an array of size 20.
+- Take the following example:
+```
+function sum(arr) {
+    let total = 0;
+    for (let i = 0; i < arr.length; i++) {
+        total += 0;
+    }
+    return total;
+}
+```
+- Within this algorithm, two numbers are declared (let total = 0 and let I = 0). This means the algorithm has a space complexity of O(1).
+```
+function double(arr) {
+    let newArray = []
+    for (i = 0; i < newArray.length; i++) {
+        newArray.push(2*arr[i])
+    }
+}
+```
+- Within this algorithm, an array is declared and a number is declared (let I = 0). Within the loop, items are pushed onto the array and then the array is returned. The size of the array returned scales proportionally to the size of input array. This results in a space complexity of O(n + 2), which reduces to O(n).
