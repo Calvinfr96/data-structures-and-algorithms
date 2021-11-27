@@ -1,5 +1,11 @@
 # Analyzing Peformance of Arrays and Objects
 
+### Objectives
+- Analyze how arrays and objects work through the lens of Big O.
+- Explain why adding elements to the beginning of an array is costly.
+- Compare and contrast the runtimes of arrays and objects, as well as their built-in methods.
+
+
 ## The Big O of Objects
 - Objects are unordered data structures of key-value pairs. Objects are ideal when you don’t need to store data in an ordered fashion and fast access, insertion, and removal.
 - The Big O of basic object operations are as follows:
