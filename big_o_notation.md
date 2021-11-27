@@ -44,7 +44,7 @@ function addUpTo(n) {
 ## Introduction to Big O
 - Big O Notation is a way to formalize fuzzy counting. It allows us to talk formally about how the runtime of an algorithm grows as the number of inputs grow. It describes the relationship between the input size and the runtime of a function.
 - We say that an algorithm is O(f(n)) if the number of simple operations the computer must do is eventually less than a constant times f(n) as n increases.
-- f(n) could be linear, meaning f(n) = n. In general, we compare how the input n on the left side of the equation scales with the runtime n on the right sie.
+- f(n) could be linear, meaning f(n) = n. In general, we compare how the input n on the left side of the equation scales with the runtime n on the right side.
     - f(n) could be quadratic, meaning f(n) = n^2.
     - f(n) could be constant, meaning f(n) = 1.
     - f(n) could also be something entirely different.
@@ -141,6 +141,6 @@ function double(arr) {
 - Recursion sometimes involves logarithmic space complexity.
 
 ## Recap
-- To analyze performance of an algorithm, we use Big O Notation. We are mainly concerned with analyzing how the runtime and memory usage of an algorithm changes as the size of input changes.
+- To analyze performance of an algorithm, we use Big O Notation. We are mainly concerned with analyzing how the runtime (time complexity) and memory usage (space complexity) of an algorithm changes as the size of input changes.
 - Big O Notation is not concerned with precisely defining the number of operations. It is only concerned with the general trend of input size vs. runtime or memory usage.
 - Time and space complexity only depend on the algorithm, not on the hardware used to run the algorithm.
