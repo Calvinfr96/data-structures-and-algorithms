@@ -67,3 +67,21 @@ function charCount(str) {
     2.	Temporarily ignore that difficulty.
     3.	Write a simplified solution.
     4.	Incorporate the difficult part back in.
+
+## Look Back and Refactor
+- If you don’t take the time to look back on your code and reflect on it line by line, your code won’t be as good as it can be.
+- When looking back and refactoring, you need to strive for an ideal balance of efficiency and legibility. You can ask these questions to achieve this:
+    - Can you check the result?
+    - Can you derive the result differently?
+    - Can you understand it at a glance?
+    - Can you use the result or method for some other problem?
+    - Can you improve the performance of the solution?
+    - Can you think of other ways to refactor?
+    - How have other people solve the problem?
+
+## Recap
+- Understand the problem: Ask the interview questions to clarify your understanding of the problem they ask you to solve.
+- Explore concrete examples: This will help you thoroughly understand all aspects of the problem, including inputs, outputs, edge cases, error handling, etc.
+- Break it down: Write out pseudocode or a step by step process you will need to follow to solve the problem. Don’t just start writing code. This will help especially if you don’t finish, you can show the interviewer you had an idea of how to solve the rest of the problem.
+- Solve/simplify: Once you’ve broken the problem down into an understandable step-by-step process solve it. If there are lingering misconceptions, simplify the problem by ignoring them and addressing them at some other point in the solving process.
+- Look back/refactor: This will help you become a developer because you’re going back and figuring out what you could’ve done better.
