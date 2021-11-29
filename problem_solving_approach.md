@@ -37,13 +37,15 @@ What is an algorithm?
 - Understand the outputs that should come from the solution to the problem. What do they look like?
 - Can the outputs be determined from the inputs? In other words, do you have enough information to solve the problem? (Sometimes you need to start solving the problem to determine this, but it’s still good to consider this early on.)
 - How should the important pieces of data be labeled? What are the things that matter?
-Explore Concrete Examples
+
+## Explore Concrete Examples
 - Coming up with examples can help you solve the problem better.
 - Examples also provide sanity checks that your eventual solution works how it should.
 - Examples of problems can include user stories and unit tests.
 - When exploring examples, you should start with simple examples, then progress to more complex examples.
 - Next, explore edge cases such as examples with empty or invalid inputs.
-Break It Down
+
+## Break It Down
 - Break down the problem by writing out the steps it takes to solve the problem. This forces you to think about your code before writing it. It also helps you catch lingering conceptual issues or misunderstandings before you try solving the problem with code.
 - A good way to break down the problem is by writing pseudocode. Writing pseudocode means writing out the steps you need to take to implement the solution using code, you don’t worry about specific syntax.
 ```
