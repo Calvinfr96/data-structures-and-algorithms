@@ -103,7 +103,7 @@ function logAtMost5(n) {
 ```
 - In this function, as n grows, the number of operations remains constant because the maximum number of times it will log a number is 5. This means the algorithm has a time complexity of O(1).
 
-Space Complexity
+## Space Complexity
 - Time complexity is concerned with analyzing the runtime of an algorithm as the size of inputs increases.
 - Space complexity, which also uses Big O Notation, is concerned with analyzing how much additional memory we need to allocate to run the code in the algorithm.
     - When analyzing the space complexity of an algorithm, the size of the input is not considered. The size of an algorithm, excluding the size of the input, is also known as auxiliary space complexity.
