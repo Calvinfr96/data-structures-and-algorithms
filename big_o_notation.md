@@ -110,7 +110,7 @@ function logAtMost5(n) {
 - Things to consider when analyzing space complexity in JS:
     - Most primitives (Booleans, numbers, undefined, and null) are constant space.
     - Strings require O(n) space, where n is the string length. This means that 1 takes up the same amount of space as 1000 or that true takes up the same amount of space as false.
-    o	Reference types such as arrays and objects are generally O(n), where n is the number of elements in an array or the number of keys in an object. This means that an array of size 40 takes up twice as much space as an array of size 20.
+    - Reference types such as arrays and objects are generally O(n), where n is the number of elements in an array or the number of keys in an object. This means that an array of size 40 takes up twice as much space as an array of size 20.
 - Take the following example:
 ```
 function sum(arr) {
