@@ -128,3 +128,50 @@ function countUniqueValues(array){
     return pointer1 + 1
 }
 ```
+
+## Sliding Window Pattern
+- This pattern is useful for when you have a set of data such as an array or a string, and you’re looking for a subset of that data that is continuous in some way. For example, this pattern would be useful for finding the longest sequence of unique characters within a string.
+    - Another useful problem this pattern is ideal for is one in which you must create a function that finds the maximum sum of n consecutive elements within an array.
+- The pattern works by creating a window, which can be either an array or a single number. Depending on a certain condition, the window either increases or closes (and a new window is created).
+- As an example, take the problem where you must find the largest subset of n consecutive elements in an array. Implementing the sliding window pattern here means that you create a window of n digits at the beginning of the array and shift it forward by one element until you reach the end of the array. As you move forward, you update the value of max sum.
+    - Naïve Approach:
+    ```
+    function maxSubarraySum(array, num) {
+        if(num > array.length) {
+            return null;
+        }
+        let max = -Infinity;
+        for(let i = 0; i < array.length - num + 1; i++) {
+            let temp = 0;
+            for(let j = 0; j < num j++) {
+                temp += array[i + j];
+            }
+            if(temp > max) {
+                max = temp;
+            }
+        }
+        return max;
+    }
+    ```
+    - This solution uses the sliding window approach, but does so ineffeciently because the window is recalculated during each iteration instead of being shifted or slid.
+    - Sliding Window Approach
+    ```
+    function maxSubarraySum(array, num) {
+        let maxSum = 0;
+        let tempSum = 0;
+        if (array.length < num) {
+            return null;
+        }
+
+        for(let i = 0; i < num; i++) {
+            maxSum += array[i];
+        }
+        tempSum = maxSum;
+        for(let i = num; i < array.length; i++) {
+            tempSum = tempSum - array[i - num] + array[i];
+            maxSum = Math.max(maxSum, tempSum);
+        }
+        return maxSum;
+    }
+    ```
+    - This solution uses the sliding window approach by creating an initial window, then sliding it forward (by subtracting the number moving out of the window from the left and adding the one moving into the window from the right) until the end of the array. As the window moves, the sum of the elements within it is calculated. This sum is compared against the maximum sum and the maximum is updated accordingly.
