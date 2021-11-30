@@ -81,7 +81,7 @@ function validAnagram(str1, str2){
 ## Multiple Pointers
 - This pattern involves creating pointers or values that correspond to an index or position and move toward the beginning or end based on a certain condition. This pattern is very efficient for solving problems with minimal space complexity as well.
 - You use this pattern for problems in which you are asked to find a pair of values within a linear structure such as an array or string. This pair of values must satisfy some condition.
-- As an example, consider a problem in which you are asked to write a function called sumZero, which accepts a sorted array of integers. The function should find the first pair whose sum is zero. The function should return the pair as an array or undefined if said pair does not exist.
+- As an example, consider a problem in which you are asked to write a function called sumZero, which accepts a **sorted** array of integers. The function should find the first pair whose sum is zero. The function should return the pair as an array or undefined if said pair does not exist.
 - The naïve solution uses nested looping and has a time complexity of O(n^2) and a space complexity of O(1).
 ```
 function sumZero(array) {
@@ -112,7 +112,7 @@ function sumZero(array){
 }
 ```
 - This refactor has a time complexity of O(n) and space complexity of O(1).
-- As another example, consider a problem in which you are asked to write a function called countUniqueValues, which accepts a sorted array and counts the unique values in the array. There can be negative numbers in the array, but it must always be sorted. Instead having a pointer at both ends of the array, you have two pointers at the beginning and move them forward based on certain conditions.
+- As another example, consider a problem in which you are asked to write a function called countUniqueValues, which accepts a **sorted** array and counts the unique values in the array. There can be negative numbers in the array, but it must always be sorted. Instead having a pointer at both ends of the array, you have two pointers at the beginning and move them forward based on certain conditions.
 ```
 function countUniqueValues(array){
   if(array.length === 0) {
@@ -175,3 +175,10 @@ function countUniqueValues(array){
     }
     ```
     - This solution uses the sliding window approach by creating an initial window, then sliding it forward (by subtracting the number moving out of the window from the left and adding the one moving into the window from the right) until the end of the array. As the window moves, the sum of the elements within it is calculated. This sum is compared against the maximum sum and the maximum is updated accordingly.
+
+## Divide and Conquer
+- This pattern involves breaking a large set of data into small chunks, then repeating a process with a subset of data.
+- As an example, consider a problem where you need to write a function that, given a **sorted** array of integers, accepts a value and returns the index where the value is located. If the value is not found, the function should return -1.
+    - Using the divide and conquer approach, you would roughly split the array in half, then you would take the number you split the array on and compare it to the number you’re looking for. If the desired number is greater, you look at the second half of the array. if it’s smaller, you look at the first half.
+    - You repeat this process for each subarray that is created until you find the number you’re looking for.
+- The divide on conquer pattern is typically used for complicated operations such as sorting large sets of data. The are also used in binary search algorithms. This pattern can be used on structures such as arrays, linked lists, and trees.
