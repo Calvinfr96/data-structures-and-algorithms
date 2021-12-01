@@ -182,3 +182,25 @@ function countUniqueValues(array){
     - Using the divide and conquer approach, you would roughly split the array in half, then you would take the number you split the array on and compare it to the number you’re looking for. If the desired number is greater, you look at the second half of the array. if it’s smaller, you look at the first half.
     - You repeat this process for each subarray that is created until you find the number you’re looking for.
 - The divide on conquer pattern is typically used for complicated operations such as sorting large sets of data. The are also used in binary search algorithms. This pattern can be used on structures such as arrays, linked lists, and trees.
+- Example of divide and conquer pattern used in a searching function:
+```
+function search(array, val) {
+    let min = 0;
+    let max = array.length - 1;
+    
+    while(min <= max) {
+        let middle = Math.floor((min + max) / 2);
+        let currentElement = array[middle];
+
+        if(currentElement < val) {
+            min = middle + 1; 
+        } else if(currentElement > val) {
+            max = middle - 1;
+        } else {
+            return middle;
+        }
+    }
+    return -1;
+}
+```
+- This algorithm has a time complexity of O(log(N)) and a space complexity of O(1). 
