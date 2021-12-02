@@ -33,6 +33,9 @@ function sameFrequency(num1, num2){
         }
     }
     return true
+
+    //Look Back/Refactor: The function could be made more effecient by returning false if the two strings do not have the same length.
+    //This check should be made at the beginning, before anything else is done with the strings.
 }
 
 function areThereDuplicatesFC() {
@@ -61,6 +64,9 @@ function areThereDuplicatesFC() {
         }
     }
     return false
+
+    //Look Back/Refactor: You can also use frequencies[key] > 1 in the second for loop. You can also use the ...args parameter instead
+    //of iterating through the arguments object. The ...args parameter gives access to the arguments as an array instead of an object.
 }
 
 function areThereDuplicatesMP(...args) {
@@ -89,6 +95,7 @@ function areThereDuplicatesMP(...args) {
         }
     }
     return false
-}
 
-console.log(areThereDuplicatesMP(1,3,1))
+    //Look Back/Refactor: This approach only works if the array is sorted. If it were unsorted, you would likely need to use nested 
+    //looping, resulting in a time complexity of O(n^2).
+}
