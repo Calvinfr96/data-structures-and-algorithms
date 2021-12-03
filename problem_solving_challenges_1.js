@@ -171,7 +171,37 @@ function isSubsequence(string1, string2) {
     //is empty.
 }
 
-console.log(isSubsequence('hello', 'hello world'))
-console.log(isSubsequence('sing', 'sting'))
-console.log(isSubsequence('abc', 'abracadabra'))
-console.log(isSubsequence('abc', 'acb'))
+function maxSubarraySum(array, length) {
+    //Problem: Write a function that, given an array and a length, returns the subarray of the given length that has the highest sum.
+    //The subarray must consist of consecutive digits. Ideally, the array passed to the function is sorted, but it doesn't have to be.
+
+    //Examples: maxSubarraySum([100,200,300,400], 2) // 700. maxSubarraySum([1,4,2,10,23,3,1,0,20], 4) // 79.
+
+    //Breakdown:
+    // Step 1: Define a variable called maxSum and one called tempSum. Set both equal to zero.
+    // Step 2: Loop through the array, going up to the specified length, and calculate the initial maxSum.
+    // Step 3: Loop through the array again, going up to the length of the array - the given length.
+    // Step 3a: Calculate the sum of the shifted window and set equal to tempSum.
+    // Step 3b: Compare maxSum and tempSum and update maxSum accordingly.
+    // Step 4: After the loop, return maxSum.
+
+    //Solve:
+    if(length > array.length){
+        return null
+    }
+
+    let maxSum = 0;
+    let tempSum = 0;
+
+    for(let i = 0; i < length; i++) {
+        maxSum += array[i];
+    }
+    tempSum = maxSum;
+
+    for(let i = 1; i <= array.length - length; i++) {
+        tempSum = tempSum - array[i-1] + array[i+length-1];
+        maxSum = Math.max(tempSum, maxSum);
+    }
+
+    return maxSum
+}
