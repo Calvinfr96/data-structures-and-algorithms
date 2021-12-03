@@ -131,6 +131,8 @@ function averagePair(array, target) {
     }
 
     return false
+
+    //Look Back/Reactor: The solution is adequate.
 }
 
 function isSubsequence(string1, string2) {
@@ -146,15 +148,27 @@ function isSubsequence(string1, string2) {
     // otherwise, do nothing.
     // Step 3: If pointer1 is equal to the length of the first string, return true. Otherwise, return false.
 
+    //Solve:
+    if(!string1) {
+        return true
+    }
+
     let pointer1 = 0;
 
     for(let pointer2 = 0; pointer2 < string2.length; pointer2++)  {
         if(string1[pointer1] === string2[pointer2]) {
             pointer1++
         }
+        if(pointer1 === string1.length) {
+            return true
+        }
     }
 
     return pointer1 === string1.length ? true : false
+
+    //Look Back/Refactor: A while loop (pointer2 < string2.length) could have been used instead of a for. Also, the iteration of the loop
+    //can be cut short by returning true if pointer1 === string1.length. You can also return true at the beginning of the loop if string1
+    //is empty.
 }
 
 console.log(isSubsequence('hello', 'hello world'))
