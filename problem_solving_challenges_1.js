@@ -99,3 +99,65 @@ function areThereDuplicatesMP(...args) {
     //Look Back/Refactor: This approach only works if the array is sorted. If it were unsorted, you would likely need to use nested 
     //looping, resulting in a time complexity of O(n^2).
 }
+
+function averagePair(array, target) {
+    //Problem: Write a function that, given a sorted array of integers and a target value, returns true if there is a pair of integers that 
+    //matches the target or false otherwise.
+
+    //Example: averagePair([1,2,3], 2.5) // true. averagePair([1,3,3,5,6,7,10,12,19], 8) // true.
+
+    //Breakdown:
+    // Step 1: Create two pointers called pointer1 and pointer2. Set pointer1 to zero and pointer2 to the highest index of the array.
+    // Step 2: Loop through the array using a standard for loop.
+    // Step 2a: Calculate the average of array[pointer1] and array[pointer2].
+    // Step 2b: If the average is less than the target, increment pointer1 by one. If the average is greater than the target, decrement
+    // pointer2 by 1.
+    // Step 2c: If the average is equal to the target, return true.
+    // Step 3: If the loop completes, return false
+
+    let pointer1 = 0;
+    let pointer2 = array.length - 1;
+
+    //Solve:
+    while(pointer1 < pointer2) {
+        const average = (array[pointer1] + array[pointer2]) / 2;
+        if(average < target) {
+            pointer1++
+        } else if(average > target) {
+            pointer2--
+        } else {
+            return true
+        }
+    }
+
+    return false
+}
+
+function isSubsequence(string1, string2) {
+    //Problem: Write a function that, given two strings, returns true if the first string is a substring of the second, or returns
+    //false otherwise. A substring means the characters in the first string appear in the second without their order changing.
+
+    //Examples: isSubsequence('hello', 'hello world') // true. isSubsequence('sing', sting') //true. isSubsequence('abc', 'acb') // false.
+
+    //Breakdown:
+    // Step 1: Create two pointers called pointer1 and pointer2. Set both pointers equal to 0.
+    // Step 2: Loop through the second string, using pointer2 as the iterator variable.
+    // Step 2a: Compare the characters at string1[pointer1] and string2[pointer2]. If they match, increment pointer1 by one.
+    // otherwise, do nothing.
+    // Step 3: If pointer1 is equal to the length of the first string, return true. Otherwise, return false.
+
+    let pointer1 = 0;
+
+    for(let pointer2 = 0; pointer2 < string2.length; pointer2++)  {
+        if(string1[pointer1] === string2[pointer2]) {
+            pointer1++
+        }
+    }
+
+    return pointer1 === string1.length ? true : false
+}
+
+console.log(isSubsequence('hello', 'hello world'))
+console.log(isSubsequence('sing', 'sting'))
+console.log(isSubsequence('abc', 'abracadabra'))
+console.log(isSubsequence('abc', 'acb'))
