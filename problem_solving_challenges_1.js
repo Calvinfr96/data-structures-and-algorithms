@@ -205,3 +205,40 @@ function maxSubarraySum(array, length) {
 
     return maxSum
 }
+
+function minSubArrayLen(array, target){
+    //Problem: Write a function that, given an array of positive integers and a positive integer, returns the minimum size of a subarray
+    //whose sum is greater than or equal to the positive integer. If there is no subarray, return zero.
+
+    //Examples: minSubarrayLen([2,3,1,2,4,3], 7) // 2 -> because [4,3] is the smallest array.
+    //minSubarrayLen([3,1,7,11,2,9,8,21,62,33,19], 62) // 1 -> because [62] is the smallest array.
+
+    //Breakdown:
+    // Step 1: Define two variables called start and end. Set them equal to zero and one respectively.
+    // Step 2: Define a variable called total and set it equal to zero.
+    // Step 3: Define a variable called minLen and set it equal to the length of the array.
+    // Step 4: Calculate the total. If the total is less than the target sum, move the end to the right. If the total is less than
+    // or equal to the target sum, move the start to the right. Otherwise, break out of the loop.
+
+    //Solve: 
+    let sum = 0;
+    let start = 0;
+    let end = 0;
+    let minimumLength = array.length;
+
+    while(start < array.length) {
+        if(sum < target && end < array.length) {
+            sum += array[end]
+            end++;
+        } else if(sum >= target) {
+            minimumLength = Math.min(minimumLength, end - start);
+            sum -= array[start];
+            start++;
+        } else {
+            break;
+        }
+        console.log(start,end)
+        console.log(sum)
+    }
+    return minimumLength === array.length ? 0 : minimumLength
+}
