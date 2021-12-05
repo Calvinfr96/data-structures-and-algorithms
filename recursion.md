@@ -111,8 +111,44 @@ function collectOddValues(array) {
         helper(input.slice(1));
     }
     helper(array);
-    
+
     return results;
 }
 ```
 - Helper method recursion is useful when trying to compile some sort of result like an array using a gradual process.
+- The general pattern of helper-method recursion is to have a non-recursive outer function wrap around a recursive inner (helper) function.
+
+## Pure Recursion
+- The same example from Helper Method Recursion can be solved using pure recursion, where the recursive function is completely self-contained with no external data structure (the collection array in the outer function for helper-method recursion). The purely recursive solution to this problem uses a similar approach to the recursive function that computed the sum of numbers from 1 to n or the factorial function:
+```
+function collectOddValues(array) {
+    const newArray = [];
+
+    if(array.length === 0) {
+        return newArray;
+    }
+
+    if(array[0] % 2 !== 0) {
+        newArray.push(array[0])
+    }
+
+    newArray = newArray.concat(collectOddValues(array.slice(1)))
+    return newArray
+}
+```
+- Take an example input of [1,2,3,4,5], the recursive execution of the function proceeds as follows:
+1. collectOddValues([1,2,3,4,5]) returns [1].concat(collectOddValues([2,3,4,5]))
+2. collectOddValues([2,3,4,5]) returns [ ].concat(collectOddValues([3,4,5]))
+3. collectOddValues([3,4,5]) returns [3].concat(collectOddValues([4,5]))
+4. collectOddValues([4,5]) returns [ ].concat(collectOddValues([5]))
+5. collectOddValues([5]) returns [5].concat(collectOddValues([]))
+6. collectOddValues([]) returns []
+7. [5].concat([])) resolves to [5]
+8. [ ].concat([5]) resolves to [5]
+9. [3].concat([5]) resolves to [3,5]
+10. [ ].concat([3,5]) resolves to [3,5]
+11. [1].concat([3,5]) resolves to [1,3,5]
+- Pure Recursion Tips
+    - For arrays, use methods like slice, the spread operator, and concat that make copies of arrays, so you don’t mutate them.
+    - Remember strings are immutable, so you will need to use methods like slice or substring to create copies of strings.
+    - To make copies of objects, use Object.assign or the spread operator. 
