@@ -16,6 +16,9 @@ function reverse(string) {
         const last = string.length - 1;
         return string[last] + reverse(string.slice(0, last));
     }
+
+    //Look Back / Refactor: A simpler return expression would have been reverse(str.slice(1)) + str[0]. In this expression,
+    //You're concatening the string character by character starting with the last and ending with the first.
 }
 
 function isPalindrome(string) {
@@ -29,6 +32,11 @@ function isPalindrome(string) {
 
     //Solve:
     return string === reverse(string) ? true : false
+
+    //Look Back / Refactor: Instead of using helper method recursion, you could have compared the first and last letters of the
+    //string, checking for equality. If the first and last letters match, you pass string.slice(1,-1) to isPalindrome (first and last letters
+    //removed). Otherwise, return false. The base case would be if the string is length one, return true and if the string is length two,
+    //return string[0] === string[1].
 }
 
 function someRecursive(array, callback) {
@@ -52,6 +60,8 @@ function someRecursive(array, callback) {
     } else {
         return someRecursive(array.slice(1), callback)
     }
+
+    //Look Back / Refactor: Solution adequate.
 }
 
 function flatten(array) {
@@ -81,6 +91,8 @@ function flatten(array) {
 
     collect(array);
     return flattenedArray;
+
+    //Look Back / Refactor: Solution is adequate. Pure recursion also could have been used.
 }
 
 function flattenPR(array) {
@@ -108,4 +120,7 @@ function flattenPR(array) {
 
     flattenedArray = flattenedArray.concat(flatten(array.slice(1)));
     return flattenedArray;
+
+    //Look Back / Refactor: Solution works. You also could have gone through the array with a for...of loop and used logic similar to
+    //the helper-method recursion solution. If the element is an array, call flatten on it, otherwise push it onto the collection array.
 }
