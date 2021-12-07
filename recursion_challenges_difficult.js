@@ -124,3 +124,153 @@ function flattenPR(array) {
     //Look Back / Refactor: Solution works. You also could have gone through the array with a for...of loop and used logic similar to
     //the helper-method recursion solution. If the element is an array, call flatten on it, otherwise push it onto the collection array.
 }
+
+function capitalizeFirst(stringArray) {
+    //Problem: Write a function that accepts an array of strings and returns an array with each string capitalized
+
+    //Examples: capitalizeFirst(['car','taco','banana']) // ['Car','Taco','Banana']
+
+    //Breakdown:
+    // Step 1: Create a variable called capitalizedStrings and set it equal to an empty array.
+    // Step 2: If the array is empty, return capitalized strings
+    // Step 3: Create a helper function called capitalize that capitalizes the first character of a string passed to it.
+    // Step 4: If the array is not empty, pass the first element to capitalize and push it into capitalizedStrings
+    // Step 5: Return capitalizedStrings.
+
+    //Solve:
+    let capitalizedStrings = [];
+
+    function capitalize(string) {
+        return string[0].toUpperCase() + string.slice(1);
+    }
+
+    if(stringArray.length === 0) {
+        return capitalizedStrings;
+    } else {
+        capitalizedStrings.push(capitalize(stringArray[0]));
+    }
+
+    capitalizedStrings = capitalizedStrings.concat(capitalizeFirst(stringArray.slice(1)));
+    return capitalizedStrings;
+}
+
+function nestedEvenSum(obj) {
+    //Problem: Write a function that accepts an object (potentially nested) and returns the sum of all even values.
+
+    //Example: obj = {one: 1, two: 2, nested: {three: 3, four: 4}, 6: 'six'}. nestedEvenSum(obj) // 6.
+
+    //Breakdown:
+    // Step 1: Declare a variable called evenSum and set it equal to zero.
+    // Step 2: Define a helper method called findEvens that traverses through a nested object and looks for even values,
+    // then adds them to the sum.
+    // Step 3: Call findEvens on obj
+    // Step 4: Return the sum.
+
+    //Solve:
+    let evenSum = 0;
+
+    function findEvens(obj) {
+        for(let key in obj) {
+            if(obj[key] %2 === 0) {
+                evenSum += obj[key];
+            }
+            if(typeof obj[key] === 'object' && obj[key] !== null) {
+                findEvens(obj[key]);
+            }
+        }
+    }
+
+    findEvens(obj);
+
+    return evenSum;
+}
+
+function capitalizeWords(strings) {
+    //Problem: Write a function that accepts an array of strings and returns an array with those strings in all caps.
+
+    //Example: capitalizeWords(['alpha','bravo','charlie']) // ['ALPHA','BRAVO','CHARLIE'].
+
+    //Breakdown:
+    // Step 1: Declare a variable called capitalized and set it equal to an empty array.
+    // Step 2: If the length of the strings array is zero, return.
+    // Step 3: If the length of the strings array is not zero, capitalize the first element if it is a string.
+    // Step 4: concatenate strings with the return value of capitalizedWords with strings.slice(1) passed as an argument.
+    // Step 5: Return the resultant array from step 4.
+
+    //Solve:
+    const capitalized = [];
+
+    if(strings.length === 0) {
+        return capitalized;
+    } else {
+        if(typeof strings[0] === 'string') {
+            capitalized.push(strings[0].toUpperCase());
+        }
+    }
+
+    return capitalized.concat(capitalizeWords(strings.slice(1)));
+}
+
+function stringifyNumbers(obj) {
+    //Problem: Write a function that accepts an object and modifies it non-destructively by converting number values to strings.
+
+    //Example: obj = {one: 1, two: 2, nested: {three: 3, four: 4}, 6: 'six'}.
+    //stringifyNumbers(obj) // obj = {one: '1', two: '2', nested: {three: '3', four: '4'}, 6: 'six'}.
+
+    //Breakdown:
+    // Step 1: Create a variable called stringified and set it equal to a copy of obj using the spread operator.
+    // Step 2: Create a function called findNumbers that traverses through all layers of the object looking for numbers.
+    // When the function finds a value that is a number, it converts it to a string. When the function finds a value that is an object,
+    // it calls findNumbers on that object.
+    // Step 3: Return the modified object.
+
+    //Solve:
+    const stringified = Object.assign({}, obj);
+
+    function findNumbers(obj) {
+        for(let key in obj) {
+            if(typeof obj[key] === 'number') {
+                obj[key] = obj[key].toString();
+            }
+            if(typeof obj[key] === 'object' && obj[key] !== null) {
+                findNumbers(obj[key]);
+            }
+        }
+    }
+
+    findNumbers(stringified);
+
+    return stringified;
+}
+
+function collectStrings(obj) {
+    //Problem: Write a function which accepts an object and returns an array of values in said object that are strings.
+
+    //Example: collectStrings({one: 1, two: 2, nested: {three: '3', four: '4'}, 6: 'six'}) // ['3','4','6'].
+
+    //Breakdown: 
+    // Step 1: Create a variable called strings and set it equal to an empty array.
+    // Step 2: Create a helper method called findStrings that traverses through all layers of an object. If it finds a value
+    // that is a string, it pushes it onto string. If it finds a value that is an object, it passes it as an argument to findStrings.
+    // Step 3: Return strings.
+
+    //Solve:
+    const strings = [];
+
+    function findStrings(obj) {
+        for(let key in obj) {
+            if(typeof obj[key] === 'string') {
+                strings.push(obj[key]);
+            }
+            if(typeof obj[key] === 'object' && obj !== null) {
+                findStrings(obj[key]);
+            }
+        }
+    }
+
+    findStrings(obj);
+
+    return strings;
+}
+
+console.log(collectStrings({one: 1, two: 2, nested: {three: '3', four: '4'}, 6: 'six'}))
