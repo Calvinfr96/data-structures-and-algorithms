@@ -152,6 +152,9 @@ function capitalizeFirst(stringArray) {
 
     capitalizedStrings = capitalizedStrings.concat(capitalizeFirst(stringArray.slice(1)));
     return capitalizedStrings;
+
+    //Look Back / Refactor: Solution is adequate. You can also shrink the array from the other end by capitalizing the last element, the
+    //passing stringArray.slice(0,-1) to the function recursively.
 }
 
 function nestedEvenSum(obj) {
@@ -171,7 +174,7 @@ function nestedEvenSum(obj) {
 
     function findEvens(obj) {
         for(let key in obj) {
-            if(obj[key] %2 === 0) {
+            if(typeof obj[key] === 'number' & obj[key] %2 === 0) {
                 evenSum += obj[key];
             }
             if(typeof obj[key] === 'object' && obj[key] !== null) {
@@ -183,6 +186,9 @@ function nestedEvenSum(obj) {
     findEvens(obj);
 
     return evenSum;
+
+    //Look Back / Refactor: Solution adequate. The code can be made slightly more effecient by checking if obj[key] is
+    //a number before determining if it is even.
 }
 
 function capitalizeWords(strings) {
@@ -209,6 +215,8 @@ function capitalizeWords(strings) {
     }
 
     return capitalized.concat(capitalizeWords(strings.slice(1)));
+
+    //Look Back / Refactor: Solution is adequate.
 }
 
 function stringifyNumbers(obj) {
@@ -241,6 +249,9 @@ function stringifyNumbers(obj) {
     findNumbers(stringified);
 
     return stringified;
+
+    //Look Back / Refactor: Solution adequate. You also could have built up an empty object by using the same findNumbers function, but
+    //expanding it so that it does sets the copies a key's value instead of stringifying it if it is not a number.
 }
 
 function collectStrings(obj) {
@@ -271,6 +282,25 @@ function collectStrings(obj) {
     findStrings(obj);
 
     return strings;
+
+    //Look Back / Refactor: Solution adequate. You also could have used pure recursion by concatenating the string arrays together
+    //as you passed through each layer of the nested object.
 }
 
-console.log(collectStrings({one: 1, two: 2, nested: {three: '3', four: '4'}, 6: 'six'}))
+function collectStringsPR(obj) {
+    let strings = [];
+
+    for(let key in obj) {
+        if(typeof obj[key] === 'string') {
+            strings.push(obj[key]);
+        }
+        if(typeof obj[key] === 'object') {
+            strings = strings.concat(collectStrings(obj[key])); //non-destructive.
+        }
+    }
+
+    return strings;
+
+    //Note: You perform the concatenation inside the for...in loop because the recursive invocations are non-blocking.
+    //This means that the for loop for the first layer finishes, then the second layer and so on. 
+}
