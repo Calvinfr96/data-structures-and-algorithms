@@ -95,3 +95,4 @@ function bubbleSort(array) {
         return array;
     }
     ```
+- The Big O (time complexity) of Bubble sort is O(n^2) in the worst-case scenario. If they data is nearly sorted, the time complexity is O(n).
