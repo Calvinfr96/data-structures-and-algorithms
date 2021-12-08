@@ -50,3 +50,58 @@ function binarySearch(array, value) {
     return -1;
 }
 ```
+- The Big O (time complexity) of the binary search algorithm above is O(log(n)) in the worst and average case, and O(1) in the best case. The worst case is when the value in question isn’t found until left <= right or is not found at all, and the best case is when the value in question is found on the first try.
+## Searching Strings
+- To implement a searching algorithm for a string that looks for a substring within a larger string, implement the following algorithm:
+    - Loop over each character in the characters in both strings with a for loop. If the characters from the  iteration of each loop don’t match, break out the loop, otherwise keep going.
+    - If you complete the inner loop an find a match, increment the count of matches.
+    - Finally return the count.
+- My Approach:
+```
+function search(string1, string2) {
+    //Problem: Write a function that takes in two strings and returns the number of times string1 appears in string2
+    
+    //Example: search('l','challenge') // 2.
+    
+    //Breakdown:
+    // Step1: Create two pointers called pointer1 and pointer2 assigned to string1 and string2, respectively. Set both equal to zero.
+    // Also create a variable called counter and set it equal to zero.
+    // Step2: Loop through string2 using pointer2. If string1[ponter1] === string2[pointer2], increment pointer1.
+    // Step3: If pointer1 = string1.length - 1, increment the count and set pointer1 back to zero.
+    // Step4: Return the count.
+
+    //Solve:
+    let pointer1 = 0;
+    let count = 0;
+
+    for(let char of string2) {
+        if(string1[pointer1] === char) {
+            if(pointer1 === string1.length - 1) {
+                count++;
+                pointer1 = 0;
+            } else {
+                pointer1++
+            }
+        }
+    }
+
+    return count;
+}
+```
+- Naive Approach:
+```
+function naiveSearch(string1, string2) {
+    let count = 0;
+    for(let i = 0; i < string1.length; i++) {
+        for(let j = 0; j < string2.length; j++) {
+            if(string1[i+j] !== string2[j]) {
+                break;
+            }
+            if(j === string2.length - 1) {
+                count++
+            }
+        }
+    }
+    return count;
+}
+```
