@@ -19,5 +19,5 @@ function numberCompare(num1,num2) {
 
 array.sort(numberCompare) // [4,6,10,15]
 ```
-    - Without the function the numbers would be sorted in the following order: [10,15,4,6] (based on Unicode values).
-    - In this case, a = num1 and b = num2. If b > a for a given pair, then a - b returns a negative number and a comes before b. This is why the function sorts the array in ascending order when passed to the sort method as a callback.
+- Without the function the numbers would be sorted in the following order: [10,15,4,6] (based on Unicode values).
+- In this case, a = num1 and b = num2. If b > a for a given pair, then a - b returns a negative number and a comes before b. This is why the function sorts the array in ascending order when passed to the sort method as a callback.
