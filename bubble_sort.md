@@ -8,7 +8,7 @@
 ## Pseudocode
 - Start looping with a variable called i starting at the end of the array and move towards the beginning.
 - Start an inner loop with a variable called j starting at the beginning and moving up to i – 1.
-- If array[j] > array[j + 1], swap the values.
+- If ```array[j]``` > ```array[j + 1]```, swap the values.
 - Return the sorted array when the loops are finished.
 ## Implementation
 - My Approach:
@@ -30,7 +30,7 @@ function bubbleSort(array) {
 ```
 function bubbleSort(array) {
     for(let i = 0;  i < array.length; i++) {
-        for(let j = 0; j < array.length j++) {
+        for(let j = 0; j < array.length; j++) {
             if(array[j] > array[j + 1]) {
                 let temp = array[j];
                 array[j] = array[j+1];
