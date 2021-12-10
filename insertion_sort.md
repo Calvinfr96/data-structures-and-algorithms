@@ -34,3 +34,5 @@ function insertionSort(array) {
     2. 3 > 1, so 3 gets copied to where 4 was: [2,3,3,4,5,6,7].
     3. 2 > 1, so 2 gets copied to where 3 was: [2,2,3,4,5,6,7]. This concludes the loop.
     4. After the loop finishes, currentVal is copied to where array[j] was when the loop finished. In this case, 2: [1,2,3,4,5,6,7].
+- The time complexity of insertion sort is O(n^2) for a completely unsorted array. For an array that is almost entirely sorted, the time complexity is O(n).
+- Insertion sort is good at adding items to a previously sorted array. For example, if you’re adding items to an array based on submissions made online. This sorting algorithm will be able to add those values in O(n) time.
