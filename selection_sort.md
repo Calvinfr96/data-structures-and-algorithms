@@ -12,10 +12,10 @@
 - My Approach:
 ```
 function selectionSort(array) {
-    for(i = 0; i < array.length; i++) {
+    for(let i = 0; i < array.length; i++) {
         let minIndex = i;
         let swapElements = false;
-        for(j = i; j < array.length; j++) {
+        for(let j = i; j < array.length; j++) {
             if(array[minIndex] > array[j]) {
                 minIndex = j;
                 swapElements = true;
@@ -31,9 +31,9 @@ function selectionSort(array) {
 - Solution:
 ```
 function selectionSort(array) {
-    for(i = 0; i < array.length; i++) {
+    for(let i = 0; i < array.length; i++) {
         let minIndex = i;
-        for(j = i + 1; j < array.length; j++) {
+        for(let j = i + 1; j < array.length; j++) {
             if(array[minIndex] > array[j]) {
                 minIndex = j;
             }
