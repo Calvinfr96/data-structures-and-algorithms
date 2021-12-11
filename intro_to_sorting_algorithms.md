@@ -21,3 +21,26 @@ array.sort(numberCompare) // [4,6,10,15]
 ```
 - Without the function the numbers would be sorted in the following order: [10,15,4,6] (based on Unicode values).
 - In this case, a = num1 and b = num2. If b > a for a given pair, then a - b returns a negative number and a comes before b. This is why the function sorts the array in ascending order when passed to the sort method as a callback.
+## Comparing Bubble, Insertion, and Selection sort
+- Bubble Sort:
+    - Time Complexity (Best): O(n)
+    - Time Complexity (Average): O(n)
+    - Time Complexity (Worst): O(n^2)
+    - Space Complexity: O(1)
+    - Works best with data that is almost sorted.
+- Insertion Sort:
+    - Time Complexity (Best): O(n^2)
+    - Time Complexity (Average): O(n^2)
+    - Time Complexity (Worst): O(n^2)
+    - Space Complexity: O(1)
+    - Works best with data that is almost sorted.
+    - Also works very well if you need data to be continuously sorted. It only needs to pass through the array once to add the data while maintaining the sort.
+- Selection Sort:
+    - Time Complexity (Best): O(n^2)
+    - Time Complexity (Average): O(n^2)
+    - Time Complexity (Worst): O(n^2)
+    - Space Complexity: O(1)
+    - Does not perform well with almost-sorted data. It's strongest positive is that it is easy to understand.
+- In the grand scheme of things, these algorithms are all roughly equivalent.
+- All these algorithms have quadratic time complexities. There are more effecient algorithms, but they're more complex.
+- These algorithms perform best and can actually out=perform the more advanced algorithms when they are applied to small data sets.
