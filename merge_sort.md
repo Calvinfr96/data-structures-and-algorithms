@@ -10,7 +10,7 @@
 ## Merging Arrays
 - The first step in implementing the Merge Sort algorithm is writing a function to merge two **sorted** arrays. The arrays are already sorted and you’re simply retuning the sorted combination of those arrays.
 - This function should have a time and space complexity of O(n + m), where n and m are the sizes of the arrays. It should modify the arrays in a non-destructive manner.
-- Pseudocode:
+- Merging Pseudocode:
     - Create an array, look at the smallest values in each **sorted** input array.
     - Using the Multiple Pointers Approach, create two pointers, one for each array being compared.
     - While there are still elements in either array that haven’t been looked at:
@@ -49,3 +49,29 @@ function merge(array1, array2) {
 ```
 - You don't need two nested while loops as long both conditions are satisfied in the conditional for the one while loop (using &&).
 - Only one of the last two while loops will run based on which array was not iterated through completely.
+- Sorting Pseudocode:
+    - The sorting pseudocode is recursive in nature. The first step is to break up the input array into two halves until you have arrays that are empty or only have one element. These arrays are automatically sorted since they contain one or no elements.
+    - Next, you merge these arrays using the merge function until you have one array that is the same length as the input array.
+    - Once the array has been merged back together, you return the merged and sorted array.
+    ```
+    function mergeSort(array) {
+        if(array.length < 2) {
+            return array;
+        }
+        const middle = Math.floor(array.length / 2);
+        const left = mergeSort(array.slice(0,middle));
+        const right = mergeSort(array.slice(middle));
+        return merge(left,right);
+    }
+
+    ```
+    - Take an example array of [10,24,76,73]:
+    - mergeSort([10,24,73,76]: left1 = mergeSort([10,24])
+    - mergeSort([10,24]): left2 = mergeSort([10]). This returns [10]. right2 = mergeSort([24]). This returns [24]. merge([10],[24]) returns [10,24].
+    - This means left1 resolves to [10,24].
+    - Now right1 = mergeSort([73,76])
+    - mergeSort([76,73]): left3 = mergeSort([76]). This returns [76]. right3 = mergeSort([73]). This returns [73]. merge([76], [73]) returns [73,76].
+    - This means right1 resolves to [73,76].
+    - merge([10,24], [73,76]) returns [10,24,73,76].
+    - An important thing to note about the recursion here is that left1 must fully resolve before right1 is calculated, then right1 must fully resolve before the function returns.
+    - Both merge and mergeSort are being called recursively in this function.
