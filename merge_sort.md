@@ -49,6 +49,7 @@ function merge(array1, array2) {
 ```
 - You don't need two nested while loops as long both conditions are satisfied in the conditional for the one while loop (using &&).
 - Only one of the last two while loops will run based on which array was not iterated through completely.
+## Sorting Arrays
 - Sorting Pseudocode:
     - The sorting pseudocode is recursive in nature. The first step is to break up the input array into two halves until you have arrays that are empty or only have one element. These arrays are automatically sorted since they contain one or no elements.
     - Next, you merge these arrays using the merge function until you have one array that is the same length as the input array.
@@ -75,3 +76,10 @@ function merge(array1, array2) {
     - merge([10,24], [73,76]) returns [10,24,73,76].
     - An important thing to note about the recursion here is that left1 must fully resolve before right1 is calculated, then right1 must fully resolve before the function returns.
     - Both merge and mergeSort are being called recursively in this function.
+## Time and Space Complexity
+- The time complexity in the best (almost sorted), worst (completely reversed), and average (somewhat sorted) case is O(n*log(n)).
+- The space complexity in all cases is O(n).
+- The time complexity is the same in all cases because the algorithm will split the array and merge it back together regardless of its initial sort.
+- The relationship between the size of the array and the number of splits performed by the mergeSort function is log(n) (base 2). For an 8-item array, 3 splits are performed. For 32-item array, 5 splits are performed.
+- The relationship between the size of the array and the number of comparisons performed by the merge function is linear (O(n) comparisons).
+- This means the total time complexity of the mergeSort function is O(n*log(n)).
