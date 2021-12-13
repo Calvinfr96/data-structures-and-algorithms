@@ -21,3 +21,36 @@
     - If the pivot is greater than the current element, increment the pivot index variable and then swap the current element with the element at the pivot index.
 - Swap the starting element (the pivot) with the element at the pivot index.
 - Return the pivot index.
+## Pivot Implementation
+- My Approach:
+```
+function pivot(array, start = 0, end = array.length - 1) {
+    const selectedIndex = start;
+    let pivotIndex = start;
+    
+    for(let i = 1; i <= end; i++) {
+        if(array[selectedIndex] > array[i]) {
+            pivotIndex++;
+            [array[i], array[pivotIndex]] = [array[pivotIndex], array[i]];
+        }
+    }
+    [array[selectedIndex], array[pivotIndex]] = [array[pivotIndex], array[selectedIndex]];
+    return pivotIndex;
+}
+```
+- Solution: 
+```
+function pivot(array, start = 0, end = array.length - 1) {
+    const selectedIndex = start;
+    let pivotIndex = start;
+    
+    for(let i = start + 1; i < array.length; i++) {
+        if(array[selectedIndex] > array[i]) {
+            pivotIndex++;
+            [array[i], array[pivotIndex]] = [array[pivotIndex], array[i]];
+        }
+    }
+    [array[selectedIndex], array[pivotIndex]] = [array[pivotIndex], array[selectedIndex]];
+    return pivotIndex;
+}
+```
