@@ -69,3 +69,11 @@ function quickSort(array, left = 0, right = array.length - 1) {
     return array;
 }
 ```
+## Time and Space Complexity
+- The time complexity of Quick Sort in the best (unsorted) and average (fairly sorted) cases is O(n*log(n)). The time complexity in the worst (completely sorted) case is O(n^2).
+    - As with Merge Sort, Quick Sort requires log(n) decompositions, where n is the size of the array.
+    - For each decomposition, you must make O(n) comparisons. This results in a total complexity of O(n*log(n)) in the best and average case.
+    - Completely sorted data is the worst case scenario for this algorithm because we are choosing the first element as the pivot point. The decomposition of the array is based on the left and right side of the pivot point, so if the array is completely sorted, the left side will always be one element and the right side will be the rest of the array. This leads to O(n) decompositions.
+    - For each decomposition, you must make O(n) comparisons. This results in a total complexity of O(n^2) in the worst case.
+    - This same problem occurs when the pivot is chosen as the last element. The time complexity in the worst case can be improved by picking a random element or a middle element instead of the first or last.
+- The space complexity of Quick Sort in all cases is O(log(n))
