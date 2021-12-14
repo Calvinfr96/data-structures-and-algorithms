@@ -54,3 +54,18 @@ function pivot(array, start = 0, end = array.length - 1) {
     return pivotIndex;
 }
 ```
+## Quick Sort Implementation
+- Pseudocode:
+    - Call the pivot helper function on the array.
+    - When the helper function returns the updated pivot index, recursively call the pivot helper on the subarray to the left and right of that index.
+    - Your base case is a subarray with less than two items in it.
+```
+function quickSort(array, left = 0, right = array.length - 1) {
+    if (left < right) {
+        let pivotIndex = pivot(array, left, right);
+        quickSort(array, left, pivotIndex - 1);
+        quickSort(array, pivotIndex + 1);
+    }
+    return array;
+}
+```
