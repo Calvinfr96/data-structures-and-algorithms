@@ -110,3 +110,9 @@ function maxDigits(array) {
     ```
     - Note: Using the spread operator in the concat method allows you to pass the individual subarrays within digitBuckets as arguments instead of the 2D array. If we just passed digitBuckets to concat, it would be a 2D array, not a 1D array.
     - Using Array.from({length: 10}, () => []) is a nicer way of creating the 2D array than doing it manually.
+## Time and Space Complexity
+- The time complexity in the best (almost sorted), average, and worst (completely unsorted) cases is O(n*k) where n is the number of elements in the array and k is the average number of digits.
+    - Due to the way computers store numbers, if the array consists entirely of random, unique numbers, then k approaches log(n). This means that for this case, radix sort is just as good as any of the comparison sorts. 
+    - For an array that has duplicated values, radix sort is technically only theoretically better than the comparison sorts.
+- The space complexity in all cases is O(n +k).
+
