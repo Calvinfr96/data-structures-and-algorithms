@@ -55,6 +55,7 @@ function findDigit(num, n) {
 function numDigits(num) {
     return Math.floor(Math.log10(num)) + 1;
 }
+```
 - Max Number of Digits Helper Method(Solution)
 ```
 function maxDigits(array) {
@@ -65,3 +66,47 @@ function maxDigits(array) {
     return max;
 }
 ```
+## Radix Sort Pseudocode
+- Define a function that accepts a list of numbers
+- Find the number with the maximum number of digits in that list.
+- Iterate through the list n times, where n is the maximum number of digits.
+- During each iteration separate the numbers into bucks based on the value if the kth digit.
+- At the end of each iteration combine all of the groupings back into a single array and call the function again on that array.
+- Do this until you have done it the appropriate number of times (step 1).
+## Radix Sort Implementation
+- My Approach: 
+    - For the implementation of the algorithm, it is helpful to use the flatten function from our practice on recursion to convert the 2D array of “buckets” to a 1D array of numbers to return as the final sorted array. One way of implementing the algorithm is by recursively calling the function on the array that is modified by each sort. With this approach, you have n – 1 recursive calls, where n is the number of digits.
+    ```
+    function radixSort(array) {
+        function sort(array, loopCount) {
+            const buckets = [[],[],[],[],[],[],[],[],[],[]];
+            for(let num of array) {
+                const position = findDigit(num,loopCount);
+                buckets[position].push(num);
+            }
+            if(loopCount< maxDigits(array)) {
+                return sort(flatten(buckets), loopCount + 1);
+            }
+            return flatten(buckets);
+        }
+        return sort(array,0);  
+    }
+    ```
+- Solution:
+    - Another way of implementing the algorithm is to use an outer for loop to iterate n times, where n is the maximum number of digits, then use an inner for loop to iterate through the array of numbers. Inside the inner loop, you create a new array based on the sorting algorithm, then assign this array to the array of numbers so it is updated before the next iteration of the inner loop.
+    ```
+    function radixSort(array) {
+        const maxDigitCount = maxDigits(array);
+        for(let i = 0; i < maxDigitCount; i++) {
+            let buckets = Array.from({length: 10}, () => []);
+            for(let num of array) {
+                const position = findDigit(num, i);
+                buckets[position].push(num);
+            }
+            array = [].concat(...buckets)
+        }
+        return array;
+    }
+    ```
+    - Note: Using the spread operator in the concat method allows you to pass the individual subarrays within digitBuckets as arguments instead of the 2D array. If we just passed digitBuckets to concat, it would be a 2D array, not a 1D array.
+    - Using Array.from({length: 10}, () => []) is a nicer way of creating the 2D array than doing it manually.
