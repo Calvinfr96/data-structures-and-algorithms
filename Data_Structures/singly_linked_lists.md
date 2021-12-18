@@ -26,3 +26,15 @@
 - If the list is empty (no head), the head and tail of the list should be set as the node being pushed.
 - If the list is not empty, the pointer of the tail should be updated from null to the node being pushed and the tail of the list should be updated to be that node. 
 - Finally, increment the length by one and return the linked list.
+## Popping
+- When popping an item off the end of a singly linked list, you have to remove the current tail and set the new tail as the node before it.
+- To set the previous node as the tail, you must traverse through the list until you find the node before the tail being removed, then set the tail as the previous node.
+- After popping the last node off the list, you return that node.
+- To traverse a list, you start at the head, then keep moving to the next node as long as the node has a next property
+## Popping Pseudocode
+- If there are no nodes in the list, return undefined.
+- Loop through the list until you reach the tail.
+- Set the next property of the second to last item to null.
+- Set the tail property to be the second to last node.
+- Decrement the length by one.
+- Return the node that was removed.

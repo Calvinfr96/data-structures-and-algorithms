@@ -32,12 +32,37 @@ class SinglyLinkedList {
         this.length++;
         return this;
     }
+
+    pop() {
+        if(!this.head) {
+            return undefined;
+        } else if(this.head === this.tail) {
+            const tail = this.head;
+            this.head = null;
+            this.tail = null;
+            this.length--;
+            return tail;
+        }
+        else {
+            const tail = this.tail;
+            let prev = this.head;
+            while(prev.next !== this.tail) {
+                prev = prev.next
+            }
+            prev.next = null;
+            this.tail = prev;
+            this.length--;
+            return tail;
+        }
+    }
 }
 
 const list = new SinglyLinkedList();
 console.log(list)
 list.push(1);
-list.push(2);
-list.push(3);
-list.push(4);
+console.log(list)
+const popped = list.pop()
+console.log(list)
+console.log(popped)
+list.pop()
 console.log(list)
