@@ -44,4 +44,11 @@
 ## Shifting Pseudocode
 - If the list is empty, return undefined
 - Otherwise, save the current head in a variable to be returned at the end of the method. Then, set the head to be the next property of the current head. Afterwards, decrement the length by one and return the head that was removed.
-
+## Unshifting
+- Unshifting involves adding a node onto the beginning of a linked list.
+- To add a node to the beginning of the list, you set the next property of the new node to be the current head, then you reassign the current head to be the new node. Finally, you return the new node.
+## Unshifting Pseudocode
+- The function should accept a value and create a new node using that value.
+- If there is no head, set the head and tail to be the new node.
+- Otherwise, set the next property of the new node to be the head of list, then reassign the head of the list to be the new node.
+- Finally, increment the length of the list by one and return the new node.
