@@ -52,3 +52,13 @@
 - If there is no head, set the head and tail to be the new node.
 - Otherwise, set the next property of the new node to be the head of list, then reassign the head of the list to be the new node.
 - Finally, increment the length of the list by one and return the new node.
+## Get
+- sGet is a method that allows you to treat a linked list like an array. You pass it a number, starting from 0, and it returns the node at that position in the linked list by starting at the head and accessing that node’s next property an appropriate number of times.
+## Get Pseudocode
+- sThe function should accept an index and return the node at that index.
+- sIf the index is negative or greater than or equal to the length, return null or undefined.
+- sLoop through the list until you reach the node at that index.
+## Set
+- sSet is like get, except you’re changing the value of a node at a specific position instead of just retrieving the node.
+## Set Pseudocode
+- sThe function should accept an index and a value. The function should change the value of the node at that index and return true if successful. If the node is not found, return false. The get method can be used as a helper to write this method.
