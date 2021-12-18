@@ -38,3 +38,10 @@
 - Set the tail property to be the second to last node.
 - Decrement the length by one.
 - Return the node that was removed.
+## Shifting
+- Shifting involves removing a node from the beginning of a linked list.
+- To remove the head, you can simply set its next property to be the head of the linked list.
+## Shifting Pseudocode
+- If the list is empty, return undefined
+- Otherwise, save the current head in a variable to be returned at the end of the method. Then, set the head to be the next property of the current head. Afterwards, decrement the length by one and return the head that was removed.
+
