@@ -18,4 +18,26 @@ class SinglyLinkedList {
         this.head = null;
         this.tail = null;
     }
+
+    push(value) {
+        const node = new Node(value);
+
+        if(!this.head) {
+            this.head = node;
+            this.tail = node;
+        } else {
+            this.tail.next = node;
+            this.tail = node;
+        }
+        this.length++;
+        return this;
+    }
 }
+
+const list = new SinglyLinkedList();
+console.log(list)
+list.push(1);
+list.push(2);
+list.push(3);
+list.push(4);
+console.log(list)
