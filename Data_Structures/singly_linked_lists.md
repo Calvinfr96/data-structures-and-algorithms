@@ -53,12 +53,24 @@
 - Otherwise, set the next property of the new node to be the head of list, then reassign the head of the list to be the new node.
 - Finally, increment the length of the list by one and return the new node.
 ## Get
-- sGet is a method that allows you to treat a linked list like an array. You pass it a number, starting from 0, and it returns the node at that position in the linked list by starting at the head and accessing that node’s next property an appropriate number of times.
+- Get is a method that allows you to treat a linked list like an array. You pass it a number, starting from 0, and it returns the node at that position in the linked list by starting at the head and accessing that node’s next property an appropriate number of times.
 ## Get Pseudocode
-- sThe function should accept an index and return the node at that index.
-- sIf the index is negative or greater than or equal to the length, return null or undefined.
-- sLoop through the list until you reach the node at that index.
+- The function should accept an index and return the node at that index.
+- If the index is negative or greater than or equal to the length, return null or undefined.
+- Loop through the list until you reach the node at that index.
 ## Set
 - sSet is like get, except you’re changing the value of a node at a specific position instead of just retrieving the node.
 ## Set Pseudocode
-- sThe function should accept an index and a value. The function should change the value of the node at that index and return true if successful. If the node is not found, return false. The get method can be used as a helper to write this method.
+- The function should accept an index and a value. The function should change the value of the node at that index and return true if successful. If the node is not found, return false. The get method can be used as a helper to write this method.
+## Insert
+- The insert method should be able to add a node to a singly linked list at a specific location. The method should accept an index and a value, just like the set method. If the index is negative or greater than the length, return false. Otherwise, create and insert a new node at the specified index and return true.
+## Insert Pseudocode
+- If the index is the same as the length, use the push method to push the new node onto the list.
+- If the index is zero, use the unshift method to add the new node to the beginning of the list.
+- If the index is valid, reference the nodes before and at the node at the argument index. Update the next property of the before node to be the new node and set the next property of the new node to be the node previously at the argument index. Finally, return true.
+## Remove
+- The remove method should be able to remove a node from a singly linked list at a specific location. The method should accept an index and remove the node at that index.
+## Remove Pseudocode
+- If the index is less than zero or greater than or equal to the length, return undefined.
+- If the index is length – 1, pop the node off the end of the list. If the index is zero, unshift the node off the beginning of the list. Otherwise, reference the nodes before and after the one to be deleted. Set the next property of the before node to be the after node.
+- Finally, decrement the length and return the value of the node removed.

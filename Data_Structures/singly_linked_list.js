@@ -107,4 +107,38 @@ class SinglyLinkedList {
             return false;
         }
     }
+
+    insert(index, value) {
+        if(index < 0 || index > this.length) {
+            return false;
+        } else if (index === 0) {  
+            return !!this.unshift(value); //coerces the return value of the function (a list) to a boolean
+        } else if(index === this.length){
+            return !!this.push(value)
+        } else {
+            const newNode = new Node(value);
+            const previousNode = this.get(index - 1);
+            const nodeAtIndex = this.get(index);
+            previousNode.next = newNode;
+            newNode.next = nodeAtIndex;
+            this.length++;
+            return true;
+        }
+    }
+
+    remove(index) {
+        if(index < 0 || index >= this.length) {
+            return undefined;
+        } else if(index === 0) {
+            return this.shift();
+        } else if(index === this.length - 1) {
+            return this.pop();
+        } else {
+            this.length--;
+            const node = this.get(index);
+            const previousNode = this.get(index - 1);
+            previousNode.next = previousNode.next.next;
+            return node;
+        }
+    }
 }
