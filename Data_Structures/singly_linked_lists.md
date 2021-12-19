@@ -85,3 +85,11 @@
     - Update current.next to be the previous node. This reverses the order of the two nodes. For the first iteration of the loop, this makes the head the tail by setting its next property to null.
     - Update the previous node to be the current node.
     - Update the current node to be the next node. You can’t update current node to be next before updated previous node to be current node because then the previous and current node would be set to the next node.
+## Time and Space Complexity
+- Insertion – O(1) time and space, regardless of where you insert a node.
+- Removal – O(1) time and space when removing from the beginning. O(n) when removing from the end.
+- Searching and Accessing – O(n) time and O(1) space.
+- Singly linked lists excel at insertion and deletion when compared to arrays, especially at the beginning of the list, but they fall behind arrays regarding accessing data. If you need quick insertion and deletion more than quick access, linked lists are the better choice.
+## Recap
+- Elements in an array contain a built-in index while linked lists do not. Instead, each node in the list contains a reference to the node after it.
+- The idea of a list data structure that consists of nodes is the foundation for other data structures such as Stacks and Queues.
