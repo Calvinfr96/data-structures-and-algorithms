@@ -74,3 +74,14 @@
 - If the index is less than zero or greater than or equal to the length, return undefined.
 - If the index is length – 1, pop the node off the end of the list. If the index is zero, unshift the node off the beginning of the list. Otherwise, reference the nodes before and after the one to be deleted. Set the next property of the before node to be the after node.
 - Finally, decrement the length and return the value of the node removed.
+## Reverse
+- Reversing a linked list means reversing the order of the nodes so that the head becomes the tail and the tail becomes the head. Additionally, all nodes in between have their order reversed, so that the next property of the head becomes the node that previously came before the tail, and so on.
+## Reverse Pseudocode
+- When reversing the list, you need to keep track of three things: The previous node, the current node, and the next node.
+- Initially the previous pointer will be set to null (because you’re at the head), the current node will be set to the head, and the next node will be set to null.
+- Before looping, set the head to be the tail of the list, then set the tail of the list to be the current node.
+- While the current pointer is not null:
+    - Update the next node to be current.next. You do this first because it is the only way to access the node after the current node. In the next step, we reassign current.next, which erases the reference, so we save the reference first.
+    - Update current.next to be the previous node. This reverses the order of the two nodes. For the first iteration of the loop, this makes the head the tail by setting its next property to null.
+    - Update the previous node to be the current node.
+    - Update the current node to be the next node. You can’t update current node to be next before updated previous node to be current node because then the previous and current node would be set to the next node.

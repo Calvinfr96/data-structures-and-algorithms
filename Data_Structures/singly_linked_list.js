@@ -141,4 +141,28 @@ class SinglyLinkedList {
             return node;
         }
     }
+
+    reverse() {
+        let previousNode = null;
+        let currentNode = this.head;
+        this.head = this.tail;
+        this.tail = currentNode;
+        let next = null;
+        
+        while(currentNode !== null) {
+            next = currentNode.next;
+            currentNode.next = previousNode;
+            previousNode = currentNode;
+            currentNode = next;
+        }
+        return this
+    }
 }
+
+const list = new SinglyLinkedList()
+console.log(list)
+list.push(13)
+list.push(71)
+console.log(list)
+list.reverse()
+console.log(list)
