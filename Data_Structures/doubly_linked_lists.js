@@ -34,13 +34,25 @@ class DoublyLinkedList{
 
         return this;
     }
+
+    pop() {
+        if(!this.head) {
+            return undefined;
+        }
+        
+        const tail = this.tail;
+        if(!this.head.next) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            const tail = this.tail;
+            this.tail = tail.previous;
+            tail.previous = null;
+            this.tail.next = null;
+        }
+        this.length--;
+        return tail;
+    }
 }
 
 const list = new DoublyLinkedList();
-console.log(list)
-list.push(1);
-console.log(list)
-list.push(2)
-console.log(list)
-list.push(3)
-console.log(list)

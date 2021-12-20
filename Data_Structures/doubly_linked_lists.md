@@ -14,3 +14,12 @@
 - If the list is not empty, set the next property on the current tail to be the new node. Then set the previous property of the new node to be the current tail.
 - Set the tail of the list to be the new node and increment the length of the list by one.
 - Return the updated list.
+## Pop
+- The pop method removes the current tail of the Doubly Linked List and makes the previous node the new tail. This method returns the node that was removed.
+- If the list is empty, the method should return undefined. If the list only has one node, the method should set the head and tail to be null.
+## Pop Pseudocode
+- If the list doesn’t have a tail, return undefined.
+- If the length of the list is one, set the head and tail to be null and return the tail of the list.
+- Otherwise, store the current tail in a variable that will be returned at the end of the method. 
+- Set the current tail’s previous node to be the current tail. Then set the current tail’s previous node to be null.
+- Set the new tail’s next node to be null. Then decrement the length and return the tail that was removed.
