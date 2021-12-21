@@ -38,3 +38,16 @@
 - Create a new node with the value passed to the function.
 - If the length is zero, set the head and tail of the list to be the new node and increment the length by one.
 - Otherwise, set the next pointer of the new node to be the current head, then set the previous pointer of the current head to be the new node. Finally, update the head of the list to be the new node, increment the length by one, and return the list.
+## Get
+- The get method takes an index and returns the node at that index.
+- With Singly Linked Lists, you must start at the beginning of list and move forward until you reach the index. With a Doubly Linked List, you can start at the end of the list and move backwards if the index is closer to the end of the list than the beginning.
+## Get Pseudocode
+- If the index is less than zero or greater than or equal to the length of the list, return undefined.
+- Otherwise, if the index is greater than or equal to half the length of the list, start at the tail and loop backwards toward the middle. If the index is less than half of the length, start at the head and loop forwards toward the middle.
+- Return the node once it is found.
+## Set
+- The set function accepts an index and a value, updates the value of the node at that index and returns true if the update was successful or false otherwise.
+## Set Pseudocode
+- Create a variable to store the result of passing the index to the get method.
+- If the variable is not undefined (the get method returned a node), update the value of the node with the value passed to the function. Return true.
+- If the variable is undefined (the get method returned undefined), return false.
