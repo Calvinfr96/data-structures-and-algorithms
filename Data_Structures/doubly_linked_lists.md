@@ -51,3 +51,11 @@
 - Create a variable to store the result of passing the index to the get method.
 - If the variable is not undefined (the get method returned a node), update the value of the node with the value passed to the function. Return true.
 - If the variable is undefined (the get method returned undefined), return false.
+## Time and Space Complexity
+- Insertion – O(1) time and space, regardless of where you insert a node.
+- Removal – O(1) time and space, regardless of where you remove a node from the beginning or end of the list. O(n) if you remove a node from the middle of the list. 
+- Searching – O(n) time and O(1) space. Technically O(n/2) because of the optimization made in the get method.
+## Recap
+- Doubly Linked Lists are identical to Singly Linked Lists except for the additional pointer to the previous node.
+- The are better at searching than Singly Linked Lists because you can optimize the search by starting at the beginning or end.
+- Although they are more efficient at searching, they do take up more memory because they of the extra pointer.
