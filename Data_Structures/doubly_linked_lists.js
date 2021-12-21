@@ -45,13 +45,47 @@ class DoublyLinkedList{
             this.head = null;
             this.tail = null;
         } else {
-            const tail = this.tail;
             this.tail = tail.previous;
             tail.previous = null;
             this.tail.next = null;
         }
         this.length--;
         return tail;
+    }
+
+    shift() {
+        if(!this.head) {
+            return undefined;
+        }
+
+        const head = this.head;
+        if(!this.head.next) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.head = this.head.next;
+            head.next = null;
+            this.head.previous = null;
+        }
+        this.length--;
+
+        return head;
+    }
+
+    unshift(value) {
+        const newNode = new Node(value);
+
+        if(!this.head) {
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            newNode.next = this.head;
+            this.head.previous = newNode;
+            this.head = newNode;
+        }
+        this.length++;
+
+        return this;
     }
 }
 
