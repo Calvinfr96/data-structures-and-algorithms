@@ -53,7 +53,8 @@
 - If the variable is undefined (the get method returned undefined), return false.
 ## Time and Space Complexity
 - Insertion – O(1) time and space, regardless of where you insert a node.
-- Removal – O(1) time and space, regardless of where you remove a node from the beginning or end of the list. O(n) if you remove a node from the middle of the list. 
+- Removal – O(1) time and space, regardless of where you remove a node from the beginning or end of the list. O(n) if you remove a node from the middle of the list.
+- A good example of a Doubly Linked List in a practical application would the history of a web browser.
 - Searching – O(n) time and O(1) space. Technically O(n/2) because of the optimization made in the get method.
 ## Recap
 - Doubly Linked Lists are identical to Singly Linked Lists except for the additional pointer to the previous node.
