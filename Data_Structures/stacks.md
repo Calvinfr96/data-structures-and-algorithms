@@ -1,4 +1,5 @@
 # Stacks
+
 ## Introduction
 - A stack is an abstract data structure that is a collection of data which abides by the Last In Fist Out (LIFO) principle. This means the last element added to a stack must be the first element removed from a stack.
     - This makes sense logically. If you stack plates in a cabinet after cleaning them, the last plate put on the stack (the one on top) will be the first one removed when you want to use it.
