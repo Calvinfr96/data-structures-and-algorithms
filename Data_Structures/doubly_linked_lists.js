@@ -162,18 +162,18 @@ class DoublyLinkedList{
     }
 
     reverse() {
-        let current = this.head;//4
+        let current = this.head;
         let previous = null;
         
         while(current) {
-            current.previous = current.next;//null -> 7
-            current.next = previous;//7 -> null
+            current.previous = current.next;
+            current.next = previous;
             previous = current;
-            current = current.previous;//4 -> 7
+            current = current.previous;
         }
 
         if (previous) {
-            this.tail = this.head
+            this.tail = this.head;
             this.head = previous;
 
         }
