@@ -51,6 +51,20 @@
 - Create a variable to store the result of passing the index to the get method.
 - If the variable is not undefined (the get method returned a node), update the value of the node with the value passed to the function. Return true.
 - If the variable is undefined (the get method returned undefined), return false.
+## Reverse
+- Reversing a Doubly Linked List is like reversing a Singly Linked List, where you swap the head and tail, then reverse the order of the intermediate nodes. A key difference is that, with a Doubly linked list, you have access to the previous node as well as the next node.
+- To reverse a Doubly Linked List, we need to keep track of the current node and the previous node.
+## Reverse Pseudocode
+- First assign the current head of the list to a variable called ‘current’. Also, assign the variable called ‘previous’ to null (which is always the previous pointer of the head).
+- While current is not null:
+    - Assign the previous pointer of ‘current’ to the next pointer of ‘current.’
+    - Assign the next pointer of ‘current’ to be ‘previous.’
+    - Reassign ‘previous’ to be ‘current.’
+    - Reassign ‘current’ to be the previous pointer of ‘current.’
+- If the current value of ‘previous’ is not null (in the case of an empty list):
+    - First, update the tail of the list to be the head of the list. Then update the head of the list to be the current value of ‘previous.’
+- Finally, return the reversed list.
+
 ## Time and Space Complexity
 - Insertion – O(1) time and space, regardless of where you insert a node.
 - Removal – O(1) time and space, regardless of where you remove a node from the beginning or end of the list. O(n) if you remove a node from the middle of the list.

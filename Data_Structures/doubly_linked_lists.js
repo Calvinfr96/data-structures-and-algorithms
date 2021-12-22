@@ -160,6 +160,26 @@ class DoublyLinkedList{
             return node;
         }
     }
+
+    reverse() {
+        let current = this.head;//4
+        let previous = null;
+        
+        while(current) {
+            current.previous = current.next;//null -> 7
+            current.next = previous;//7 -> null
+            previous = current;
+            current = current.previous;//4 -> 7
+        }
+
+        if (previous) {
+            this.tail = this.head
+            this.head = previous;
+
+        }
+
+        return this;
+    }
 }
 
 const list = new DoublyLinkedList();
