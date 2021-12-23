@@ -29,4 +29,4 @@
 ## Recap
 - Queues are an abstract data structure that follow the FIFO principle, this means the first piece of data added to the queue should be the first item removed from a queue.
 - Queues are useful for processing tasks, such as a printer queue. They are also foundational for more complex data structures.
-- Insertion and removal needs t be O(1).
+- Insertion and removal needs to be O(1).
