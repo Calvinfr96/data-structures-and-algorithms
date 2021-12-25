@@ -17,3 +17,10 @@
     - Siblings – A group of nodes with the same parent.
     - Leaf – A node with no children.
     - Edge – The connection between one node and another.
+## Applications
+- The HTML DOM is an example of a tree. There is a parent-child relationship between the different HTML elements that make up a webpage.
+- Network routing also implements trees to transmit messages between nodes.
+- Abstract syntax keys are a way of describing the syntax of a programming language using a tree structure. This can be used to write a program that parses through code to ensure its syntax is valid for the language it is written in.
+- They are used in AI and machine learning. You can break down the logic of a task using a decision tree and use that to train the algorithm.
+- Folders in an OS, as well as computer filing systems, are modeled using a tree structure.
+- JSON from an HTML response is parsed from a string into an object by traversing a tree-like structure.
