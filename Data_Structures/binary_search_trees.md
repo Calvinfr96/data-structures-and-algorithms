@@ -39,7 +39,17 @@
     - A BST is a type of tree in which every parent node has at most two children.
     - Every child node lower in value than the parent node is located to the left of the parent while nodes greater in value than the parent are located to the right.
     - All values in a BST must be unique because of the way they are structured and the way the searching algorithms work. The position of a node in BST is strictly defined by its value, meaning that two nodes of the same value would occupy the same position on the tree. Further, searching algorithms would skip duplicated values once the first match was found.
-## Searching Binary Trees
+## Searching
 - The manner in which BSTs are structured makes it very easy to search for, insert, and delete nodes.
 - To search through a binary tree, you compare the value you’re looking for to the parent node. If the value is greater than that of the node, you only search through the nodes to its right. You do this for every node as you move through each level of the tree.
     - For an evenly weighted tree, this cuts the number of comparisons in half when compared to an un-sorted tree.
+## Inserting
+- When inserting a node into a BST, its position is strictly defined by its value. The insert function should take in a value, create a new node, and insert the node into the tree based on that value.
+- The first thing the function should check is the root of the tree. If the root does not exist, insert the new node at the root of the tree.
+- If the root does exist, define a variable called ‘current’ and assign it to the root of the tree.
+- Perform the following comparisons in an indefinite loop:
+    - If the current node’s value is equal to the new node’s value, return undefined (there should not be duplicates in a BST).
+    - If the new node’s value is less than the current node’s value and there is no node to the left of that node, assign the current node’s left node to be the new node and return the new tree to break out of the loop.
+    - If the current node already has a left node, update the current node to be that left node.
+    - If the new node’s value is greater than the current node’s value and there is no node to the right of that node, assign the current node’s right node to be the new node and return the new tree to break out of the loop.
+    - If the current node already has a right node, update the current node to be that right node.
