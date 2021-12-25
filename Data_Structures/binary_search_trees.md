@@ -24,3 +24,18 @@
 - They are used in AI and machine learning. You can break down the logic of a task using a decision tree and use that to train the algorithm.
 - Folders in an OS, as well as computer filing systems, are modeled using a tree structure.
 - JSON from an HTML response is parsed from a string into an object by traversing a tree-like structure.
+## Binary Trees
+- Like the many different types of trees in nature, there are many different types of trees used in programming. All these types of trees follow the same general patterns of a tree data structure but have their own unique properties.
+    - Some trees are much faster at searching while others are faster at insertion and deletion. There are also trees specifically suited to storing data that is structured in a certain way, such as data that contains either unique values or a lot of duplicates.
+- One type of tree commonly used in programming is the Binary Search tree which is a special kind of Binary Tree (a family of trees) that excels at searching.
+- Binary Search Trees store sorted data in a particular way that makes the data easier to retrieve.
+- In a tree structure, there is no limit on the number of children a node can have. In Binary trees, any given node can only have up to two children.
+- Binary Search Trees are Binary trees in which the data is sorted in a particular way. They store data that is sortable or comparable in some way. The nodes of a Binary Search Tree (BST) must follow the following rule:
+    - All children of a node that are lower in value are located to the left of the node. All children of a node that are greater in value are located to the right of the node.
+    - This pattern must be followed for all nodes, not just the root node.
+    - Another way of putting is that the left subtree of a node must contain values less than that node and the right subtree must contain values greater than that node. This means all nodes below a given node (a subtree) must abide by this rule, not just the immediate children.
+    - Each subtree in a BST must also be a BST.
+- Recap:
+    - A BST is a type of tree in which every parent node has at most two children.
+    - Every child node lower in value than the parent node is located to the left of the parent while nodes greater in value than the parent are located to the right.
+    - All values in a BST must be unique because of the way they are structured and the way the searching algorithms work. The position of a node in BST is strictly defined by its value, meaning that two nodes of the same value would occupy the same position on the tree. Further, searching algorithms would skip duplicated values once the first match was found.
