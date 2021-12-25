@@ -39,3 +39,7 @@
     - A BST is a type of tree in which every parent node has at most two children.
     - Every child node lower in value than the parent node is located to the left of the parent while nodes greater in value than the parent are located to the right.
     - All values in a BST must be unique because of the way they are structured and the way the searching algorithms work. The position of a node in BST is strictly defined by its value, meaning that two nodes of the same value would occupy the same position on the tree. Further, searching algorithms would skip duplicated values once the first match was found.
+## Searching Binary Trees
+- The manner in which BSTs are structured makes it very easy to search for, insert, and delete nodes.
+- To search through a binary tree, you compare the value you’re looking for to the parent node. If the value is greater than that of the node, you only search through the nodes to its right. You do this for every node as you move through each level of the tree.
+    - For an evenly weighted tree, this cuts the number of comparisons in half when compared to an un-sorted tree.
