@@ -53,3 +53,8 @@
     - If the current node already has a left node, update the current node to be that left node.
     - If the new node’s value is greater than the current node’s value and there is no node to the right of that node, assign the current node’s right node to be the new node and return the new tree to break out of the loop.
     - If the current node already has a right node, update the current node to be that right node.
+## Finding
+- The find method should take in a value and return true if the tree contains a node with that value and false otherwise.
+- Starting at the root, the first thing the function should is the existence of a root. If the root does not exist (the tree is empty), return false.
+- If there is a root, compare the root’s value to the value passed to the function. If the values are equal, return true. If the value is greater, move to the right and perform the same comparison. If the value is lesser, move to the left and perform the same comparison.
+- If you reach the end of the tree without finding the value, return false.
