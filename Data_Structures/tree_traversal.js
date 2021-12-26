@@ -1,3 +1,4 @@
+//Using BST class to demonstrate various traversal algorithms
 class Node {
     constructor(value) {
         this.value = value;
@@ -65,29 +66,39 @@ class BinarySearchTree {
             return undefined;
         }
     }
-
-    breadthFirstSearch() {
-        const queue = [];
-        const visited = [];
-        queue.push(this.root)
-    
-        function traverse(queue) {
-            const node = queue.shift();
-            if(node.left) {
-                queue.push(node.left);
-            }
-            if(node.right) {
-                queue.push(node.right);
-            }
-            visited.push(node.value);
-            if(queue.length !== 0) {
-                traverse(queue);
-            }
-        }
-    
-        traverse(queue);
-        return visited;
-    }
 }
 
+//Breadth-First Search
 const tree = new BinarySearchTree();
+tree.insert(10);
+tree.insert(6);
+tree.insert(15);
+tree.insert(3);
+tree.insert(8);
+tree.insert(20);
+
+function breadthFirstSearch(tree) {
+    const queue = [];
+    const visited = [];
+    queue.push(tree.root)
+
+    function traverse(queue) {
+        const node = queue.shift();
+        if(node.left) {
+            queue.push(node.left);
+        }
+        if(node.right) {
+            queue.push(node.right);
+        }
+        visited.push(node.value);
+        if(queue.length !== 0) {
+            traverse(queue);
+        }
+    }
+
+    traverse(queue);
+    return visited;
+}
+
+const traversal = breadthFirstSearch(tree);
+console.log(traversal)
