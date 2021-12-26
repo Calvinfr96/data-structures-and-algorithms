@@ -88,6 +88,25 @@ class BinarySearchTree {
         traverse(queue);
         return visited;
     }
+
+    preOrderSearch() {
+        const visited = [];
+        visited.push(this.root.value);
+    
+        function traverse(node) {
+            if(node.left) {
+                visited.push(node.left.value)
+                traverse(node.left);
+            }
+            if(node.right) {
+                visited.push(node.right.value);
+                traverse(node.right);
+            }
+        }
+    
+        traverse(this.root);
+        return visited;
+    }
 }
 
 const tree = new BinarySearchTree();
