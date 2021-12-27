@@ -33,3 +33,17 @@
         - If the node has right property, call the function on that node.
     - Invoke the helper function with ‘current.’
     - Return ‘visited.’
+## Depth-First Post-Order Search
+- Post-Order search is like Pre-Order search in that both use the DFS algorithm but differ in the order in which nodes are visited.
+- In Pre-Order Search, you visit a node first, then visit its entire left side, then its entire right side. In Post-Order Search, you visit a node’s entire left side, then a node’s entire right side, then you visit the node itself.
+    - In Pre-Order, the root is the first node visited (added to the ‘visited’ array). In Post-Oder, the root is the last node visited.
+    - Before visiting a node, you explore all of its children first.
+- Recommended algorithm:
+    - Create a variable called ‘visited’ (array) to store the list of nodes visited.
+    - Store the root of the BST in a variable called ‘current.’
+    - Write a helper function that accepts a node as an argument:
+        - If the node has a left node, call the function on that node.
+        - If the node has right property, call the function on that node.
+        - Push the value of the node into ‘visited.’
+    - Invoke the helper function with ‘current.’
+    - Return ‘visited.’
