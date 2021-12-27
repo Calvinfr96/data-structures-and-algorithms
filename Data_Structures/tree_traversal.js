@@ -103,15 +103,13 @@ function breadthFirstSearch(tree) {
 //Depth-First Search: Pre-Order
 function preOrderSearch(tree) {
     const visited = [];
-    visited.push(tree.root.value);
 
     function traverse(node) {
+        visited.push(node.value)
         if(node.left) {
-            visited.push(node.left.value)
             traverse(node.left);
         }
         if(node.right) {
-            visited.push(node.right.value);
             traverse(node.right);
         }
     }

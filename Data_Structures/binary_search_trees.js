@@ -91,15 +91,13 @@ class BinarySearchTree {
 
     preOrderSearch() {
         const visited = [];
-        visited.push(this.root.value);
     
         function traverse(node) {
+            visited.push(node.value)
             if(node.left) {
-                visited.push(node.left.value)
                 traverse(node.left);
             }
             if(node.right) {
-                visited.push(node.right.value);
                 traverse(node.right);
             }
         }
