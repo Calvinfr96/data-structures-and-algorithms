@@ -135,3 +135,21 @@ function postOrderSearch(tree) {
     traverse(tree.root);
     return visited;
 }
+
+//Depth-First Search: In-Order
+function inOrderSearch(tree) {
+    const visited = [];
+
+    function traverse(node) {
+        if(node.left) {
+            traverse(node.left); //the conditional can be refactored to node.left && traverse(node.left)
+        }
+        visited.push(node.value)
+        if(node.right) {
+            traverse(node.right); //the conditional can be refactored to node.right && traverse(node.right)
+        }
+    }
+
+    traverse(tree.root);
+    return visited;
+}

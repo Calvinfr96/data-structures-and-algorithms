@@ -47,3 +47,14 @@
         - Push the value of the node into ‘visited.’
     - Invoke the helper function with ‘current.’
     - Return ‘visited.’
+## Depth-First In-Order Search
+- In-Order search is like Post-Oder Search, except you visit a node after visiting its entire left side, then you visit the node’s entire right side.
+- Recommended algorithm:
+    - Create a variable called ‘visited’ (array) to store the list of nodes visited.
+    - Store the root of the BST in a variable called ‘current.’
+    - Write a helper function that accepts a node as an argument:
+        - If the node has a left node, call the function on that node.
+        - Push the value of the node into ‘visited.’
+        - If the node has right property, call the function on that node.
+    - Invoke the helper function with ‘current.’
+    - Return ‘visited.’
