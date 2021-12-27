@@ -64,3 +64,14 @@ Time and Space Complexity
 - O(log(n)) is the time complexity for insertion and searching **in the best and average case**, where log is log of base 2.
 - The best and average cases involve a BST that is perfectly balanced and fairly balanced, respectively.
 - In the worst case (completely lopsided BST). The time complexity increases to O(n).
+## Method Benefits and Drawbacks
+- DFS and BFS have the same time complexity because you visit every node once in both algorithms. However, BFS can have a greater space complexity than DFS because of the queue that is created. This queue can grow to be quite large in “fully flashed out trees”, “wide” trees with a lot of siblings and children.
+- For trees that are very lopsided (have all or most nodes to one side), BFS would be better to use because the queue would only grow to store one node (in the case of a BST where each node only has a node to one side). With DFS, each of these nodes would need to be added to the call stack, so it would grow to be very large and take up more space than the queue in BFS.
+- For wide trees, the queue in BFS could end up using more space than the call stack in DFS.
+- For long (deep) trees, the call stack in DFS could end up using more space than the queue in BFS.
+- As far as the different variants of DFS are concerned, there’s no concrete guidance on which variant is better for a given situation. However, there are some examples in which one variant prevails over another.
+- For example, using In-Order search on a BST containing numbers will cause the nodes to be visited in numerical order.
+- Using Pre-Order Search on a BST allows you to “flatten” the tree, potentially store it in a database, and then recreate it from that flattened form.
+    - This is possible because performing Pre-Order Search on a BST ensures that the root is the first element visited and added to the flattened clone of the tree. Then the first child is visited, then the first grandchild and so on.
+    - Traversing the tree in this order to create a “flattened copy” ensures that when this copy is used to recreate the tree using the insert function, the insert function places the nodes in the correct position.
+- The DFS variants are very similar, so it’s not as big of a decision as choosing between DFS and BFS.
