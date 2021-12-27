@@ -75,3 +75,8 @@ Time and Space Complexity
     - This is possible because performing Pre-Order Search on a BST ensures that the root is the first element visited and added to the flattened clone of the tree. Then the first child is visited, then the first grandchild and so on.
     - Traversing the tree in this order to create a “flattened copy” ensures that when this copy is used to recreate the tree using the insert function, the insert function places the nodes in the correct position.
 - The DFS variants are very similar, so it’s not as big of a decision as choosing between DFS and BFS.
+## Recap
+- Trees are a non-linear data structure consisting of a root node and child nodes. Trees can store any data type.
+- Binary Trees are a special type of tree where each node can have a maximum of two children, one to the left and the other to the right.
+- Binary Search tree are a special type of Binary Tree in which all nodes to the left of a parent are smaller in value than the parent and all nodes to the right of the parent are greater in value. They are only used with data that is comparable.
+- You search through the nodes of a tree using Breadth-First Search or Depth-First Search (In-Order, Post-Order, and Pre-Order),
