@@ -117,3 +117,21 @@ function preOrderSearch(tree) {
     traverse(tree.root);
     return visited;
 }
+
+//Depth-First Search: Post-Order
+function postOrderSearch(tree) {
+    const visited = [];
+
+    function traverse(node) {
+        if(node.left) {
+            traverse(node.left);
+        }
+        if(node.right) {
+            traverse(node.right);
+        }
+        visited.push(node.value)
+    }
+
+    traverse(tree.root);
+    return visited;
+}

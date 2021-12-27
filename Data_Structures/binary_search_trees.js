@@ -105,6 +105,23 @@ class BinarySearchTree {
         traverse(this.root);
         return visited;
     }
+
+    postOrderSearch() {
+        const visited = [];
+    
+        function traverse(node) {
+            if(node.left) {
+                traverse(node.left);
+            }
+            if(node.right) {
+                traverse(node.right);
+            }
+            visited.push(node.value)
+        }
+    
+        traverse(this.root);
+        return visited;
+    }
 }
 
 const tree = new BinarySearchTree();
