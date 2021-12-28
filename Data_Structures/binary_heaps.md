@@ -15,3 +15,12 @@
 - The insert method for a Binary Heap should accept a value, push the value into the end of the values array, then swap it with its parent node (if necessary) until it is in the correct position.
 - To swap the parent and child nodes, you first need the indices of the parent and child. To start, the index of the child is [length – 1] because it’s at the end of the array. The index of the parent will always be the floor of (x – 1) / 2 where x is the child index.
 - While the child element is greater than the parent element, swap them and update the child element.
+## Removing Nodes
+- In Max Binary Heaps, the root is typically removed while other nodes are left alone. When the root is removed, the new root needs to be found and placed in the correct position.
+- The remove method should remove the current head of the Binary Heap and return it at the end. This should be done by swapping the first and last elements of the array, then popping the last value off the array.
+- After removing the head, it should restructure the heap, if necessary, so that it is a correct Binary Heap.
+- The heap is restructured by taking the current head and “sinking it down” to its correct position by:
+    - Comparing the head to its children.
+    - Swapping the head with the child of greater value.
+    - Updating the index of the head with the swapped child.
+    - Repeating this process until there are no children or the head is greater than both children.
