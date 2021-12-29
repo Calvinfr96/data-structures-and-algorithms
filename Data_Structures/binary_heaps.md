@@ -33,3 +33,15 @@
     - With a binary heap (min or max) the highest priority item would always be at the root of the heap.
 - In many real-world examples of a Priority Queue, lower numbers are associated with a higher priority (level 0 priority would be the most important and level 5 the least). This would be implemented best by a Min Binary Heap instead of a Max Binary Heap.
 - A Min Binary Heap is the same as a Max Binary Heap, except the lowest values are floated to the top of the tree and highest values settle toward the bottom.
+## Time and Spaces Complexity
+- Insertion and Removal operations for a Binary Heap have a time complexity of O(log(n)) and a space complexity of O(1). Searching has a time complexity of O(n) and a space complexity of O(1).
+- The time complexity of O(log(n)) because, in the worst-case scenario (the number you’re inserting has the maximum/minimum value for a Max/Min Binary Heap), the number of comparisons that need to be made is equal to the number of levels in the heap.
+    - In a completely occupied (each parent has two children) Binary Heap), the number of levels is equal to the logarithm (base 2) of the number of nodes, including the node being inserted.
+- Recall that for a completely one-sided (worst-case) binary search tree, the time complexity for insertion was O(N) because you must traverse the entire tree. Binary heaps aren’t allowed to be lopsided, so their time complexity is O(log(n)) in the best and worst-case scenario.
+- Binary Heaps aren’t made to be searchable because the sibling nodes aren’t sorted like they are in a BST, so you can’t optimize by choosing to search in a particular direction; you must look at each node.
+## Recap
+- A Binary Heap is a type of heap in which each node can have a maximum of two children. They are useful for sorting and implementing other data structures like a Priority Queue.
+- Binary Heaps are abstract data structures, meaning they can be implemented using a variety of data structures such as lists and arrays.
+- Binary Heaps can be categorized as either Min or Max, depending on the relationship between the parent and its children. In a Min Binary Heap, the root is the smallest value in the tree and in a Max Binary Heap, the root is the largest value.
+- Binary Heaps are always filled out from left to right, making it impossible to form a lopsided heap.
+- The indices provided by an array make them ideal for representing binary heaps because the index can be used to define a relationship between parent and child nodes in both directions. You can create your own Heap class, but arrays are the easiest implementation.
