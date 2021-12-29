@@ -14,30 +14,37 @@ class PriorityQueue {
         this.values = [];
     }
     
-    insert(value) {
-        this.values.push(value)
-        let childIndex = this.values.length - 1;
-        let parentIndex = Math.floor((childIndex - 1) / 2);
-        let childValue = this.values[childIndex];
-        let parentValue = this.values[parentIndex];
+    insert(value, priority) {
+        const node = new Node(value, priority);
+        this.values.push(node);
 
-        while(childIndex > 0 && childValue > parentValue) {
-            swap(this.values, parentIndex, childIndex);
-            childIndex = parentIndex;
-            parentIndex = Math.floor((childIndex - 1) / 2);
-            childValue = this.values[childIndex];
-            parentValue = this.values[parentIndex];
+        if(this.values.length > 1) {
+            let childIndex = this.values.length - 1; //2
+            let parentIndex = Math.floor((childIndex - 1) / 2); //0
+            let childPriority = this.values[childIndex].priority;
+            let parentPriority = this.values[parentIndex].priority;
+    
+            while(childPriority < parentPriority) {
+                swap(this.values, parentIndex, childIndex);
+                childIndex = parentIndex;
+                parentIndex = Math.floor((childIndex - 1) / 2);
+                if(parentIndex < 0) {
+                    break;
+                }
+                childPriority = this.values[childIndex].priority;
+                parentPriority = this.values[parentIndex].priority;
+            }
         }
     }
 
     remove() {
-        function greaterIndex(array, a, b) {
+        function lesserIndex(array, a, b) {
             const length = array.length
             if(a < length && b < length) {
-                const maxValue = Math.max(array[a], array[b]);
-                let maxIndex;
-                array[a] === maxValue ? maxIndex = a : maxIndex = b;
-                return maxIndex;
+                const minValue = Math.min(array[a].priority, array[b].priority);
+                let minIndex;
+                array[a].priority === minValue ? minIndex = a : minIndex = b;
+                return minIndex;
             } else {
                 return a < length ? a : b
             }
@@ -45,22 +52,27 @@ class PriorityQueue {
 
         if(!this.values.length) {
             return undefined;
-        } else if(this.values.length === 1) {
+        } else if(this.values.length <= 1) {
             return this.values.pop();
         } else {
             swap(this.values, 0, this.values.length - 1);
             const head = this.values.pop();
-            let currentIndex = 0;
-            let currentValue = this.values[currentIndex];
-            let childIndex = greaterIndex(this.values, 2*currentIndex + 1, 2*currentIndex + 2);
-            let childValue = this.values[childIndex];
-
-            while(childValue > currentValue) {
-                swap(this.values, currentIndex, childIndex);
-                currentIndex = childIndex;
-                childIndex = greaterIndex(this.values, 2*currentIndex + 1,2*currentIndex + 2);
-                currentValue = this.values[currentIndex];
-                childValue = this.values[childIndex];
+            if(this.values.length > 1) {
+                let currentIndex = 0;
+                let currentPriority = this.values[currentIndex].priority;
+                let childIndex = lesserIndex(this.values, 2*currentIndex + 1, 2*currentIndex + 2);
+                let childPriority = this.values[childIndex].priority;
+    
+                while(childPriority < currentPriority) {
+                    swap(this.values, currentIndex, childIndex);
+                    currentIndex = childIndex;
+                    childIndex = lesserIndex(this.values, 2*currentIndex + 1,2*currentIndex + 2);
+                    if(childIndex >= this.values.length) {
+                        break;
+                    }
+                    currentPriority = this.values[currentIndex].priority;
+                    childPriority = this.values[childIndex].priority;
+                }
             }
 
             return head;
