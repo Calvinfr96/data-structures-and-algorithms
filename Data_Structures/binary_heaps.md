@@ -24,3 +24,12 @@
     - Swapping the head with the child of greater value.
     - Updating the index of the head with the swapped child.
     - Repeating this process until there are no children or the head is greater than both children.
+## Priority Queues
+- A Priority Queue is a data structure where each element has a priority. Elements with higher priorities are served before elements with lower priorities.
+- Priority Queues are commonly used in emergency rooms to facilitate the treatment of more serious injuries before more benign injuries.
+    - They are also used by computers to prioritize the many tasks that a computer must run.
+- A Priority Queue is an abstract concept that is independent from heaps. We just so happen to be implementing a Priority Queue with a binary heap because it is efficient. They could also be implemented with a list or an array, although it would be less efficient.
+    - Using an array to implement a Priority Queue would be inefficient because you would need to iterate over the entire array to ascertain the priority of level of each element, then serve the element with the lowest priority level (highest importance) first.
+    - With a binary heap (min or max) the highest priority item would always be at the root of the heap.
+- In many real-world examples of a Priority Queue, lower numbers are associated with a higher priority (level 0 priority would be the most important and level 5 the least). This would be implemented best by a Min Binary Heap instead of a Max Binary Heap.
+- A Min Binary Heap is the same as a Max Binary Heap, except the lowest values are floated to the top of the tree and highest values settle toward the bottom.
