@@ -71,3 +71,36 @@ const heap = new MaxBinaryHeap();
 heap.values = [41,39,33,18,27,12]
 heap.insert(55)
 console.log(heap)
+
+// Recursive Solotion for Insert Method
+function swapIndeces(array,a,b) {
+    [array[a], array[b]] = [array[b], array[a]];
+}
+
+class MaxBinaryHeapRecusriveInsert {
+    constructor() {
+        this.values = [];
+    }
+
+    swap(index) {
+        const childValue = this.values[index];
+        const parentIndex = Math.floor((index - 1)/2);
+        const parentValue = this.values[parentIndex];
+
+        if(childValue > parentValue) {
+            swapIndeces(this.values, parentIndex, index);
+        }
+        if(parentIndex >= 0) {
+            const updatedIndex = parentIndex;
+            this.swap(updatedIndex);//When calling an instance method recursively, the 'this' keyword is required.
+        }
+    }
+
+    insert(value) {
+        this.values.push(value);
+
+        if(this.values.length > 1) {
+            this.swap(this.values.length - 1);
+        }
+    }
+}
