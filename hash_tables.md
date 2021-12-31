@@ -24,3 +24,11 @@ o	Fast, allowing for fast insertion and access. Ideally, the function should be 
     - When you try to access the value for “pink”, the hashing function would loop through the array stored at index 4 until it found the value for “pink.”
 - Linear Probing involves looking for another empty slot in the array when a collision occurs, instead of storing more than one piece of data at an index in a nested data structure.
     - For example, if you hash “pink” and “blue” and get 4 for both. You would store “pink” at 4 and then look for an empty spot after 4 to store “blue.”
+## Setting Values
+-The set function should accept a key and a value, hash the key, and store the key-value pair in the hash table array using separate chaining.
+-Using separate chaining means that, when the first key value pair is stored at an index, it must be stored as a nested array, where the inner array is the key-value pair and the outer array is the data structure being used to implement separate chaining.
+-This allows the hashing function to store multiple values at the same index when different inputs produce the same index.
+## Retrieving Values
+-The get function accepts a key, hashes it, and retrieves the key-value pair in the hash table.
+-Separate chaining was used to store the values in the hash table, so finding the key-value pair at an index means looping through the array to find it.
+-If the key is not found in the hash table, return undefined.
