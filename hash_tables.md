@@ -35,3 +35,12 @@ o	Fast, allowing for fast insertion and access. Ideally, the function should be 
 ## Keys and Values
 •	The keys method loops through the hash table array and returns an array of the keys in the table.
 •	The values method loops through the hash table array and returns an array of the values in the table. This method should only return unique values.
+## Time and Space Complexity
+- Insertion, Deletion, and Access in a hash table is O(1) time complexity and space complexity in average and best case. The time complexity of these operations depends largely on the performance of your hash function and how evenly it distributes the data (how many collisions it has).
+- When implementing a hash table, it is best to use a hashing function that has already been built and tested. There are many libraries online that provide good hashing functions.
+## Recap
+- Hash Tables are collections of key-value pairs. They are implemented in almost every programming language in one form or another. In JavaScript, they are called objects and in Ruby, they are called hashes.
+- Hash tables can find values quickly when given a key. They can also add and remove key-value pairs quickly.
+- One way to implement a hash table is by storing key-value pairs in a large array (preferably one with a size that is a prime number) and hashing the keys. The hashed keys are numbers which act as indices to store the pairs in the array.
+- A good hashing function should be fast, deterministic, and distribute keys uniformly.
+- Separate chaining and linear probing are two methods used to handle collisions, where two keys hash to the same index.
