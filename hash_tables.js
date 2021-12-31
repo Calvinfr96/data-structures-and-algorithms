@@ -33,12 +33,40 @@ class HashTable {
             }
         }
     }
+
+    keys() {
+        const keys = [];
+        for(let index of this.keyMap) {
+            if(index) {
+                for(let pair of index) {
+                    if(!keys.includes(pair[0])) {
+                        keys.push(pair[0]);
+                    }
+                }
+            }
+        }
+        return keys;
+    }
+
+    values() {
+        const values = [];
+        for(let index of this.keyMap) {
+            if(index) {
+                for(let pair of index) {
+                    if(!values.includes(pair[1])) {
+                        values.push(pair[1]);
+                    }
+                }
+            }
+        }
+        return values;
+    }
 }
 
 const hash = new HashTable(5);
 hash.set('pink', 43);
-hash.set('pnik', 34);
+hash.set('pnik', 43);
 hash.set('orange', 52);
 hash.set('blue', 86);
 hash.set('purple', 112);
-console.log(hash.get('blue'))
+console.log(hash.values())

@@ -32,3 +32,6 @@ o	Fast, allowing for fast insertion and access. Ideally, the function should be 
 -The get function accepts a key, hashes it, and retrieves the key-value pair in the hash table.
 -Separate chaining was used to store the values in the hash table, so finding the key-value pair at an index means looping through the array to find it.
 -If the key is not found in the hash table, return undefined.
+## Keys and Values
+•	The keys method loops through the hash table array and returns an array of the keys in the table.
+•	The values method loops through the hash table array and returns an array of the values in the table. This method should only return unique values.
