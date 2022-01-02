@@ -15,7 +15,8 @@
 - To review depth-first search generally involves visiting child nodes before visiting sibling nodes (you deepen the traversal before widening it). Each depth-first method only varies in the order in which the children are visited. Since there is no root node in a graph, it’s harder to determine what “depth” means for a graph.
 - A simple definition of depth-first searching in graphs is to start at a node and visit it’s neighbor, then it’s neighbor’s neighbor and so on, moving away from the starting node before coming back to it to visit its neighbors.
 - When deciding which direction to start traversing in, you can choose an alphabetical or numeric order, depending on the nature of the data stored in the graph.
-- In the example graph, a depth-first search would mean visiting nodes in the following order: A  B  C  D  E  F.
+<img src="Example_Graph_Traversal.JPG" />
+- In the example graph, a depth-first search would mean visiting nodes in the following order: A -> B -> C -> D -> -> -> F.
     - On the second step of the traversal, when deciding which of B’s neighbors to visit, we chose C to maintain the alphabetic order we started with. The same goes for the decision made in the fourth step, when deciding which of D’s neighbors to visit.
 - In general, depth-first means prioritizing visiting neighbors over back-tracking. This is very similar to depth-first tree (BST) traversal, where we keep moving left of the root before moving right. In graph traversal, we keep following the “chain of neighbors” until we need to start back-tracking to visit the other nodes.
 - As with tree-traversal, it’s important to keep track of nodes visited when traversing a graph to avoid getting stuck in an infinite loop. For example, moving between nodes A and B because they are the closest (and lowest) alphabetical neighbors.
