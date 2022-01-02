@@ -39,3 +39,11 @@
 - Adjacency lists can be a better choice than matrices because real-world data tends to be sparse.
 - Chart Comparing Performance of a List and Matrix:  
     <img src="Big_O_Adjacency.JPG" />
+## Populating Graphs
+- Adding a Vertex: Implementing a graph using an Adjacency List makes adding vertices very easy because you simply need to add a key to the object that represents the list, then set the value of that key to an empty array (the node starts out with zero connections). The function should accept a value as an argument and add that value as a key to the adjacency list object. It should then set the value of that key to an empty array.
+- Adding an Edge: The function should accept two vertices as arguments. For an undirected graph, the function should add the second vertex to the array associated with first vertex and vice versa. For a directed graph, the function should only add the second vertex to the array associated with the first vertex.
+- Removing an Edge: The function should accept two vertices as arguments. For an undirected graph, the function should remove the second vertex from the array associated with first vertex and vice versa. For a directed graph, the function should only remove the second vertex from the array associated with the first vertex.
+    - The function should remove a vertex by reassigning the value of the key to be a new array that does not contain the removed vertex.
+    - Recall from React on how to non-destructively modify an array: when adding, use the spread operator; when removing, use filter; and when modifying an element, use map.
+- Removing a Vertex: When removing a vertex from a graph, you must also remove all edges associated with that vertex. The function should accept a vertex as an argument, it should then remove all edges associated with that vertex, and then remove the vertex from the adjacency list object.
+
