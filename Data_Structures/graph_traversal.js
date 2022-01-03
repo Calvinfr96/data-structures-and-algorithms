@@ -73,6 +73,29 @@ class Graph {
         traverse(vertex)
         return results;
     }
+    
+    DFSIterative(vertex) {
+        const stack = [];
+        const results = [];
+        const visited = {};
+        const list = this.adjacencyList;
+
+        stack.push(vertex);
+        visited[vertex] = true;
+
+        while(stack.length) {
+            const current = stack.pop();
+            results.push(current);
+            for(let neighbor of list[current]) {
+                if(!visited[neighbor]) {
+                    stack.push(neighbor);
+                    visited[neighbor] = true;
+                }
+            }
+        }
+
+        return results;
+    }
 }
 
 const exampleGraph = new Graph();

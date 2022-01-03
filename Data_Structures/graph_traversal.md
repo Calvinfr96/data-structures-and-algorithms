@@ -15,7 +15,7 @@
 - To review depth-first search generally involves visiting child nodes before visiting sibling nodes (you deepen the traversal before widening it). Each depth-first method only varies in the order in which the children are visited. Since there is no root node in a graph, it’s harder to determine what “depth” means for a graph.
 - A simple definition of depth-first searching in graphs is to start at a node and visit it’s neighbor, then it’s neighbor’s neighbor and so on, moving away from the starting node before coming back to it to visit its neighbors.
 - When deciding which direction to start traversing in, you can choose an alphabetical or numeric order, depending on the nature of the data stored in the graph.
-<img src="Example_Graph_Traversal.JPG" />
+  <img src="Example_Graph_Traversal.JPG" />
 - In the example graph, a depth-first search would mean visiting nodes in the following order: A -> B -> C -> D -> -> -> F.
     - On the second step of the traversal, when deciding which of B’s neighbors to visit, we chose C to maintain the alphabetic order we started with. The same goes for the decision made in the fourth step, when deciding which of D’s neighbors to visit.
 - In general, depth-first means prioritizing visiting neighbors over back-tracking. This is very similar to depth-first tree (BST) traversal, where we keep moving left of the root before moving right. In graph traversal, we keep following the “chain of neighbors” until we need to start back-tracking to visit the other nodes.
@@ -37,3 +37,20 @@
         - If any of those values have not been visited, call the helper method on them.
     - Invoke the helper method with the starting vertex.
     - Return the ‘results’ array.
+## Depth-First Graph Traversal: Iterative
+- The iterative solution to depth-first graph traversal is like the recursive solution. In the recursive solution, the Call Stack was used to progress through the neighbors of each visited node. When a node was visited, it was added to the call stack, its neighbors were added to the Call Stack with recursion, and it was only removed once all of its neighbors were visited. In the iterative solution, a stack is implemented with an array and used to manage which vertices should be visited.
+- The iterative solution begins with pushing the starting vertex onto the stack. While the stack is not empty, we pop a vertex off the stack, visit the vertex (add it to the visited array), and label the vertex as discovered. For each vertex’s neighbor, we push it onto the stack and the loop starts over again.
+- Pseudocode:
+    - The function should accept a starting node.
+    - Create a stack, using a list or array, to track vertices during the traversal.
+    - Create list (array) to store the result of the traversal.
+    - Create an object to store visited vertices.
+    - Add the starting vertex to the stack and mark it as visited.
+    - While the stack is not empty:
+        - Pop a vertex off the stack.
+        - Add the popped-off vertex to the results array,
+        - If the vertex hasn't been visited: mark it as visited array and push its neighbors onto the stack.
+- Although the order of the traversal is different in the iterative approach (ACEFDB iterative vs. ABDECF recursive), it is still depth-first.
+    - The difference in order comes from the difference between the Call Stack in the recursive approach and the stack implemented in the iterative approach.
+    - Vertices aren’t popped off the Call Stack until the base case is reached in the recursive approach.
+    - In the iterative approach, vertices are popped off the stack during each iteration of the loop.
