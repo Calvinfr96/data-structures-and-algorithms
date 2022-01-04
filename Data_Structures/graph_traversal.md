@@ -54,3 +54,15 @@
     - The difference in order comes from the difference between the Call Stack in the recursive approach and the stack implemented in the iterative approach.
     - Vertices aren’t popped off the Call Stack until the base case is reached in the recursive approach.
     - In the iterative approach, vertices are popped off the stack during each iteration of the loop.
+## Breadth-First Graph Traversal
+- Breadth-first search involves visiting all the neighbors of a vertex first, before moving on to the next vertex. The neighbors of a given node are said to have a depth of one, while its neighbor’s neighbors are said to have a depth of two, and so on.
+    - Breath-first search involves visiting all of the nodes at a depth before moving to the next depth.
+- In Depth-first search, we used a stack to determine which the order in which vertices should be visited. In Breadth-first search, we use a queue.
+- The function should accept a starting vertex	
+- Create a queue using an array and place the starting vertex in it.
+- Create a results array to return at the end of the function. Also create an object to store vertices that have been visited.
+- Mark the starting vertex as visited.
+- While there are items in the queue:
+    - Dequeue the starting vertex from the queue and push it into the results array.
+    - Looping over the adjacency list for each vertex, if the vertex hasn’t been visited, mark it as visited and enqueue it.
+- After the while loop, return the results array.

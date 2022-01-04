@@ -96,6 +96,30 @@ class Graph {
 
         return results;
     }
+
+    BFS(vertex) {
+        const queue = [];
+        const results = [];
+        const visited = {};
+        const list = this.adjacencyList;
+        let current
+
+        queue.push(vertex);
+        visited[vertex] = true;
+
+        while(queue.length) {
+            current = queue.shift();
+            results.push(current);
+            for(let neighbor of list[current]) {
+                if(!visited[neighbor]) {
+                    queue.push(neighbor);
+                    visited[neighbor] = true;
+                }
+            }
+        }
+
+        return results; 
+    }
 }
 
 const exampleGraph = new Graph();
@@ -115,4 +139,4 @@ exampleGraph.addEdge("D","F");
 exampleGraph.addEdge("E","F");
 
 console.log(exampleGraph.adjacencyList)
-console.log(exampleGraph.DFSRecursive("A"))
+console.log(exampleGraph.BFS("A"))
