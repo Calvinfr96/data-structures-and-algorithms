@@ -47,15 +47,90 @@ class WeightedGraph {
             delete list[vertex];
         }
     }
+
+    dijkstras(start, end) {
+        const nodes = new basicPrioirtyQueue();
+        const distances = {};
+        const previous = {};
+        const path = [];
+        let smallest;
+
+        for(let vertex in this.adjacencyList) {
+            if(vertex === start) {
+                distances[vertex] = 0;
+                nodes.enqueue(vertex, 0);
+            } else {
+                distances[vertex] = Infinity;
+                nodes.enqueue(vertex, Infinity);
+            }
+            previous[vertex] = null;
+        }
+
+        while(nodes.values.length) {
+            smallest = nodes.dequeue().value;
+            if(smallest === end) {
+                while(previous[smallest]) {
+                    path.push(smallest);
+                    smallest = previous[smallest];
+                }
+                break;
+            }
+            if(smallest || distances[smallest] !== Infinity) {
+                for(let neighbor in this.adjacencyList[smallest]) {
+                    let nextNode = this.adjacencyList[smallest][neighbor];
+                    let candidate = distances[smallest] + nextNode.weight;
+                    if(candidate < distances[nextNode.node]) {
+                        distances[nextNode.node] = candidate;
+                        previous[nextNode.node] = smallest;
+                        nodes.enqueue(nextNode.node, candidate);
+                    }
+                }
+            }
+        }
+        return path.concat(smallest).reverse();
+    }
 }
 
-const graph = new WeightedGraph();
-graph.addVertex("A")
-graph.addVertex("B")
-graph.addVertex("C")
-graph.addEdge("A", "B", 9)
-graph.addEdge("A", "C", 5)
-graph.addEdge("B", "C", 7)
-console.log(graph.adjacencyList)
-graph.removeVertex("A")
-console.log(graph.adjacencyList)
+class basicPrioirtyQueue {
+    constructor() {
+        this.values = [];
+    }
+
+    sort() {
+        this.values.sort((a,b) => a.priority - b.priority)
+    }
+
+    enqueue(value, priority) {
+        this.values.push({value, priority});
+        this.sort()
+    }
+
+    dequeue() {
+        return this.values.shift();
+    }
+}
+
+const graph1 = new WeightedGraph();
+graph1.addVertex("A");
+graph1.addVertex("B");
+graph1.addVertex("C");
+graph1.addEdge("A", "B", 9);
+graph1.addEdge("A", "C", 5);
+graph1.addEdge("B", "C", 7);
+
+const graph2 = new WeightedGraph();
+graph2.addVertex("A");
+graph2.addVertex("B");
+graph2.addVertex("C");
+graph2.addVertex("D");
+graph2.addVertex("E");
+graph2.addVertex("F");
+graph2.addEdge("A", "B", 4);
+graph2.addEdge("A", "C", 2);
+graph2.addEdge("B", "E", 3);
+graph2.addEdge("C", "D", 2);
+graph2.addEdge("C", "F", 4);
+graph2.addEdge("D", "E", 3);
+graph2.addEdge("D", "F", 1);
+graph2.addEdge("E", "F", 1);
+console.log(graph2.dijkstras("A", "A"));
