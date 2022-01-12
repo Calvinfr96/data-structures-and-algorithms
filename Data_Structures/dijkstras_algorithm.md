@@ -21,4 +21,4 @@
 - If the new total distance is less than the previous total distance, you store the new total distance for that node.
 - Example Graph:
     <img src="Weighted_Graph.JPG" />
-    <img src="Dijkstras_Algorithm.JPG" />
+    <img src="Dijkstras_Algoirthm.JPG" />
