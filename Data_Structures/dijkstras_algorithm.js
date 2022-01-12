@@ -134,3 +134,26 @@ graph2.addEdge("D", "E", 3);
 graph2.addEdge("D", "F", 1);
 graph2.addEdge("E", "F", 1);
 console.log(graph2.dijkstras("A", "A"));
+
+// Practice:
+const distances = {
+    "A": 0,
+    "B": 4,
+    "C": 2,
+    "D": 4,
+    "E": 6,
+    "F": 5
+}
+
+const visited = ["A","C","B","D","F"];
+
+const previous = {
+    "A": null,
+    "B": "A",
+    "C": "A",
+    "D": "C",
+    "E": "B",
+    "F": "F"
+}
+
+console.log(graph2.adjacencyList)

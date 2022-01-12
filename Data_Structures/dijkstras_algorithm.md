@@ -22,3 +22,25 @@
 - Example Graph:
     <img src="Weighted_Graph.JPG" />
     <img src="Dijkstras_Algoirthm.JPG" />
+- For example, if we start at vertex A in the graph above. You make a table with two columns. The left column has each vertex, and the right column has distances from the starting vertex (A in this case). You fill out the table by putting 0 for the row for A (the distance from A to A is zero) and infinity (an arbitrarily high number) for the rest.
+- Following the first step in the algorithm, you pick A because it has the shortest distance to A in the table. You add A to the visited list, then look at its neighbors.
+- Moving alphabetically, you update the distance from A to B to be 4, then set the value of B in previous to be A (the node that came before B on the current path).
+- You do the same thing for C, updating its distance from A to be 2 and its previous to be A. This completes the process for vertex A.
+- Next, we move to vertex C because it has the shortest distance to A (besides A).
+- Now that you’re analyzing vertex C, you add it to the visited list and calculate the distance from A to C’s neighbors through C. For vertex D, this would be 4 and its previous would now be C.
+- You continue this process for the rest of the vertices (except the last one), updating the table and previous object when you find a distance from A that is less than the current low.
+## Priority Queue
+- In a basic priority queue, each item is an object with a value and a priority, and the queue is implemented with array. Each time an item is enqueued, the array is sorted by priority.
+- This approach, while sufficient, is inefficient because it requires sorting the array each time an item is added, resulting in a time complexity of O(n*log(n)).
+- A better way of implementing the queue, as seen previously, is a binary heap.
+## Pseudocode
+- The function should accept a starting and ending vertex (to define the path to be taken).
+- Create an object called distances. Set the keys of the object to be the vertices of the graph and the associated values to infinity, except for the starting vertex, which should be given a value of zero.
+- After setting a value in the distances object, add each vertex with a priority of infinity to the priority queue. Leave the starting vertex out of the object because its priority is zero.
+- Create another object called previous and set the keys of the object to be the vertices of the graph and the associated values to be null.
+- Start looping while there are vertices in the priority queue:
+    - Dequeue a vertex from the priority queue. If that vertex is the same as the ending vertex, break out of the loop.
+    - Otherwise loop through each value in the adjacency list for that vertex.
+    - Calculate the distance from the starting vertex to the current vertex in the loop.
+    - If the distance is less than that which is stored in the distances object, update the object with the new lower distance. Also update the previous object to contain that vertex.
+    - Finally, enqueue the vertex with the total distance from the start node.
