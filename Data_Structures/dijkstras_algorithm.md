@@ -36,7 +36,7 @@
 ## Pseudocode
 - The function should accept a starting and ending vertex (to define the path to be taken).
 - Create an object called distances. Set the keys of the object to be the vertices of the graph and the associated values to infinity, except for the starting vertex, which should be given a value of zero.
-- After setting a value in the distances object, add each vertex with a priority of infinity to the priority queue. Leave the starting vertex out of the object because its priority is zero.
+- After setting a value in the distances object, add each vertex, except the starting vertex, with a priority of infinity to the priority queue. Add the starting vertex to the priority queue with a priority of zero because that's where we start.
 - Create another object called previous and set the keys of the object to be the vertices of the graph and the associated values to be null.
 - Start looping while there are vertices in the priority queue:
     - Dequeue a vertex from the priority queue. If that vertex is the same as the ending vertex, break out of the loop.
