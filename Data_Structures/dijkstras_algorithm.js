@@ -49,40 +49,40 @@ class WeightedGraph {
     }
 
     dijkstras(start, end) {
-        const nodes = new PriorityQueue();
-        const distances = {};
-        const previous = {};
-        const path = [];
-        let smallest;
+        const nodes = new PriorityQueue(); //Creates priority queue that we dequeue from for each iteration of the loop.
+        const distances = {}; //Stores the distances from the starting node.
+        const previous = {}; // Stores the previous node in the traversal to the given node.
+        const path = []; //Stores the traversal path to be returned at the end.
+        let smallest; //Stores the node with the shortest distance to the starting node.
 
         for(let vertex in this.adjacencyList) {
-            if(vertex === start) {
+            if(vertex === start) { //Ensures the starting node has a distance of zero and a priority of zero (highest).
                 distances[vertex] = 0;
                 nodes.insert(vertex, 0);
-            } else {
+            } else { //Ensures all other nodes have a distance of infinity (unknown) and a priorty of infinity (lowest).
                 distances[vertex] = Infinity;
                 nodes.insert(vertex, Infinity);
             }
-            previous[vertex] = null;
+            previous[vertex] = null; //At the start, the graph hasn't been traversed, so there is no previous node in the traversal to a given node.
         }
 
-        while(nodes.values.length) {
-            smallest = nodes.remove().value;
-            if(smallest === end) {
-                while(previous[smallest]) {
+        while(nodes.values.length) { //While there are nodes in the queue...
+            smallest = nodes.remove().value; //Sets smallest to the node with the smallest distance from the starting node in the queue.
+            if(smallest === end) { //When the smallest node in the queue is the ending node, the travseral is complete.
+                while(previous[smallest]) { //Builds path array to be returned when the traversal is complete.
                     path.push(smallest);
                     smallest = previous[smallest];
                 }
                 break;
             }
-            if(smallest || distances[smallest] !== Infinity) {
-                for(let neighbor in this.adjacencyList[smallest]) {
-                    let nextNode = this.adjacencyList[smallest][neighbor];
-                    let candidate = distances[smallest] + nextNode.weight;
-                    if(candidate < distances[nextNode.node]) {
-                        distances[nextNode.node] = candidate;
-                        previous[nextNode.node] = smallest;
-                        nodes.insert(nextNode.node, candidate);
+            if(smallest || distances[smallest] !== Infinity) { //As long as the vertex dequeued is valid...
+                for(let neighbor in this.adjacencyList[smallest]) { //For each node in the adjacency list of 'smallest'.
+                    let nextNode = this.adjacencyList[smallest][neighbor]; //The node in the adjacency list (can be improved with for... of).
+                    let candidate = distances[smallest] + nextNode.weight; //Potentially smaller distance from starting node.
+                    if(candidate < distances[nextNode.node]) { //If the candidate is smaller than the distance currently stored in 'distances'...
+                        distances[nextNode.node] = candidate; //Update the distance for that node to be the smaller distance.
+                        previous[nextNode.node] = smallest; //Update the previous for the node to be 'smallest'.
+                        nodes.insert(nextNode.node, candidate); //Add the neighbor of 'smallest to the queue with the updated priority.
                     }
                 }
             }
@@ -219,4 +219,4 @@ const previous = {
     "F": "F"
 }
 
-console.log(graph2.adjacencyList)
+console.log("Adjacency List: ", graph2.adjacencyList)
