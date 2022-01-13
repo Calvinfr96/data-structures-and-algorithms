@@ -49,7 +49,7 @@ class WeightedGraph {
     }
 
     dijkstras(start, end) {
-        const nodes = new basicPrioirtyQueue();
+        const nodes = new PriorityQueue();
         const distances = {};
         const previous = {};
         const path = [];
@@ -58,16 +58,16 @@ class WeightedGraph {
         for(let vertex in this.adjacencyList) {
             if(vertex === start) {
                 distances[vertex] = 0;
-                nodes.enqueue(vertex, 0);
+                nodes.insert(vertex, 0);
             } else {
                 distances[vertex] = Infinity;
-                nodes.enqueue(vertex, Infinity);
+                nodes.insert(vertex, Infinity);
             }
             previous[vertex] = null;
         }
 
         while(nodes.values.length) {
-            smallest = nodes.dequeue().value;
+            smallest = nodes.remove().value;
             if(smallest === end) {
                 while(previous[smallest]) {
                     path.push(smallest);
@@ -82,7 +82,7 @@ class WeightedGraph {
                     if(candidate < distances[nextNode.node]) {
                         distances[nextNode.node] = candidate;
                         previous[nextNode.node] = smallest;
-                        nodes.enqueue(nextNode.node, candidate);
+                        nodes.insert(nextNode.node, candidate);
                     }
                 }
             }
@@ -91,22 +91,85 @@ class WeightedGraph {
     }
 }
 
-class basicPrioirtyQueue {
+class Node {
+    constructor(value, priority) {
+        this.value = value;
+        this.priority = priority;
+    }
+}
+
+class PriorityQueue {
     constructor() {
         this.values = [];
     }
-
-    sort() {
-        this.values.sort((a,b) => a.priority - b.priority)
+    
+    swap(array,a,b) {
+        [array[a], array[b]] = [array[b], array[a]];
+    }
+    
+    insert(value, priority) {
+        const node = new Node(value, priority);
+        this.values.push(node);
+        
+        if(this.values.length > 1) {
+            let childIndex = this.values.length - 1; //2
+            let parentIndex = Math.floor((childIndex - 1) / 2); //0
+            let childPriority = this.values[childIndex].priority;
+            let parentPriority = this.values[parentIndex].priority;
+            
+            while(childPriority < parentPriority) {
+                this.swap(this.values, parentIndex, childIndex);
+                childIndex = parentIndex;
+                parentIndex = Math.floor((childIndex - 1) / 2);
+                if(parentIndex < 0) {
+                    break;
+                }
+                childPriority = this.values[childIndex].priority;
+                parentPriority = this.values[parentIndex].priority;
+            }
+        }
     }
 
-    enqueue(value, priority) {
-        this.values.push({value, priority});
-        this.sort()
-    }
+    remove() {
+        function lesserIndex(array, a, b) {
+            const length = array.length
+            if(a < length && b < length) {
+                const minValue = Math.min(array[a].priority, array[b].priority);
+                let minIndex;
+                array[a].priority === minValue ? minIndex = a : minIndex = b;
+                return minIndex;
+            } else {
+                return a < length ? a : b
+            }
+        }
 
-    dequeue() {
-        return this.values.shift();
+        if(!this.values.length) {
+            return undefined;
+        } else if(this.values.length <= 1) {
+            return this.values.pop();
+        } else {
+            this.swap(this.values, 0, this.values.length - 1);
+            const head = this.values.pop();
+            if(this.values.length > 1) {
+                let currentIndex = 0;
+                let currentPriority = this.values[currentIndex].priority;
+                let childIndex = lesserIndex(this.values, 2*currentIndex + 1, 2*currentIndex + 2);
+                let childPriority = this.values[childIndex].priority;
+    
+                while(childPriority < currentPriority) {
+                    this.swap(this.values, currentIndex, childIndex);
+                    currentIndex = childIndex;
+                    childIndex = lesserIndex(this.values, 2*currentIndex + 1,2*currentIndex + 2);
+                    if(childIndex >= this.values.length) {
+                        break;
+                    }
+                    currentPriority = this.values[currentIndex].priority;
+                    childPriority = this.values[childIndex].priority;
+                }
+            }
+
+            return head;
+        }
     }
 }
 
@@ -133,7 +196,7 @@ graph2.addEdge("C", "F", 4);
 graph2.addEdge("D", "E", 3);
 graph2.addEdge("D", "F", 1);
 graph2.addEdge("E", "F", 1);
-console.log(graph2.dijkstras("A", "A"));
+console.log(graph2.dijkstras("A", "E"));
 
 // Practice:
 const distances = {
