@@ -87,7 +87,7 @@ class WeightedGraph {
                 }
             }
         }
-        return path.concat(smallest).reverse();
+        return path.concat(smallest).reverse(); //Add the starting node to the path and reverse it (it was built backwards in the loop).
     }
 }
 
