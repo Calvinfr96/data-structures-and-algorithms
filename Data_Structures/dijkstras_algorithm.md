@@ -44,3 +44,18 @@
     - Calculate the distance from the starting vertex to the current vertex in the loop.
     - If the distance is less than that which is stored in the distances object, update the object with the new lower distance. Also update the previous object to contain that vertex.
     - Finally, enqueue the vertex with the total distance from the start node.
+## Pseudocode Breakdown
+- The algorithm mainly requires two data structures: the object that stores the shortest distances from the starting vertex, and the priority queue that we dequeue from.
+- When you dequeue a node (smallest), you look at its neighbors (neighbor) in the graph’s adjacency list using a for loop. Within the for loop, you’re mainly looking to see if any od the neighbor’s distances can be updated (if there is a smaller distance than the one currently stored in the distances object).
+- During each iteration of the for loop, you want to update the distance of the neighbor, as well as the neighbor’s position in the priority queue, if the recalculated distance is smaller than the current distance.
+- To update the position of the neighbor, you can either add a copy of the neighbor to the queue (the copy will be moved up the queue if its new distance is shorter).
+    - Due to the nature of a priority queue, you can’t dequeue the neighbor, then enqueue it after recalculating the shortest distance, unless the neighbor is at the beginning of the queue (highest priority).
+    - Therefore, you must enqueue a copy of a node with the updated (smaller) distance when a smaller distance is calculated.
+    - This will result in an infinite loop because the queue will never be emptied (the nodes with the distance set to Infinity will never be removed).
+    - To finish the loop, you break out of the loop when smallest is equal to the ending node. You break on this condition because smallest is the node being dequeued, which is the node with smallest distance (distance is the ‘priority’ in the priority queue). If the ending node has the smallest distance, the shortest path has been found.
+- To recalculate the distance during each iteration, you add the weight property of neighbor to the distance of smallest in the distances object.
+- Ideally, the function will return the shortest path as an array. To build this array,  you need an object that stores the previous node in the shortest path between the starting and ending nodes.
+    - At the start of the algorithm, this object will contain all vertices of the graph as keys with property set to null.
+    - During each iteration of the for loop, if a smaller distance is found, the property of the key associated with neighbor should be updated to be smallest.
+    - To build the path array, you first unshift smallest (if it has been assigned to be the ending node) into the array. Then, you use smallest to loop through the object while smallest is not null.
+    - Within the loop, you unshift the value associated with smallest into the array, then update smallest to be that value. 
