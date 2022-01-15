@@ -20,7 +20,7 @@
 - Using the Fibonacci problem as an example, the recursive solution involves establishing a base case and then having a function repeatedly invoke itself until that base case is reached.
 - For this problem, the base case would be if the number passed to the function is less than or equal to 2. If this is the case, you return 1. Otherwise, you return the sum of the invocation of the function with num – 1 and num – 2 passed to it.
 - The time complexity of the recursive solution is O(2^n), which is really bad (worse than n^2). It’s a very simple and easy to understand solution, but it is not performant at all.
-    <img scr="https://i.stack.imgur.com/kgXDS.png" />
+    ![](https://i.stack.imgur.com/kgXDS.png)
     <img src="https://pbs.twimg.com/media/CnCqdu-VIAEsbZZ?format=jpg&name=4096x4096" />
 - The reason the time complexity is so bad is because you repeat function calls during the recursion. For example, running Fibonacci(5) will result in the following calls: [5,4,3,3,2,2,1,2,1].
     - Here, you can see that the calls for Fibonacci of 3, 2, and 1 are called more than once during the recursion. With dynamic programming, we can improve upon this solution by only performing these overlapping subproblems once.
