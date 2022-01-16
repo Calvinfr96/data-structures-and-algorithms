@@ -139,13 +139,13 @@ class SinglyLinkedList {
         // Step 6: Set the tail to be current.
 
         //Solution:
-        if(index < 0 || index >= this.length - 1) {
+        if(index < 0 || index >= this.length) {
             return undefined;
         } else if(index === 0) {
             return this;
         } else {
-            const current = this.get(index);
-            const nextNode = this.get(index + 1);
+            const current = this.get(index - 1);
+            const nextNode = this.get(index);
             current.next = null;
             this.tail.next = this.head;
             this.tail = current;
@@ -162,7 +162,7 @@ list.push(10)
 list.push(15)
 list.push(20)
 list.push(25)
-console.log(list.rotate(1))
+console.log(list.rotate(4))
 console.log(list)
 console.log(list.head.value)
 console.log(list.head.next.value)
