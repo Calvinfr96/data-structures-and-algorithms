@@ -29,3 +29,9 @@
 - Storing the solution of each subproblem can be done using a method called memoization.
 - Memoization involves storing the return value of expensive function calls and returning the cached result when the same input occurs again. The return values can be stored in any data structure, such as an array or object.
 - The time complexity of the solution using dynamic programming and memoization is O(n) because you only need to perform the calculation for each Fibonacci number in the sequence once. Looking up a value in an array is constant time, so those operations don’t affect the time complexity. 
+## Tabulation
+- Storing the result of a previous calculation in a table (usually an array). This is usually done using iteration, instead of recursion.
+- Using tabulation can result in a solution that has better space complexity than one derived using memoization.
+- The recursive solution (using memoization) is a top-down approach because the function starts by trying to calculate the result, then works down until it reaches the base case. The iterative solution (using tabulation) starts from the base case and works up until it calculates the result.
+- Tabulation results in better space complexity than memoization because it significantly reduces the number of function calls being added to the call stack. For large enough numbers (~10,000), the recursive Fibonacci function will result in a stack overflow because of the excessive amount of function calls being added to the call stack.
+- The tabulation and memoization solutions both have a time complexity of O(n).
