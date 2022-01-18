@@ -74,8 +74,8 @@ function countZeroes(array){
           return middle;
       }
 
-      if(array[low] < array[middle]) { //left half is sorted
-          if(array[low] <= value && value <= array[middle]) {
+      if(array[low] <= array[middle]) { //left half is sorted
+          if(array[low] <= value && array[middle] >= value) {
               return findRotatedIndex(array, value, low, middle - 1);
           } else {
               return findRotatedIndex(array, value, middle + 1, high);
@@ -86,16 +86,7 @@ function countZeroes(array){
           } else {
               return findRotatedIndex(array, value, low, middle - 1);
           }
-      } else if(array[middle] === array[low]) {
-          if(array[middle] !== array[high]) {
-            return findRotatedIndex(array, value, middle + 1, high);
-          } else {
-              let result = findRotatedIndex(array, value, low, middle - 1);
-              if(result === -1) {
-                  return findRotatedIndex(array, value, middle + 1, high);
-              } else {
-                  return result;
-              }
-          }
       }
   }
+
+  console.log( findRotatedIndex([3,4,1,2],4,0,3))
