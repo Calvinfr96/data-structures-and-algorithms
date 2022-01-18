@@ -127,6 +127,24 @@ class SinglyLinkedList {
         }
     }
 
+    remove(index) {
+        if(index < 0 || index >= this.length) {
+            return undefined;
+        } else if(index === 0)  {
+            return this.shift();
+        } else if(index === this.length - 1) {
+            return this.pop();
+        } else {
+            const node = this.get(index);
+            const previousNode = this.get(index - 1);
+            const afterNode = this.get(index + 1);
+            previousNode.next = afterNode;
+
+            this.length--;
+            return node;
+        }
+    }
+
     rotate(index) {
         //Problem: Write a function that accepts an index and "rotates" a singly linked list at that index, then returns the list.
         //Example: If your list looks like 1->2->3->4->5 and you rotate at 2, the list becomes 3->4->5->1->2 
