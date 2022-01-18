@@ -57,3 +57,49 @@ const comparator = function(a,b) {
         return 0;
     }
 }
+
+function selectionSort(array) {
+    for(let i = 0; i < array.length; i++) {
+        let minIndex = i;
+        for(let j = i + 1; j < array.length; j++) {
+            if(array[j] < array[minIndex]) {
+                minIndex = j;
+            }
+        }
+        if(minIndex !== i) {
+            [array[i], array[minIndex]] = [array[minIndex], array[i]];
+        }
+    }
+
+    return array;
+}
+
+function selectionSort2(array, comparator) {
+    if(typeof comparator !== 'function') {
+        comparator = function(a, b) {
+            if(a > b) {
+                return 1;
+            } else if(a < b) {
+                return -1;
+            } else {
+                return 0;
+            }
+        }
+    }
+    for(let i = 0; i < array.length; i++) {
+        let minIndex = i;
+        for(let j = i + 1; j < array.length; j++) {
+            if(comparator(array[j], array[minIndex]) < 0) {
+                minIndex = j;
+            }
+        }
+        if(minIndex !== i) {
+            [array[i], array[minIndex]] = [array[minIndex], array[i]];
+        }
+    }
+
+    return array;
+}
+
+const array2 = [0, -10, 7, 4];
+console.log(selectionSort2(array2))
