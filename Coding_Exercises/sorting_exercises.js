@@ -217,4 +217,20 @@ function mergeSort(array, comparator) {
     return merge2(left, right, comparator);
 }
 
-console.log(mergeSort(["Lilbub", "Garfield", "Heathcliff", "Blue", "Grumpy", 7, 40]))
+function pivot(array, pivot = 0, start = 0, end = array.length) {
+    const pivotElement = array[pivot];
+    let pivotIndex = 0;
+
+    for(let i = start; i < end; i++) {
+        if(i === pivot) {
+            continue;
+        }
+        if(pivotElement > array[i]) {
+            pivotIndex++;
+        }
+    }
+
+    return pivotIndex;
+}
+
+console.log(pivot([28,41,4,11,16,1,40,14,36,37,42,18], 1))
