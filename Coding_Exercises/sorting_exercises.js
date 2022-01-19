@@ -140,4 +140,81 @@ function insertionSort2(array, comparator) {
 }
 
 const array3 = [9, 10, 12, 20, 4, 4, 7];
-console.log(insertionSort(array3));
+
+function merge(array1, array2) {
+    let pointer1 = 0;
+    let pointer2 = 0;
+    const length1 = array1.length;
+    const length2 = array2.length;
+    const results = [];
+
+    while(pointer1 < length1 && pointer2 < length2) {
+        if(array1[pointer1] < array2[pointer2]) {
+            results.push(array1[pointer1]);
+            pointer1++;
+        } else {
+            results.push(array2[pointer2]);
+            pointer2++;
+        }
+    }
+
+    for(let i = pointer1; i < length1; i++) {
+        results.push(array1[i]);
+    }
+    for(let i = pointer2; i < length2; i++) {
+        results.push(array2[i]);
+    }
+
+    return results;
+}
+
+function merge2(array1, array2, comparator) {
+    if(typeof comparator !== 'function') {
+        comparator = function(a,b) {
+            if(a < b) {
+                return -1;
+            } else if(a > b) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+    }
+    let pointer1 = 0;
+    let pointer2 = 0;
+    const length1 = array1.length;
+    const length2 = array2.length;
+    const results = [];
+
+    while(pointer1 < length1 && pointer2 < length2) {
+        if(comparator(array1[pointer1], array2[pointer2]) < 0) {
+            results.push(array1[pointer1]);
+            pointer1++;
+        } else {
+            results.push(array2[pointer2]);
+            pointer2++;
+        }
+    }
+
+    for(let i = pointer1; i < length1; i++) {
+        results.push(array1[i]);
+    }
+    for(let i = pointer2; i < length2; i++) {
+        results.push(array2[i]);
+    }
+
+    return results;
+}
+
+function mergeSort(array, comparator) {
+    if(array.length < 2) {
+        return array;
+    }
+
+    const middle = Math.floor(array.length / 2);
+    const left = mergeSort(array.slice(0,middle));
+    const right = mergeSort(array.slice(middle));
+    return merge2(left, right, comparator);
+}
+
+console.log(mergeSort(["Lilbub", "Garfield", "Heathcliff", "Blue", "Grumpy", 7, 40]))
