@@ -217,20 +217,65 @@ function mergeSort(array, comparator) {
     return merge2(left, right, comparator);
 }
 
-function pivot(array, pivot = 0, start = 0, end = array.length) {
-    const pivotElement = array[pivot];
+//Pivoting from the beginning of the array
+function pivot(array, start = 0, end = array.length -1) {
+    const pivotElement = array[start];
     let pivotIndex = 0;
 
-    for(let i = start; i < end; i++) {
-        if(i === pivot) {
-            continue;
-        }
+    for(let i = 1; i <= end; i++) {
         if(pivotElement > array[i]) {
             pivotIndex++;
+            [array[i], array[pivotIndex]] = [array[pivotIndex], array[i]]
         }
     }
+    [array[pivotIndex], array[start]] = [array[start], array[pivotIndex]];
 
     return pivotIndex;
 }
 
-console.log(pivot([28,41,4,11,16,1,40,14,36,37,42,18], 1))
+//Pivoting from the end of the array
+function pivot(array, index = 0, start = 0, end = array.length - 1) {
+    //Choose the pivot element as the last element in the array.
+//[7,2,1,8,6,3,5,4]
+
+
+//Establish two counters. The first counter, i = p - 1,
+//where p is the starting position. The second counter, 
+//j ranges from p to r - 1, where r is the position of
+//the last element.
+
+//Make a comparison between the pivot element and the
+//element at position j. If a[j] is larger, increment j.
+//If a[j] is smaller than the pivot element, increment i
+//and swap a[i] and a[j].
+
+//After looping, move the pivot from its current position
+//to the index i + 1.
+
+    const pivotElement = array[index];
+    let i = start - 1;
+
+    for(let j = start; j <=end; j++) {
+        if(array[j] < pivotElement) {
+            i++;
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+        if(index > i + 1) {
+            for(let k = index; k > i + 1; k--) {
+                [array[k], array[k - 1]] = [array[k - 1], array[k]]
+            }
+        }
+        if(index < i + 1) {
+            for(let k = index; k < i + 1; k++) {
+                [array[k], array[k + 1]] = [array[k + 1], array[k]]
+            }
+        }
+
+    return i + 1;
+}
+
+const array4 = [28,41,4,11,16,1,40,14,36,37,42,18]
+console.log(pivot(array4))
+console.log(array4)
