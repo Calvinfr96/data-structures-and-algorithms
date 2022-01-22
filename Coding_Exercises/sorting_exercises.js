@@ -218,7 +218,15 @@ function mergeSort(array, comparator) {
 }
 
 //Pivoting from the beginning of the array
-function pivot(array, start = 0, end = array.length -1) {
+function pivotStart(array, start = 0, end = array.length -1) {
+    //Establish two counters: One counter starts at zero and tracks the number of elements less than the pivot
+    //The other counter starts at one and compares all elements in the array to the pivot element.
+
+    //When the second counter finds an element less than the pivot, the first counter is incrmented and the elements
+    //at each counter are swapped.
+
+    //When the second counter finishes looping through the array, you swap the first counter with the first element.
+
     const pivotElement = array[start];
     let pivotIndex = 0;
 
@@ -234,7 +242,7 @@ function pivot(array, start = 0, end = array.length -1) {
 }
 
 //Pivoting from the end of the array
-function pivot(array, index = 0, start = 0, end = array.length - 1) {
+function pivotEnd(array, start = 0, end = array.length - 1) {
     //Choose the pivot element as the last element in the array.
 //[7,2,1,8,6,3,5,4]
 
@@ -252,7 +260,7 @@ function pivot(array, index = 0, start = 0, end = array.length - 1) {
 //After looping, move the pivot from its current position
 //to the index i + 1.
 
-    const pivotElement = array[index];
+    const pivotElement = array[end];
     let i = start - 1;
 
     for(let j = start; j <=end; j++) {
@@ -262,20 +270,51 @@ function pivot(array, index = 0, start = 0, end = array.length - 1) {
         }
     }
 
-        if(index > i + 1) {
-            for(let k = index; k > i + 1; k--) {
-                [array[k], array[k - 1]] = [array[k - 1], array[k]]
-            }
-        }
-        if(index < i + 1) {
-            for(let k = index; k < i + 1; k++) {
-                [array[k], array[k + 1]] = [array[k + 1], array[k]]
-            }
-        }
+    for(let k = end; k > i + 1; k--) {
+        [array[k], array[k - 1]] = [array[k - 1], array[k]]
+    }
 
     return i + 1;
 }
 
+
+//Pivoting from the middle
+function pivotMiddle(array, left=0, right=array.length-1) {
+    //Establish two counters at both ends of the array.
+
+    //Loop while the first counter (starting end) is less than or equal to the second (other end).
+
+    //Increment the first counter as long as elements are less than the pivot (the middle element).
+
+    //Decrement the second counter as long as elements are greater than the pivot.
+
+    //When both counters stop, if the first counter is less than or equal to the second, swap the elements
+    //at the counters, then increment the first and decrement the second.
+
+    //Continue looping while the first counter is less than or equal to the second.
+
+
+    const pivot = array[Math.floor(array.length/2)];
+    console.log(pivot)
+    let start = left;
+    let end = right;
+  
+    while(start <= end) {
+      while(array[start] < pivot) {
+        start++;
+      }
+      while(array[end] > pivot) {
+        end--;
+      }
+      if(start <= end) {
+        [array[start], array[end]] = [array[end], array[start]];
+        start++;
+        end--;
+      }
+  
+    }
+  }
+
 const array4 = [28,41,4,11,16,1,40,14,36,37,42,18]
-console.log(pivot(array4))
+console.log(pivotStart(array4))
 console.log(array4)
