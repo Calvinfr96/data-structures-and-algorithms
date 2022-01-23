@@ -367,4 +367,20 @@ function quickSort(array, comparator, start = 0, end = array.length - 1) {
 }
 
 const array4 = [28,41,4,11,16,1,40,14,36,37,42,18]
-console.log(quickSort(array4))
+
+//Radix Sort Helper Methods
+function getDigit(num, n) {
+    return Math.floor(num / Math.pow(10,n)) % 10;
+}
+
+function digitCount(num) {
+    return Math.floor(Math.log10(num)) + 1;
+}
+
+function mostDigits(array) {
+    let maxDigits = 0;
+    for(let num of array) {
+        maxDigits = Math.max(maxDigits, digitCount(num));
+    }
+    return maxDigits;
+}
