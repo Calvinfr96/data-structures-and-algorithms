@@ -384,3 +384,17 @@ function mostDigits(array) {
     }
     return maxDigits;
 }
+
+function radixSort(array) {
+    const maxDigitCount = mostDigits(array);
+
+    for(let i = 0; i < maxDigitCount; i++) {
+        const buckets = Array.from({length: 10}, () => []);
+        for(let num of array) {
+            const position = getDigit(num, i);
+            buckets[position].push(num);
+        }
+        array = [].concat(...buckets);
+    }
+     return array;
+}
