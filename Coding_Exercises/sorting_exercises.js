@@ -244,12 +244,12 @@ function pivotStart(array, comparator, start = 0, end = array.length -1) {
     }
 
     const pivotElement = array[start];
-    let pivotIndex = 0;
+    let pivotIndex = start;
 
-    for(let i = 1; i <= end; i++) {
+    for(let i = start + 1; i <= end; i++) {
         if(comparator(array[i], pivotElement) < 0) {
             pivotIndex++;
-            [array[i], array[pivotIndex]] = [array[pivotIndex], array[i]]
+            [array[i], array[pivotIndex]] = [array[pivotIndex], array[i]];
         }
     }
     [array[pivotIndex], array[start]] = [array[start], array[pivotIndex]];
@@ -334,7 +334,7 @@ function pivotMiddle(array, comparator, left=0, right=array.length-1) {
         }
     }
 
-    const pivot = array[Math.floor(array.length/2)];
+    const pivot = array[Math.floor((right - left + 1)/2)];
     let start = left;
     let end = right;
   
@@ -356,7 +356,15 @@ function pivotMiddle(array, comparator, left=0, right=array.length-1) {
     return start;
   }
 
+function quickSort(array, comparator, start = 0, end = array.length - 1) {
+    if(start < end) {
+        let pivotIndex  = pivotStart(array, comparator, start, end);
+        quickSort(array, comparator, start, pivotIndex - 1);
+        quickSort(array, comparator, pivotIndex + 1);
+    }
+
+    return array;
+}
 
 const array4 = [28,41,4,11,16,1,40,14,36,37,42,18]
-console.log(pivotEnd(array4))
-console.log(array4)
+console.log(quickSort(array4))
