@@ -85,4 +85,27 @@ class Queue {
         this.size--;
         return first;
     }
+
+    reverse() {
+        let previous = null;
+        let current = this.first;
+        let next = null;
+        this.first = this.last;
+        this.last = current;
+
+        while(current) {
+            next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+
+        return this;
+    }
 }
+
+const stack = new Stack();
+stack.push("First")
+stack.push("Second")
+stack.push("Third")
+console.log(stack)
