@@ -104,8 +104,36 @@ class Queue {
     }
 }
 
-const stack = new Stack();
-stack.push("First")
-stack.push("Second")
-stack.push("Third")
-console.log(stack)
+class Stack2 {
+    constructor() {
+        this.queue1 = new Queue();
+        this.queue2 = new Queue();
+    }
+
+    push(value) {
+        const node = new Node(value);
+        this.queue1.enqueue(node.value);
+
+        return this.queue1
+    }
+
+    pop() {
+        if(this.queue1.size === 0) {
+            return undefined;
+        } else if(this.queue1.size === 1) {
+            return this.queue1.dequeue().value;
+        } else {
+            const size = this.queue1.size;
+            for(let i = 1; i < size; i++) {
+                const node = this.queue1.dequeue();
+                this.queue2.enqueue(node.value);
+            }
+            const lastNode = this.queue1.dequeue();
+            const queue1 = this.queue1;
+            this.queue1 = this.queue2;
+            this.queue2 = queue1;
+
+            return lastNode.value;
+        }
+    }
+}
