@@ -58,7 +58,7 @@
 - Starting at the root, the first thing the function should is the existence of a root. If the root does not exist (the tree is empty), return false.
 - If there is a root, compare the root’s value to the value passed to the function. If the values are equal, return true. If the value is greater, move to the right and perform the same comparison. If the value is lesser, move to the left and perform the same comparison.
 - If you reach the end of the tree without finding the value, return false.
-Time and Space Complexity
+## Time and Space Complexity
 - Insertion has a time complexity of O(log(n)) and a space complexity of O(1).
 - Searching has a time complexity of O(log(n)) and a space complexity of O(1).
 - O(log(n)) is the time complexity for insertion and searching **in the best and average case**, where log is log of base 2.
