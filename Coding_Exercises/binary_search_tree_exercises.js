@@ -60,6 +60,18 @@ class BinarySearchTree {
             return undefined;
         }
     }
+
+    findRecursive(value, node = this.root) {
+        if(!node) {
+            return undefined;
+        } else if(value < node.value) {
+            return this.findRecursive(value, node.left);
+        } else if(value > node.value) {
+            return this.findRecursive(value, node.right);
+        } else {
+            return node;
+        }
+    }
 }
 
 const bst = new BinarySearchTree();
@@ -70,4 +82,3 @@ bst.insert(6)
 bst.insert(4)
 bst.insert(14)
 bst.insert(16)
-console.log(bst.find(6))
