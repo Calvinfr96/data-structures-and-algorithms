@@ -72,13 +72,32 @@ class BinarySearchTree {
             return node;
         }
     }
+
+    breadthFirstSearch() {
+        const queue = [];
+        const visited = [];
+        queue.push(this.root);
+
+        while(queue.length) {
+            const node = queue.shift();
+            visited.push(node.value);
+            if(node.left) {
+                queue.push(node.left);
+            }
+            if(node.right) {
+                queue.push(node.right);
+            }
+        }
+
+        return visited;
+    }
 }
 
 const bst = new BinarySearchTree();
-bst.insert(10)
-bst.insert(5)
 bst.insert(15)
-bst.insert(6)
-bst.insert(4)
-bst.insert(14)
-bst.insert(16)
+bst.insert(20)
+bst.insert(10)
+bst.insert(12)
+bst.insert(1)
+bst.insert(5)
+bst.insert(50)
