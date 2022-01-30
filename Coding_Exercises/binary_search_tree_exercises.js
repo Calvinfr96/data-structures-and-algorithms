@@ -42,6 +42,24 @@ class BinarySearchTree {
         }
     }
 
+    remove(value) {
+        if(!this.root) {
+            return undefined;
+        }
+        /* Things to Consider:
+            1. The removal of a node depends on its position within the tree and how many children it has.
+            2. There are three types of nodes: leaves, nodes with one child, and nodes with two children.
+            3. Case 1: Deleting a leaf node is relatively straightforward. You go to the parent of the leaf, then set pointer that
+            references the leaf to null.
+            4. Case 2: To delete a node with one child, you replace that node with its only child. In other words, you go the parent of
+            the node and update the reference to that node so that it points to its only child.
+            5. Case 3: To delete a node with two children, you must replace that node with its in-order successor. The in-order successor
+            of a node is the left-most element of its right subtree. For a BST, this is the right child of the node. To perform the replacement,
+            you make the parent of the node point to the node's in-order successor. You then set the left child of the successor to the left child
+             of the node.
+        */
+    }
+
     find(value) {
         if(!this.root) {
             return undefined;
@@ -152,3 +170,4 @@ bst.insert(12)
 bst.insert(1)
 bst.insert(5)
 bst.insert(50)
+console.log(bst.DFSPreOrder())
