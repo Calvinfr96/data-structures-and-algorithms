@@ -54,9 +54,10 @@ class BinarySearchTree {
             4. Case 2: To delete a node with one child, you replace that node with its only child. In other words, you go the parent of
             the node and update the reference to that node so that it points to its only child.
             5. Case 3: To delete a node with two children, you must replace that node with its in-order successor. The in-order successor
-            of a node is the left-most element of its right subtree. For a BST, this is the right child of the node. To perform the replacement,
-            you make the parent of the node point to the node's in-order successor. You then set the left child of the successor to the left child
-             of the node.
+            of a node can be the smallest value in the right subtree or the largest value in the left subtree.For a BST, this is the 
+            left-most node in the right subtree or the right-most node in the left subtree. To perform the replacement, follow this procedure:
+                1. Copy the value of the node found in the subtree to the node you want to remove.
+                2. Recursively remove the node copied in the previous step.
         */
     }
 
