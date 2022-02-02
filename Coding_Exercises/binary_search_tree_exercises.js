@@ -43,9 +43,6 @@ class BinarySearchTree {
     }
 
     remove(value) {
-        if(!this.root) {
-            return undefined;
-        }
         /* Things to Consider:
             1. The removal of a node depends on its position within the tree and how many children it has.
             2. There are three types of nodes: leaves, nodes with one child, and nodes with two children.
@@ -59,6 +56,40 @@ class BinarySearchTree {
                 1. Copy the value of the node found in the subtree to the node you want to remove.
                 2. Recursively remove the node copied in the previous step.
         */
+
+        const node = find(value);
+
+        if(!node) {
+            return undefined;
+        } else if(node.left && node.right) {
+
+        } else if(node.left || node.right) {
+
+        } else {
+
+        }
+    }
+
+    findParent(value) {
+        if(!this.root) {
+            return undefined;
+        } else {
+            let previous = null;
+            let current = this.root;
+            while(current) {
+                if(value < current.value) {
+                    previous = current;
+                    current = current.left;
+                } else if(value > current.value) {
+                    previous = current;
+                    current = current.right;
+                } else {
+                    return previous;
+                }
+            }
+
+            return undefined;
+        }
     }
 
     find(value) {
@@ -171,4 +202,4 @@ bst.insert(12)
 bst.insert(1)
 bst.insert(5)
 bst.insert(50)
-console.log(bst.DFSPreOrder())
+console.log(bst.findParent(20).value)
