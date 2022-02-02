@@ -46,7 +46,7 @@ class BinarySearchTree {
         /* Things to Consider:
             1. The removal of a node depends on its position within the tree and how many children it has.
             2. There are three types of nodes: leaves, nodes with one child, and nodes with two children.
-            3. Case 1: Deleting a leaf node is relatively straightforward. You go to the parent of the leaf, then set pointer that
+            3. Case 1: Deleting a leaf node is relatively straightforward. You go to the parent of the leaf, then set the pointer that
             references the leaf to null.
             4. Case 2: To delete a node with one child, you replace that node with its only child. In other words, you go the parent of
             the node and update the reference to that node so that it points to its only child.
@@ -58,15 +58,27 @@ class BinarySearchTree {
         */
 
         const node = find(value);
+        const parent = this.findParent(value);
+        let successor;
 
         if(!node) {
             return undefined;
         } else if(node.left && node.right) {
-
+            
         } else if(node.left || node.right) {
-
+            if(value < parent.value) {
+                node.left ? parent.left = node.left : parent.left = node.right;
+            }
+            if(value > parent.value) {
+                node.left ? parent.right = node.left : parent.right = node.right;
+            }
         } else {
-
+            if(value < parent.value) {
+                parent.left = null;
+            }
+            if(value > parent.value) {
+                parent.right = null;
+            }
         }
     }
 
