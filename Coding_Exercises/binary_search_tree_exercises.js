@@ -57,14 +57,22 @@ class BinarySearchTree {
                 2. Recursively remove the node copied in the previous step.
         */
 
-        const node = find(value);
+        const node = this.find(value);
         const parent = this.findParent(value);
-        let successor;
 
         if(!node) {
             return undefined;
         } else if(node.left && node.right) {
-            
+            let successor = node.right;
+            let subtree = node.right;
+            while(subtree.left) {
+                successor = subtree.left;
+                subtree = subtree.left;
+            }
+
+            this.remove(successor.value)
+            node.value = successor.value;
+
         } else if(node.left || node.right) {
             if(value < parent.value) {
                 node.left ? parent.left = node.left : parent.left = node.right;
@@ -80,6 +88,8 @@ class BinarySearchTree {
                 parent.right = null;
             }
         }
+
+        return this;
     }
 
     findParent(value) {
@@ -214,4 +224,4 @@ bst.insert(12)
 bst.insert(1)
 bst.insert(5)
 bst.insert(50)
-console.log(bst.findParent(20).value)
+console.log(bst.remove(15))
