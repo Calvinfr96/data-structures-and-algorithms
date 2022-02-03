@@ -60,6 +60,10 @@ class BinarySearchTree {
         const node = this.find(value);
         const parent = this.findParent(value);
 
+        if(!this.root.left && !this.root.right) {
+            this.root = null;
+        }
+
         if(!node) {
             return undefined;
         } else if(node.left && node.right) {
@@ -145,6 +149,26 @@ class BinarySearchTree {
         }
     }
 
+    findSecondLargest() {
+        if(!this.root) {
+            return undefined;
+        }
+
+        let largest = this.root;
+        while(largest.right) {
+            largest = largest.right;
+        }
+
+        const parent = this.findParent(largest.value);
+        if(largest.left) {
+            return largest.left.value;
+        } else if(parent) {
+            return parent.value;
+        } else {
+            return undefined;
+        }
+    }
+
     breadthFirstSearch() {
         const queue = [];
         const visited = [];
@@ -224,4 +248,5 @@ bst.insert(12)
 bst.insert(1)
 bst.insert(5)
 bst.insert(50)
-console.log(bst.remove(15))
+bst.insert(49)
+console.log(bst.findSecondLargest())
