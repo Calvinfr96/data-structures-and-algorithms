@@ -238,6 +238,16 @@ class BinarySearchTree {
         traverse(this.root);
         return visited;
     }
+
+    isBalanced() {
+        /*
+        Deternmine if a BST is balanced by retruning true if balanced and false otherwise. A BST is balanced when the depth of all
+        nodes with less than two children differ by no more than one.
+
+        Figure out a way to record the height of each node with less than two children using a depth-first traversal.
+        Store these heights in an array and determine if the values in the array differ by less than two.
+        */
+    }
 }
 
 const bst = new BinarySearchTree();
