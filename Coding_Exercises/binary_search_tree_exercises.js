@@ -137,6 +137,28 @@ class BinarySearchTree {
         }
     }
 
+    getLevel(value) {
+        if(!this.root) {
+            return undefined;
+        } else {
+            let current = this.root;
+            let level = 1;
+            while(current) {
+                if(value < current.value) {
+                    current = current.left;
+                    level++;
+                } else if(value > current.value) {
+                    current = current.right;
+                    level++;
+                } else {
+                    return level;
+                }
+            }
+
+            return undefined;
+        }
+    }
+
     findRecursive(value, node = this.root) {
         if(!node) {
             return undefined;
@@ -259,4 +281,4 @@ bst.insert(1)
 bst.insert(5)
 bst.insert(50)
 bst.insert(49)
-console.log(bst.findSecondLargest())
+console.log(bst.getLevel(15))
