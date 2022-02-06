@@ -261,6 +261,17 @@ class BinarySearchTree {
         return visited;
     }
 
+    differByOne(array) {
+        let difference = 0;
+        for(let i = 0; i < array.length - 1; i++) {
+            for(let j = i + 1; j < array.length; j++) {
+                difference = Math.abs(array[j] - array[i]);
+            }
+            if(difference > 1) return false;
+        }
+        return true;
+    }
+
     isBalanced() {
         /*
         Deternmine if a BST is balanced by retruning true if balanced and false otherwise. A BST is balanced when the depth of all
@@ -281,4 +292,4 @@ bst.insert(1)
 bst.insert(5)
 bst.insert(50)
 bst.insert(49)
-console.log(bst.getLevel(15))
+console.log(bst.getLevel(5))
