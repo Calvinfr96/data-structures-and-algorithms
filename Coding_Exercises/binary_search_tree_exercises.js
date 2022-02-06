@@ -261,6 +261,25 @@ class BinarySearchTree {
         return visited;
     }
 
+    oneOrNoChildren() {
+        const targetNodes = [];
+
+        function traverse(node) {
+            if(!node.left || !node.right) {
+                targetNodes.push(node.value);
+            }
+            if(node.left) {
+                traverse(node.left);
+            }
+            if(node.right) {
+                traverse(node.right);
+            }
+        }
+
+        traverse(this.root);
+        return targetNodes;
+    }
+
     differByOne(array) {
         let difference = 0;
         for(let i = 0; i < array.length - 1; i++) {
@@ -280,6 +299,15 @@ class BinarySearchTree {
         Figure out a way to record the height of each node with less than two children using a depth-first traversal.
         Store these heights in an array and determine if the values in the array differ by less than two.
         */
+
+        const nodeValues = this.oneOrNoChildren();
+        const levels = [];
+
+        for(let value of nodeValues) {
+            levels.push(this.getLevel(value));
+        }
+
+        return this.differByOne(levels);
     }
 }
 
@@ -292,4 +320,5 @@ bst.insert(1)
 bst.insert(5)
 bst.insert(50)
 bst.insert(49)
-console.log(bst.getLevel(5))
+bst.insert(19)
+console.log(bst.isBalanced())
