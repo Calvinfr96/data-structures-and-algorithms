@@ -11,6 +11,14 @@ class Graph {
         return this;
     }
 
+    removeVertex(vertex) {
+        const edges = this.adjacencyList[vertex];
+        for(let edge of edges) {
+            this.removeEdge(vertex, edge);
+        }
+        delete this.adjacencyList[vertex];
+    }
+
     addEdge(vertex1, vertex2) {
         if(this.adjacencyList[vertex1] && this.adjacencyList[vertex2]) {
             const edge1 = this.adjacencyList[vertex1].find(vertex => vertex === vertex2);
@@ -30,6 +38,30 @@ class Graph {
             }1
         }
     }
+
+    DFTRecusrive(start) {
+        const results = [];
+        const visited = {};
+        const list = this.adjacencyList;
+
+        function traverse(vertex) {
+            if(!list[vertex].length) {
+                return;
+            }
+
+            results.push(vertex);
+            visited[vertex] = true;
+
+            for(let node of list[vertex]) {
+                if(!visited[node]) {
+                    traverse(node);
+                }
+            }
+        }
+
+        traverse(start);
+        return results;
+    }
 }
 
 const graph = new Graph();
@@ -40,6 +72,4 @@ graph.addVertex("C");
 graph.addEdge("A", "B")
 graph.addEdge("B", "A")
 graph.addEdge("C", "A")
-graph.removeEdge("A", "C")
-
-console.log(graph);
+console.log(graph.DFTRecusrive("A"))
