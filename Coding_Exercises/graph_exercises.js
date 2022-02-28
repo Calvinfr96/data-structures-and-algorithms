@@ -62,6 +62,26 @@ class Graph {
         traverse(start);
         return results;
     }
+
+    BFTraversal(start) {
+        const queue = [];
+        const visited = {};
+        const results = [];
+        const list = this.adjacencyList;
+        let current;
+
+        queue.push(start);
+        visited[start] = true;
+        while(queue.length) {
+            current = queue.shift();
+            results.push(start);
+
+            for(let vertex of list[current]) {
+                queue.push(vertex);
+                visited[vertex] = true;
+            }
+        }
+    }
 }
 
 const graph = new Graph();
