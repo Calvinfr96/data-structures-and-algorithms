@@ -74,11 +74,13 @@ class Graph {
         visited[start] = true;
         while(queue.length) {
             current = queue.shift();
-            results.push(start);
+            results.push(current);
 
-            for(let vertex of list[current]) {
-                queue.push(vertex);
-                visited[vertex] = true;
+            for(let neighbor of list[current]) {
+                if(!visited[neighbor]) {
+                    queue.push(neighbor);
+                    visited[neighbor] = true;
+                }
             }
         }
     }
