@@ -83,6 +83,8 @@ class Graph {
                 }
             }
         }
+
+        return results;
     }
 }
 
