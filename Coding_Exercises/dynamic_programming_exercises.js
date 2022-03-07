@@ -39,37 +39,61 @@ function constructNote(message, characters) {
         return true
     }
     const splitMessage = message.toLowerCase().split('').filter(char => char !== ' ');
-    const messageCharSet = Array.from(new Set(splitMessage));
-    const charSet = Array.from(new Set(characters.toLowerCase().split('').filter(char => char !== ' ')))
-    console.log(messageCharSet, charSet)
-    console.log(same(messageCharSet, charSet))
-    return same(messageCharSet, charSet)
+    const charSet = characters.toLowerCase().split('').filter(char => char !== ' ')
+    return contains(splitMessage, charSet);
 }
 
-function same(arr1, arr2) {
-    if (arr1.length !== arr2.length) {
+function contains(arr1, arr2) {
+    if(arr1.length > arr2.length) {
         return false;
     }
+    let matches = 0;
 
-    let frequencies1 = {};
-    let frequencies2 = {};
-
-    for(let num of arr1) {
-        frequencies1[num] = (frequencies1[num] || 0) + 1;
-    }
-    for(let num of arr2) {
-        frequencies2[num] = (frequencies2[num] || 0) + 1;
-    }
-
-    for(let key in frequencies1) {
-        if(!(key in frequencies2)) {
-            return false;
-        }
-        if(frequencies2[key] !== frequencies1[key]) {
-            return false;
+    for(let idx1 of arr1) {
+        for(let idx2 of arr2) {
+            if(idx1 === idx2) {
+                matches++;
+                if(matches === arr1.length) {
+                    return true
+                }
+            }
         }
     }
-    return true;
+
+    return false
 }
 
-constructNote('abc', 'cba')
+function findAllDuplicates(numArray) {
+    if(!numArray.length) {
+        return undefined;
+    }
+
+    const frequencies = {};
+    const duplicates = [];
+
+    for(let num of numArray) {
+        frequencies[num] = (frequencies[num] || 0) + 1;
+    }
+
+    for(let key in frequencies) {
+        if(frequencies[key] > 1){
+            duplicates.push(key);
+        }
+    }
+
+    return duplicates;
+}
+
+function findPair(array, target) {
+    for(let i = 0; i < array.length; i++) {
+        for(let j = i + 1; j < array.length; j++) {
+            if(Math.abs(array[i] - array[j]) === Math.abs(target)) {
+                return true;
+            }
+        }
+    }
+
+    return false
+}
+
+console.log(findPair([-4,4], 8))
