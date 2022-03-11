@@ -1,0 +1,12 @@
+# Introduction
+- -	Algorithm and coding problems take up most of the interview process at most companies. By asking these questions, recruiters are looking to assess your ability to solve algorithm problems you haven't seen before.
+    - You normally only get through one question per interview.
+-	During the interview, you should discuss the problem with your interviewer and allow them to provide feedback when appropriate. The interviewer is mainly looking to assess your analytical skills, coding skills, and technical knowledge; they also assess your experience and cultural fit with the company, but the first three are most important.
+-	Companies structure their interviews to be this rigorous for several reasons.
+    - They’re trying to avoid false negatives, where bad candidates make it through the interview process and get hired.
+    - The problem-solving skills assessed in the interview are very valuable.
+    - Basic DSA knowledge is useful. It’s also hard to ask questions that don’t involve DSA to some degree.
+    - Good knowledge of basic DSA principles correlates well to being a good developer.
+    - Whiteboarding allows you to focus on the more important parts of solving a coding problem, without having to worry about compilation errors.
+-	Interview questions aren’t decided at the company level. Each interviewer individually and independently selects their own set of questions to ask. However, most companies tend to ask very similar questions.
+-	Interviewers assess your performance on each question relative to candidates they’ve interviewed in the past and candidates they’re currently interviewing, so getting a hard question isn’t bad. What’s hard for you was likely hard for a lot of other people.
