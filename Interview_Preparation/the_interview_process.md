@@ -10,3 +10,14 @@
     - Whiteboarding allows you to focus on the more important parts of solving a coding problem, without having to worry about compilation errors.
 -	Interview questions aren’t decided at the company level. Each interviewer individually and independently selects their own set of questions to ask. However, most companies tend to ask very similar questions.
 -	Interviewers assess your performance on each question relative to candidates they’ve interviewed in the past and candidates they’re currently interviewing, so getting a hard question isn’t bad. What’s hard for you was likely hard for a lot of other people.
+# Behind the Scenes
+- Once selected for an interview, the first step in the process often involves an over-the-phone interview, often called a phone screen.
+    - Phone screens often involve coding and algorithms questions that are asked during technical interviews. You’ll usually conduct two phone screens before being invited to on-site interviews.
+    - For coding questions you’ll typically be asked to write code on a shared document editor. Sometimes, you’ll be asked to write code on a piece of paper and read it back to the interviewer.
+- The on-site interview round typically consists of 3 to 6 in-person interviews. These interviews involve a combination of coding/algorithms, design/architecture, and behavioral/experience questions. Companies and teams within companies prioritize different categories over others.
+- Decisions can be made in as little as a few hours, and usually don’t take more than a week. If you reach out to a recruiter regarding the status of your application and they don’t respond this doesn’t been you’ve been rejected, delays can and do occur.
+    - For example, Microsoft gives individual teams within the company much more flexibility than other companies on how they conduct interviews and hire candidates.
+- At Amazon, you typically conduct one or two phone screens before being flown down to the office of the site you’re interested in. There, you’ll conduct 4 to 5 interviews that will assess your readiness for the role in different aspects. 
+    - One of these interviews, called the “bar raiser” will be significantly harder and more technical than the other interviews. Your performance is assessed relative to other candidates interviewing for the same position.
+    - The interviewers meet after all rounds have been conducted to make a final decision. The hiring managers don’t make the decision.
+    - Amazon interviews **typically focus on questions involving scalability and object-oriented design**.
