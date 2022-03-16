@@ -17,3 +17,21 @@
     - This means that adding an element when the array is at capacity will take O(n) time because you must copy all of the elements in the previous array over to the larger array before adding the element.
     - However, most of the time, you’re adding to the end of the array, which takes O(1) time.
     - Therefore, adding elements to an ```ArrayList``` takes O(n) time, but the _amortized_ time is O(1).
+## Logarithmic Runtime
+- Binary search is an example of an algorithm that has a runtime complexity of log(N) where log represents a logarithm with a base of two.
+    - Recall that binary search involves looking at for a number in a **sorted** array by comparing the number to the middle element of the array. If the number is smaller than the middle, you repeat the process for the half of the array to the left of the middle. If the number of is larger than the middle element, you repeat the process for the half of the array to the right of the middle.
+    - After each iteration, the number of elements being searched is cut in half. This results in a log(n) runtime complexity.
+- While the base of a log(n) runtime is typically two, the base doesn’t really matter for the purpose of big O analysis. Generally speaking, the runtime will increase logarithmically with the input size, so the actual base doesn’t really matter.
+## Recursive Runtime
+- Consider the Fibonacci function. As n grows, the number of operations performed by the function doubles, leading to a runtime complexity of O(2^n). This is because calls are repeated during the recursion. For example, a call to f(4) has the following breakdown:
+```
+public int f(int n) {
+    if(n <= 1) {
+        return 1;
+    } else {
+        return fibonacci(n - 1) + fibonacci(n - 1);
+    }
+}
+```
+    - F(4) --> f(3) + f(3) --> f(2) + f(2) + f(2) + f(2) --> (f(1) + f(0))*4.
+- Unlike logarithmic runtimes, the base of exponential runtimes is significant. For example, comparing 2^n and 8^n, 8^n can be written as 2^2n * 2^n, 2^2n is not a constant factor and cannot be ignored.
