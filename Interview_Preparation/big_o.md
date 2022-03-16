@@ -35,3 +35,23 @@ public int f(int n) {
 ```
     - F(4) --> f(3) + f(3) --> f(2) + f(2) + f(2) + f(2) --> (f(1) + f(0))*4.
 - Unlike logarithmic runtimes, the base of exponential runtimes is significant. For example, comparing 2^n and 8^n, 8^n can be written as 2^2n * 2^n, 2^2n is not a constant factor and cannot be ignored.
+
+## Special Case
+- Consider the runtime of the following function:
+```
+public void printUnorderedPairs(int[] array) {
+    for (int i = 0; i < array.length(); i++) {
+        for (int j = i + 1; j < array.length(); j++) {
+            System.out.println(array[i], + ", ", " array[j]);
+        }
+    }
+}
+```
+- The run time for this method is more complex than O(N^2) or O(log(N)).
+- Consider how the number of operations scales with the length of the array:
+    - length = 2 : operations = 1
+    - length = 3 : operations = 3
+    - length = 4 : operations = 6
+    - length = 5 : operations = 10
+    - Generally, the sum is (N - 1) + (N -2) + (N - 3) + ... + 2 + 1 = [N(N - 1)]/2. This reduces to O(N^2).
+    - Another way of thinking about this is that the "length" of the inner and outer loops scales linearly with the input, resulting in an O(N^2) runtime complexity.
