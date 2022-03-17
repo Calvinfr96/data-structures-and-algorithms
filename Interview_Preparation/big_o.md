@@ -11,6 +11,10 @@
     - Space on the call stack in recursive functions counts as well. A function that adds numbers from 1 to n iteratively would have O(1) space complexity if it added without using arrays. However, the recursive solution would have O(n) space complexity because of the frames added to the call stack during execution.
     - The space requirements relating to the call stack do not depend simply on the number of calls made to a function, they depend on the number of frames that exist on the call stack simultaneously.
 - When analyzing the time or space complexity of an algorithm, you take the function that describes the relationship between the runtime/space requirements and input size, then drop the constants and only keep the highest order term in the polynomial.
+    - For example, consider the following runtime complexities:
+        - ```O(N + P)``` where P < N/2 - This reduces to O(N) because P is a non-dominant term.
+        - ```O(N + log(N))``` - This reduces to O(N) because log(N) is a non-dominant term.
+        - ```O(N + M)``` - Cannot be reduced without knowing the relationship between N and M.
 
 ## Amortized Time
 - An ```ArrayList``` is a dynamically sized array that allows you to have the benefits of an array while offering flexibility in size. The capacity of an ```ArrayList``` will grow such that the size of the array it is implemented with will double in size when its capacity is reached.
@@ -55,3 +59,10 @@ public void printUnorderedPairs(int[] array) {
     - length = 5 : operations = 10
     - Generally, the sum is (N - 1) + (N -2) + (N - 3) + ... + 2 + 1 = [N(N - 1)]/2. This reduces to O(N^2).
     - Another way of thinking about this is that the "length" of the inner and outer loops scales linearly with the input, resulting in an O(N^2) runtime complexity.
+- Another way of looking at the above method is by looking at the average number of iterations in the inner loop. The inner loop has 9, 8, 7, 6, …, 2, 1 iterations, meaning the average number of iterations is N/2. Multiplying this by the number of iterations in the outer loop (N) results in (N^2)/2.
+•	Consider an example of an algorithm that takes an array of strings, sorts each string, then sorts the full array.
+- You might reason that sorting each string is O(N*log(N)), doing this for N strings results in O(N^2 * log(N)). Sorting the array takes an additional O(N*log(N)), for a total of O(N^2 * log(N) + N*log(N)), which reduces to O(N^2 * log(N)).
+    - This is wrong because you’re using the variable N improperly. Specifically, you’re using it to represent the length of the array _and_ the length of each string.
+    - A better approach would be to assign the length of the longest string to a variable called s and assign the length of the array to a. Sorting each string is O(s * log(s)). Doing this for ‘a’ strings is O(a * s * log(s)).
+    - Sorting all of the strings requires that you compare all of the string. Each string comparison takes O(s) time and there are O(a * log(a)) comparisons, for a total of O(a * s * log(a)).
+    - This results in a total time complexity of O(a * s * (log(a) + log(s)), which can’t be reduced further. 
