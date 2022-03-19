@@ -39,6 +39,7 @@ public int f(int n) {
 ```
     - F(4) --> f(3) + f(3) --> f(2) + f(2) + f(2) + f(2) --> (f(1) + f(0))*4.
 - Unlike logarithmic runtimes, the base of exponential runtimes is significant. For example, comparing 2^n and 8^n, 8^n can be written as 2^2n * 2^n, 2^2n is not a constant factor and cannot be ignored.
+- The runtime complexity of a recursive function with multiple branches is O(branches^depth), where branches is the number of times each recursive call branches.
 
 ## Special Case
 - Consider the runtime of the following function:
@@ -58,11 +59,87 @@ public void printUnorderedPairs(int[] array) {
     - length = 4 : operations = 6
     - length = 5 : operations = 10
     - Generally, the sum is (N - 1) + (N -2) + (N - 3) + ... + 2 + 1 = [N(N - 1)]/2. This reduces to O(N^2).
+    - Printing a String takes O(N) time, where N is the number of characters in the String.
     - Another way of thinking about this is that the "length" of the inner and outer loops scales linearly with the input, resulting in an O(N^2) runtime complexity.
 - Another way of looking at the above method is by looking at the average number of iterations in the inner loop. The inner loop has 9, 8, 7, 6, …, 2, 1 iterations, meaning the average number of iterations is N/2. Multiplying this by the number of iterations in the outer loop (N) results in (N^2)/2.
-•	Consider an example of an algorithm that takes an array of strings, sorts each string, then sorts the full array.
+- Consider an example of an algorithm that takes an array of strings, sorts each string, then sorts the full array.
 - You might reason that sorting each string is O(N*log(N)), doing this for N strings results in O(N^2 * log(N)). Sorting the array takes an additional O(N*log(N)), for a total of O(N^2 * log(N) + N*log(N)), which reduces to O(N^2 * log(N)).
     - This is wrong because you’re using the variable N improperly. Specifically, you’re using it to represent the length of the array _and_ the length of each string.
     - A better approach would be to assign the length of the longest string to a variable called s and assign the length of the array to a. Sorting each string is O(s * log(s)). Doing this for ‘a’ strings is O(a * s * log(s)).
     - Sorting all of the strings requires that you compare all of the string. Each string comparison takes O(s) time and there are O(a * log(a)) comparisons, for a total of O(a * s * log(a)).
     - This results in a total time complexity of O(a * s * (log(a) + log(s)), which can’t be reduced further. 
+- Consider the following method, which sums the nodes of a _balanced_ binary search tree:
+```
+int sum(Node node) {
+    if(node == null) {
+        return 0;
+    }
+
+    return sum(node.left) + node.value + sum(node.right);
+}
+```
+- Here, there are two branches at each recursive call, so the runtime complexity is O(2^depth). This is an exponential runtime, which would ordinarily be very bad.
+    - However, when you consider the depth of a _balanced_ binary search tree is roughly log(N) where N is the number of nodes, the runtime becomes O(2^log(N)). Assuming a log of base 2, this reduces to O(N).
+- Consider the following method, which determines if a number is prime by dividing by numbers ranging from 2, to the square root of he number.
+```
+boolean isPrime(int n) {
+    for(int x = 2; x * x <= n; x++) {
+        if(n % x == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+- The above conditional can be simplified to x < sqrt(n), meaning the runtime complexity of the method is O(sqrt(N)).
+- Looking back at the recursive fibonacci method:
+public int f(int n) {
+    if(n <= 1) {
+        return 1;
+    } else {
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+}
+```
+- There are two branches for each recursive call ```(n-1) and (n -2)```, with a depth of N. Therefore, the time complexity of the method is O(2^N).
+- Generally speaking, whe you see an algorithm with multiple recursive calls, the runtime is exponential.
+- Consider the following code, which print Fibonacci numbers from 0 through n:
+```
+void allFib(int n) {
+    for(int i = 0; i <= n; i++) {
+        System.out.println(i + ": " + fib(i));
+    }
+}
+
+int fib(int n) {
+    if(n <= 0) {
+        return 0;
+    } else if(n == 1) {
+        return 1;
+    }
+    return fib(n - 1) + fib(n - 2);
+}
+```
+- You might be tempted to say the time complexity is O(n*2^n) because fib(n) has a time complexity of 2^n and is run n times. However, n is varying (it is the i of the for loop). Therefore, the total amount of work is 2 + 2^2 + 2^3 + … + 2^n, which simplifies to O(2(n+) – 2).
+- This example uses memoization to produce an iterative solution to the fibonacci problem:
+```
+void allFib(int n) {
+    int[] memo = new int[n+1];
+    for(int i = 0; i <= n; i++) {
+        System.out.println(i + ": " + fib(i, memo));
+    }
+}
+
+int fib(int n, int[] memo) {
+    if(n <= 0) {
+        return 0;
+    } else if(n == 1) {
+        return 1;
+    } else if(memo[n] > 0) {
+        return memo[n];
+    }
+
+    memo[n] = fib(n - 1, memo) + fib(n - 2, memo)
+}
+```
+- Here, the result of each call to the function is stored in an int[]. This allows each recursive call to finish in O(1) time if the value at the index is greater than 0. Values don’t need to be recalculated, they’re simply retrieved from the memo array.
+- This technique reduces the time complexity from O(2^N) to O(n).
