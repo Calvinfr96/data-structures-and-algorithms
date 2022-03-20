@@ -41,7 +41,7 @@ public int f(int n) {
 - Unlike logarithmic runtimes, the base of exponential runtimes is significant. For example, comparing 2^n and 8^n, 8^n can be written as 2^2n * 2^n, 2^2n is not a constant factor and cannot be ignored.
 - The runtime complexity of a recursive function with multiple branches is O(branches^depth), where branches is the number of times each recursive call branches.
 
-## Special Case
+## Special Cases
 - Consider the runtime of the following function:
 ```
 public void printUnorderedPairs(int[] array) {
@@ -143,3 +143,52 @@ int fib(int n, int[] memo) {
 ```
 - Here, the result of each call to the function is stored in an int[]. This allows each recursive call to finish in O(1) time if the value at the index is greater than 0. Values don’t need to be recalculated, they’re simply retrieved from the memo array.
 - This technique reduces the time complexity from O(2^N) to O(n).
+- Consider the following function, which prints the powers of two from 1 to a numbe n (inclusive):
+```
+int powerOf2(int n) {
+    if(n < 1){
+        return 0;
+    } else if(n == 1) {
+        return 1;
+    } else {
+        int prev = powerOf2(n / 2);
+        int curr = prev * 2;
+        System.out.println(curr);
+    }
+} 
+```
+- This method will recurse in the following manner:
+``` 
+powerOf2(50) --> powerOf2 (25) --> powerOf2(12) --> powerOf2(6) --> powerOf2(3) --> powerOf2(1) -->
+prints & returns 1 --> prints & returns 2 --> prints & returns 4 --> prints & returns 8 --> prints & returns 16 -->
+prints & returns 32
+```
+- The function itself (the portion in the `else` block) is O(1). This block is executed log(n) times because it only prints the number up to n that are equal to a power of 2. Therefore, the runtime complexity of the method is O(log(n)).
+
+## Additional Examples
+1. The runtime complexity is O(N) because the number of operations scales linearly as b increases.
+2. Each call to the method is O(1). The number of recursive method calls will increase linearly as b increase. Therefore, the runtime complexirt is O(N).
+3. This method is O(1) since it only performs two arithmetic operations.
+4. The while loop will iterate as long as a <= b. Therefore, it will loop `a/b` times. The code inside of the loop is O(1). Therefore, the total time complexity is O(a/b). When considering the runtime complexity of methods with more than one parameter, you want to analyze how it changes when _all_ parameters are increasing together, not when just one of the parameters are increasing.
+5. 
+```
+int sqrt(int n) {
+    return sqrt_helper(n, 1, n);
+}
+
+int sqrt_helper(int n, int min, int max) {
+    if(max < min) {
+        return -1;
+    }
+    int guess = (min + max) / 2; //25
+    if(guess * guess == n) {
+        return guess;
+    } else if(guess * guess < n) {
+        return sqrt_helper(n, guess + 1, max);
+    } else {
+        return sqrt_helper(n, min, guess - 1);
+    }
+}
+```
+- sqrt(50) --> sqrt_helper(50, 1, 50) --> sqrt_helper(50, 1, 24) --> sqrt_helper(50, 1, 11)...
+- During the recursion, the only parameter changing value is `int max`. It is being cut in half each time the method is called, this results in a log(N) runtime complexity similar to a binary search.
