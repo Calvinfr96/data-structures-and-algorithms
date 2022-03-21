@@ -192,3 +192,11 @@ int sqrt_helper(int n, int min, int max) {
 ```
 - sqrt(50) --> sqrt_helper(50, 1, 50) --> sqrt_helper(50, 1, 24) --> sqrt_helper(50, 1, 11)...
 - During the recursion, the only parameter changing value is `int max`. It is being cut in half each time the method is called, this results in a log(N) runtime complexity similar to a binary search.
+6. `for(int guess = 1; guess*guess <= n; guess++)` can be converted to `for(int guess = 1; guess <= sqrt(n); guess++)`. This means the runtime complexity is O(sqrt(N)).
+7. An unbalanced BST will take, at worst, O(N) time to find a node.
+8. The runtime complexity of a binary tree (non-BST) is O(N). This is because there is no ordering enforced on the nodes, so all nodes will have to be searched in the worst case.
+9. `copyArray([1,2,3])` --> `appendToNew([], 1)` returns [1] --> `appendToNew([1], 2)` returns [1,2] --> `appendToNew([1,2], 3)` returns [1,2,3]. `copyArray()` calls `appendToNew()` N times, where n is the size of the array passed to it. appendToNew performs  operations, where N is the size of the array passed to it. Since N goes from 0 to n, the total time complexity of the method is O(n^2), reduced from O(n*(n-1)/2).
+10. The runtime complexity is O(log(N)), where log(N) is log of base 10.
+11. `printSortedStrings(5)` --> `printSortedStrings(5, "")` --> `printSortedStrings(4, "a")` --> `printSortedStrings(3, "ab")` --> `printSortedStrings(2, "abc")` --> `printSortedStrings(1, "abcd")` --> `printSortedStrings(0, abcd)` --> `isInOrder("abcd")`.
+- For an integer n passed to the single-argument version of the method, n calls of the two-argument method will be made. The two-argument method is O(1), so the time complexity is O(N).
+12. Assuming the binary search takes O(log(b)) time, the method has a time complexity of O(b*log(b) + a*log(b)). b*log(b) is the time complexity of the merge sort and b searched a times. **Make sure to consider all variable (inputs) whe analyzing bigO**.
