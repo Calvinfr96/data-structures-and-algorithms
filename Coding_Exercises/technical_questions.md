@@ -63,3 +63,16 @@
     - Double check weird-looking code, such a for loops that start at `int i = 1`.
     - Double check areas of your code that are likely to cause problems, such as base cases in recursive code or null nodes ina binary tree.
     - Test your code with smaller, simpler examples. Also test your code with edge cases.
+
+    ## Optimize and Solve Techniques
+    - Look for BUD:
+        - BUD stands for Bottlenecks, Unnecessary work, and Duplicated work. These are the three most common thing an algorithm can "waste time" doing. Looking for these problems in your initial, brute-force algorithm will help to optimize it.
+    - Bottlenecks:
+        - A bootleneck occurs in your code when one part of an algorithm has a runtime complexity significantly greater than another step. Consider a two-step algorithm and sorts and searches through the array. If the sorting is O(N*log(N)) and the search is O(N), it makes more sense to try and reduce the runtime of the sort because it would reduce the runtime more significantly than optimizing the search.
+        - One way to eliminate a sorting step with a high runtime is to use a hash table. Sorting makes searching the array easier and faster, but if you throw all of the elements into a hash table, you can search for any element in O(1) time.
+    - Unnecessary Work:
+        - When iterating using a loop, using a break statement can be an effective way of avoiding unnecessary work. For example, consider a method where you're using four nested loops to find solutions of a^3 + b^3 = c^3 + d^3 from 1 to n, where each loop iterates over a variable from 1 to n. Once you find a solution for the fourth nested loop (d), you can stop iterating because their won't be more than one solution for d if a, b, and c are known.
+        - To optimize further, you can eliminate the fourth loop by just calculating d given values for a, b, and c, then checking if those values satisfy the equation.
+    - Dupliated Work:
+        - Having four nested loops means that you're calculating each (a,b) pair, then checking to see if any (c,d) pair matches the (a,b) pair. Instead, you can store a list of (c,d) pairs in a hash table, then look for an (a,b) pair in that list. When a match is found, you print both pairs.
+        - This reduces the runtime to O(N^2) because you can create the list and check for (a,b) pairs with two adjacent, nested loops that are both O(N^2), as opposed to four nested loops that are O(N^4).
