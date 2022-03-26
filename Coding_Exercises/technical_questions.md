@@ -80,3 +80,18 @@
         - Before learning about Binary Search, you intuitively knew how to do this already. Consider someone gave you an alphabetized stack of papers and you had to find your paper, you'd pick a spot in the middle of the stack and check the name. If your name comes before that, you move and check again. If your name came after, you'd move forward in the stack and check again.
         - This is what Binary search is, you knew how to do it intuitively, you just didn't give it a name.
         - This is why it's important to try and solve a problem intuitively on a real, suitable example before trying to code it. Trying to code it first restricts your thinking to the constraints of the programming language.
+       Simplify and Generalize:
+        - This approach involves simplifying or tweaking a constraint in a problem, such as the data type, then solving the simplified version of the problem. Once you have an algorithm for the simplified version of the problem, you can try to adapt it for the more complex, original version of the problem.
+        - For example, if you're writing a program to determine if a ransom note can be written with the words available in a magazine, you could simplify the problem by counting the frequency of each character of each word in the magazine. You can do the same for the ransom note, and then see if the magazine had all of the required characters.
+        - To generalize this algorithm for the more complex version, you can now count the frequency of whole word, instead of characters, to make this determination.
+    - Base Case and Build:
+        - This approach involves solving a problem using the base case (e.g. n = 1) first, then trying to build up from there.
+        - When we get to more complex/interesting cases, we try to construct the solutions to those cases using the prior solutions.
+        - Consider a method that must find all permutations of a string consisting of unique characters. As an example, consider the string "abcdefg". We can use the Base Case and Build approach as follows:
+            - Case "a" --> {"a"}
+            - Case "ab" --> {"ab", "ba"}
+            - To build the next case, you can use the previous case by inserting "c" at each possible position in each string. This gives the solution for "abc"
+            - Case "abc" --> {"cab", "acb", "abc", "cba", "bca", "bac}. We know this is the solution for this case because the number of permutations should be `3! = 6`.
+        - Base Case and Build algorithms often lead to natural recursive algorithms.
+    - Data Structure Brainstorm:
+        - This approach involves running through a list of data structures, trying to apply each one to the problem. This approach is useful because a problem becomes much easier to solve when you discover an optimal data structure to use.
