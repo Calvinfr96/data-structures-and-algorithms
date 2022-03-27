@@ -64,34 +64,52 @@
     - Double check areas of your code that are likely to cause problems, such as base cases in recursive code or null nodes ina binary tree.
     - Test your code with smaller, simpler examples. Also test your code with edge cases.
 
-    ## Optimize and Solve Techniques
-    - Look for BUD:
-        - BUD stands for Bottlenecks, Unnecessary work, and Duplicated work. These are the three most common thing an algorithm can "waste time" doing. Looking for these problems in your initial, brute-force algorithm will help to optimize it.
-        - Bottlenecks:
-            - A bottleneck occurs in your code when one part of an algorithm has a runtime complexity significantly greater than another step. Consider a two-step algorithm and sorts and searches through the array. If the sorting is O(N*log(N)) and the search is O(N), it makes more sense to try and reduce the runtime of the sort because it would reduce the runtime more significantly than optimizing the search.
-            - One way to eliminate a sorting step with a high runtime is to use a hash table. Sorting makes searching the array easier and faster, but if you throw all of the elements into a hash table, you can search for any element in O(1) time.
-        - Unnecessary Work:
-            - When iterating using a loop, using a break statement can be an effective way of avoiding unnecessary work. For example, consider a method where you're using four nested loops to find solutions of a^3 + b^3 = c^3 + d^3 from 1 to n, where each loop iterates over a variable from 1 to n. Once you find a solution for the fourth nested loop (d), you can stop iterating because their won't be more than one solution for d if a, b, and c are known.
-            - To optimize further, you can eliminate the fourth loop by just calculating d given values for a, b, and c, then checking if those values satisfy the equation.
-        - Duplicated Work:
-            - Having four nested loops means that you're calculating each (a,b) pair, then checking to see if any (c,d) pair matches the (a,b) pair. Instead, you can store a list of (c,d) pairs in a hash table, then look for an (a,b) pair in that list. When a match is found, you print both pairs.
-            - This reduces the runtime to O(N^2) because you can create the list and check for (a,b) pairs with two adjacent, nested loops that are both O(N^2), as opposed to four nested loops that are O(N^4).
-    - Do It Yourself:
-        - Before learning about Binary Search, you intuitively knew how to do this already. Consider someone gave you an alphabetized stack of papers and you had to find your paper, you'd pick a spot in the middle of the stack and check the name. If your name comes before that, you move and check again. If your name came after, you'd move forward in the stack and check again.
-        - This is what Binary search is, you knew how to do it intuitively, you just didn't give it a name.
-        - This is why it's important to try and solve a problem intuitively on a real, suitable example before trying to code it. Trying to code it first restricts your thinking to the constraints of the programming language.
-       Simplify and Generalize:
-        - This approach involves simplifying or tweaking a constraint in a problem, such as the data type, then solving the simplified version of the problem. Once you have an algorithm for the simplified version of the problem, you can try to adapt it for the more complex, original version of the problem.
-        - For example, if you're writing a program to determine if a ransom note can be written with the words available in a magazine, you could simplify the problem by counting the frequency of each character of each word in the magazine. You can do the same for the ransom note, and then see if the magazine had all of the required characters.
-        - To generalize this algorithm for the more complex version, you can now count the frequency of whole word, instead of characters, to make this determination.
-    - Base Case and Build:
-        - This approach involves solving a problem using the base case (e.g. n = 1) first, then trying to build up from there.
-        - When we get to more complex/interesting cases, we try to construct the solutions to those cases using the prior solutions.
-        - Consider a method that must find all permutations of a string consisting of unique characters. As an example, consider the string "abcdefg". We can use the Base Case and Build approach as follows:
-            - Case "a" --> {"a"}
-            - Case "ab" --> {"ab", "ba"}
-            - To build the next case, you can use the previous case by inserting "c" at each possible position in each string. This gives the solution for "abc"
-            - Case "abc" --> {"cab", "acb", "abc", "cba", "bca", "bac}. We know this is the solution for this case because the number of permutations should be `3! = 6`.
-        - Base Case and Build algorithms often lead to natural recursive algorithms.
-    - Data Structure Brainstorm:
-        - This approach involves running through a list of data structures, trying to apply each one to the problem. This approach is useful because a problem becomes much easier to solve when you discover an optimal data structure to use.
+## Optimize and Solve Techniques
+- Look for BUD:
+    - BUD stands for Bottlenecks, Unnecessary work, and Duplicated work. These are the three most common thing an algorithm can "waste time" doing. Looking for these problems in your initial, brute-force algorithm will help to optimize it.
+    - Bottlenecks:
+        - A bottleneck occurs in your code when one part of an algorithm has a runtime complexity significantly greater than another step. Consider a two-step algorithm and sorts and searches through the array. If the sorting is O(N*log(N)) and the search is O(N), it makes more sense to try and reduce the runtime of the sort because it would reduce the runtime more significantly than optimizing the search.
+        - One way to eliminate a sorting step with a high runtime is to use a hash table. Sorting makes searching the array easier and faster, but if you throw all of the elements into a hash table, you can search for any element in O(1) time.
+    - Unnecessary Work:
+        - When iterating using a loop, using a break statement can be an effective way of avoiding unnecessary work. For example, consider a method where you're using four nested loops to find solutions of a^3 + b^3 = c^3 + d^3 from 1 to n, where each loop iterates over a variable from 1 to n. Once you find a solution for the fourth nested loop (d), you can stop iterating because their won't be more than one solution for d if a, b, and c are known.
+        - To optimize further, you can eliminate the fourth loop by just calculating d given values for a, b, and c, then checking if those values satisfy the equation.
+    - Duplicated Work:
+        - Having four nested loops means that you're calculating each (a,b) pair, then checking to see if any (c,d) pair matches the (a,b) pair. Instead, you can store a list of (c,d) pairs in a hash table, then look for an (a,b) pair in that list. When a match is found, you print both pairs.
+        - This reduces the runtime to O(N^2) because you can create the list and check for (a,b) pairs with two adjacent, nested loops that are both O(N^2), as opposed to four nested loops that are O(N^4).
+- Do It Yourself:
+    - Before learning about Binary Search, you intuitively knew how to do this already. Consider someone gave you an alphabetized stack of papers and you had to find your paper, you'd pick a spot in the middle of the stack and check the name. If your name comes before that, you move and check again. If your name came after, you'd move forward in the stack and check again.
+    - This is what Binary search is, you knew how to do it intuitively, you just didn't give it a name.
+    - This is why it's important to try and solve a problem intuitively on a real, suitable example before trying to code it. Trying to code it first restricts your thinking to the constraints of the programming language.
+    Simplify and Generalize:
+    - This approach involves simplifying or tweaking a constraint in a problem, such as the data type, then solving the simplified version of the problem. Once you have an algorithm for the simplified version of the problem, you can try to adapt it for the more complex, original version of the problem.
+    - For example, if you're writing a program to determine if a ransom note can be written with the words available in a magazine, you could simplify the problem by counting the frequency of each character of each word in the magazine. You can do the same for the ransom note, and then see if the magazine had all of the required characters.
+    - To generalize this algorithm for the more complex version, you can now count the frequency of whole word, instead of characters, to make this determination.
+- Base Case and Build:
+    - This approach involves solving a problem using the base case (e.g. n = 1) first, then trying to build up from there.
+    - When we get to more complex/interesting cases, we try to construct the solutions to those cases using the prior solutions.
+    - Consider a method that must find all permutations of a string consisting of unique characters. As an example, consider the string "abcdefg". We can use the Base Case and Build approach as follows:
+        - Case "a" --> {"a"}
+        - Case "ab" --> {"ab", "ba"}
+        - To build the next case, you can use the previous case by inserting "c" at each possible position in each string. This gives the solution for "abc"
+        - Case "abc" --> {"cab", "acb", "abc", "cba", "bca", "bac}. We know this is the solution for this case because the number of permutations should be `3! = 6`.
+    - Base Case and Build algorithms often lead to natural recursive algorithms.
+- Data Structure Brainstorm:
+    - This approach involves running through a list of data structures, trying to apply each one to the problem. This approach is useful because a problem becomes much easier to solve when you discover an optimal data structure to use.
+    
+## Best Conceivable Runtime
+- Simply put, the Best Conceivable Runtime (BCR) of a solution to a problem is the lower limit of its conceivable runtime.
+    - For example, if you're devising a solution to a problem that asks you to determine the number of elements two arrays, of size A and B, have in common, the lowest possible runtime for this solution is O(A + B) because you need to look at every element in each array at least once.
+- The BCR of an algorithm can offer useful hints for some problems.
+- Although the sound similar, the BCR of a solution to a problem does not relate to the best-case runtime complexity of an algorithm. The BCR is largely a function of inputs and outputs. The Best-Case Runtime is for a specific algorithm and is mostly useless since you mainly judge an algorithm by its worst or average-case runtime.
+- It's important to note that you should never rely on an algorithm having one of the most common runtimes(O(1), O(log(N)), O(N), O(N*log(N)), O(N^2)). When you're stuck on a problem and are tempted to just guess one these, the runtime is most likely something unique, like O(N^2 * K).
+- Thinking about the array problem above, this is how BCR can be useful in solving problems:
+    - A brute force algorithm that involves searching all values in the second array for each value in the first would have a runtime of O(N2).
+    - The BCR of the problem, assuming two sorted arrays of the same length, is O(A + B) = O(2N) = O(N).
+    - This means an optimal algorithm should have a runtime between these two extremes.
+    - Thinking about the problem in this way, you could consider ways of reducing the runtime, such as shortening the runtime of searching the second array from O(N) to O(log(N)) or O(1).
+    - Optimizations: 1. Once a match is found in array B at index i, start searching array B starting at i + 1 instead of 0 for subsequence iterations. 2. Perform a binary search of array B for all elements in array A.
+    - Further Optimizations: When considering optimizations to your algorithm, consider the fact that **any upfront work you do that is <= the BCR is "free"** because it won't impact the overall runtime of the algorithm.
+    - For example, you can put all of the values of array B into a **hash table** in O(N) time, then search that table for values in array A in O(1) time, leading to a total runtime of O(N), which is the BCR.
+    - If your interviewer asks for optimizations beyond this, you can tell them it's not possible since the BCR is O(N).
+    - If the interviewer asked you to reduce the space complexity of the algorithm, you would have to drop the hash table. To optimize the search of B, take advantage of the fact that it is sorted. For each value x in A, stop searching B when you find a value y that is greater than x. For each subsequent search of B, pick up where you left off.
+    - Now, the algorithm operates in O(1) space and O(N) time, so it can't be optimized any further.
