@@ -113,3 +113,34 @@
     - If your interviewer asks for optimizations beyond this, you can tell them it's not possible since the BCR is O(N).
     - If the interviewer asked you to reduce the space complexity of the algorithm, you would have to drop the hash table. To optimize the search of B, take advantage of the fact that it is sorted. For each value x in A, stop searching B when you find a value y that is greater than x. For each subsequent search of B, pick up where you left off.
     - Now, the algorithm operates in O(1) space and O(N) time, so it can't be optimized any further.
+
+## Handling Incorrect Answers
+- The most important thing to remember while interviewing is that your first solution to every problem doesn't need to be correct. The interviewer is gauging your ability to breakdown and solve a problem, then improve upon that initial solution.
+    - You don't even need to completely solve every problem. The interview is assessing you more along the lines of how optimal your final solution was, how long it took you to get there, how much assistance you needed, and how clean your code was.
+    - Another important thing to remember is that your performance is evaluated relative to other candidates' performance.
+- Most interview questions are too difficult for any candidate to solve optimally on the first try very quickly. A typical question would take even a strong candidate 20 to 30 minutes to solve.
+
+## When You've Heard a Question Before
+- If you're in an interview and are asked a question you've heard before, admit this to your interviewer. The whole point of an interview is to have your problem-solving skills evaluated. If you already know the question, you're not giving the interviewer a fair chance to do that.
+- Additionally, if the interviewer can see that you already know the problem by the way you approach, you'll seem dishonest if you're not upfront about it. Conversely, you'll get points for being upfront and honest if you do admit you've seen the problem before.
+
+## What Language to Use
+- At many top companies, interviewers don't really care about what language you use to solve problems, they care more about assessing your problem-solving abilities than your knowledge of a specific language.
+- Other companies are pickier and will require you to solve interview questions in a specific language. If you're given a choice, it's best to choose the language you're most comfortable with.
+- If you have a set of languages to choose from, it's best to choose the one that is most prevalent, readable, and easy to use. The language should also be concise and not prone to issues. For example, using C++ means that, in addition to all of the usual bugs you could have in your code, you would also need to worry about memory management and pointer issues.
+
+## Writing Good Code
+- Broadly speaking, good, clean code has the following properties:
+    - The code operates correctly on all expected and unexpected inputs.
+    - The code should have optimal time and space complexity for the worst and average-case scenarios. It should also have optimal "real-life" efficiency. For example, a constant that may be dropped in Big-O analysis could be significant in real life.
+    - The code should be simple and readable. Don't use unnecessary lines of code and remember that, while comments make code more readable, good code comments itself.
+    - The code should be easily maintainable and extensible for the initial developer and future developers.
+    - Applying these properties to your code requires a balancing act. You often need to sacrifice efficiency for readability and maintainability.
+- When solving a problem, you want to use data structures generously. Consider a problem where you're asked to find the sum of two mathematical expressions of the form `Ax^a + Bx^b + ...`
+    - A bad implementation would be to store the store the expression as a single array, where the kth element corresponds to the coefficient of the x^k term in the expression. This is bad because it can't handle negative or non-integer coefficients and has an O(n) space complexity.
+    - A better, but still inefficient, implementation would be to store the expression as a set of two arrays, where the coefficients are stored in one array that is "matched" withe elements in another array that holds the exponents. This is messy because you need to keep track of two arrays. Furthermore, expressions could have undefined values if the arrays were different lengths and returning the resulting expression means returning two arrays.
+    - A good implementation would be to design your own data structure for the expression. For example, you could create an `ExprTerm` class with a field for the coefficient and exponent. Then, an expression would just be an array of `ExprTerm`s.
+- When solving a problem, you want to make your code efficient by reusing code (such as helper methods) whenever possible. Expanding off this point, you want to make your code modular by separating logic into its own method whenever possible. This will make your code more testable, reusable, and maintainable.
+    - Modular code is more testable and maintainable because each module of code can be tested and verified independently. Modular code is more readable because each module can be given a name that describes the action it performs. When these modules are placed inside the main method, they describe the steps that the main method takes to perform its overall function.
+- When possible, you should also make your solution flexible and robust by solving for a general case instead of the specific problem case. This requires a balancing act though, as the general case may be too difficult or time-consuming to solve.
+- Whenever your code requires user input, it's important to always verify the input using if() or assert statements. You don't have to fully code out the error-checks, just acknowledge that they need to be performed.
