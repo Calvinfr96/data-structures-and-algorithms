@@ -192,4 +192,26 @@ function stringCompression(string) {
     return result.length > string.length ? string : result;
 }
 
+//Question 1.7
+function rotateMatrix(array) {
+    //Rotating a matrix involves taking the transpose of the matrix, then reversing the columns of the transposed matrix
+    //Taking the transpose of a matrix means making the first column the first row, the second column the second row, and so on
+}
+
+function transposeMatrix(array) {
+    //Taking the transpose of a matrix means flipping it over its diagonal, so that the element at X[i][j]
+    //is swapped with the element at X[j][i]
+}
+
+function reverseColumns(array) {
+    //To reverse a column, you need to start swap the first and last positions, then keep swapping, moving
+    //inward until you reach the middle
+}
+
+function swap(array, i, j) {
+    const temp = array[i][j];
+    array[i][j] = array[j][i];
+    array[j][i] = temp;
+}
+
 console.log(stringCompression(""))
