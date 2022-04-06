@@ -235,4 +235,43 @@ function swap(array, a, b, x, y) {
     array[x][y] = temp;
 }
 
-console.log(rotateMatrix([[3,6,9],[2,5,8],[1,4,7]]))
+// Question 1.8
+function zeroMatrix(array) {
+    const columns = [];
+    const rows = [];
+
+    for(let i = 0; i < array.length; i++) {
+        for(let j = 0; j < array.length; j++) {
+            if(array[i][j] === 0) {
+                rows.push(i);
+                columns.push(j);
+            }
+        }
+    }
+
+    for(let column of columns) {
+        allZeros(array, false, column)
+    }
+
+    for(let row of rows) {
+        allZeros(array, true, row)
+    }
+
+    return array;
+}
+
+function allZeros(array, row, n) {
+    if(row) {
+        for(let i = 0; i < array.length; i++) {
+            array[n][i] = 0;
+        }
+    } else {
+        for(let i = 0; i < array.length; i++) {
+            array[i][n] = 0;
+        }
+    }
+
+    return array;
+}
+
+console.log(zeroMatrix([[3,6,9],[2,5,8],[1,4,7]]))
