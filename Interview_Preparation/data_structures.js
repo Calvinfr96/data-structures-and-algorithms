@@ -274,4 +274,52 @@ function allZeros(array, row, n) {
     return array;
 }
 
-console.log(zeroMatrix([[3,6,9],[2,5,8],[1,4,7]]))
+function stringRotation(string1, string2) {
+    if(string1.length !== string2.length) {
+        return false;
+    }
+
+    const superString = string2 + string2;
+    return isSubstring(string1, superString);
+
+}
+
+function isSubstring(string1, string2) {
+    if(string1 === string2) {
+        return true;
+    }
+
+    const shorter = string1.length > string2.length ? string2 : string1;
+    const longer = string1.length > string2.length ? string1 : string2;
+
+    let j = 0;
+    for(let i = 0; i < longer.length; i++) {
+        if(j > 0 && longer[i] !== shorter[j]) {
+            return false;
+        }
+        if(longer[i] === shorter[j]) {
+            j++
+        }
+        if(j === shorter.length) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function findRotation(string1, string2) {
+    const charArray = [];
+
+    let j = 0;
+    for(let i = 0; i < string2.length; i++) {
+        if(string2[i] === string1[j]) {
+            charArray.push(string1[j]);
+            j++;
+        }
+    }
+
+    return charArray.join('');
+}
+
+console.log(stringRotation("waterbottle", "erbottlewat"));
