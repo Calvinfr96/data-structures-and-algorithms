@@ -1,3 +1,5 @@
+//Arrays and Strings
+
 // Question 1.1 - Is Unique
 
 function isUnique(string) { //Optimal Space - Multiple Pointers
