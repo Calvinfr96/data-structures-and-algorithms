@@ -192,3 +192,47 @@ function deleteMiddleNode(list, node){
 
     //1->2->3->4->5
 }
+
+function partition(list, value) {
+    if(!list.get(value)) {
+        return undefined;
+    }
+
+    const result = new SingleLinkedList();
+
+    let node = list.head;
+    while(node) {
+        if(node.value < value) {
+            console.log(node.value + " unshifted: " + node.value)
+            result.unshift(node.value);
+        } else {
+            console.log(node.value + " pushed: " + node.value)
+            result.push(node.value);
+        }
+
+        node = node.next
+    }
+
+    return result;
+} 
+
+function sum(listA, listB) {
+    const longerList = listA.length > listB.length ? listA : listB;
+    const shorterList = listA.legnth > listB.length ? listB : listA;
+    const resultList  = new SingleLinkedList();
+
+    let remainder = 0;
+    for(let i = 0; i < longerList.length; i++) {
+        const longerListNode = longerList.get(i);
+        const shorterListNode = shorterList.get(i);
+
+        const sum = longerListNode.value + shorterListNode.value;
+        if(remainder) {
+            sum += remainder;
+        }
+        if(sum >= 10) {
+            remainder = Math.floor(sum / 10);
+            resultList.push(sum - 10*remainder);
+        }
+    }
+}

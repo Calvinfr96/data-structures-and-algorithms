@@ -121,6 +121,24 @@ function paildromePermutation(string) {
 
 }
 
+//Question1.4.1 - Checking if a word is a palindrome
+function isPalindrome(string) {
+    let pointer1 = 0;
+    let pointer2 = string.length - 1;
+
+    while(pointer1 < pointer2) {
+        if(string[pointer1] !== string[pointer2]) {
+            return false;
+        }
+        pointer1++;
+        pointer2--;
+    }
+
+    return true;
+}
+
+console.log("isPalindrom: " + isPalindrome("racecar"))
+
 //Question 1.5
 function checkOneInsertionOrDeletion(string1, string2) {
     if(Math.abs(string1.length - string2.length) > 1) {
