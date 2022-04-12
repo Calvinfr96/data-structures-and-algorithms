@@ -175,10 +175,12 @@ function removeDuplicates(list) {
     return result;
 }
 
+//Question 2.2 - 
 function kthToLast(list, index) {
     return list.get(list.length - (index));
 }
 
+//Question 2.3 - 
 function deleteMiddleNode(list, node){
     let index = 0;
 
@@ -193,6 +195,7 @@ function deleteMiddleNode(list, node){
     //1->2->3->4->5
 }
 
+//Question 2.4 - 
 function partition(list, value) {
     if(!list.get(value)) {
         return undefined;
@@ -225,14 +228,40 @@ function sum(listA, listB) {
     for(let i = 0; i < longerList.length; i++) {
         const longerListNode = longerList.get(i);
         const shorterListNode = shorterList.get(i);
+        let sum = 0;
 
-        const sum = longerListNode.value + shorterListNode.value;
+        if(!shorterListNode) {
+            sum = longerListNode.value;
+        } else {
+            sum = longerListNode.value + shorterListNode.value;
+        }
+
         if(remainder) {
             sum += remainder;
+            remainder = 0;
         }
         if(sum >= 10) {
             remainder = Math.floor(sum / 10);
-            resultList.push(sum - 10*remainder);
+            resultList.push(sum % 10);
+        }
+        if(sum < 10) {
+            resultList.push(sum);
+        }
+        if(i === longerList.length - 1) {
+            resultList.push(remainder);
         }
     }
+
+    return resultList;
 }
+
+const listA = new SingleLinkedList();
+const listB = new SingleLinkedList();
+listA.push(7)
+listA.push(1)
+listA.push(6)
+listB.push(7)
+listB.push(1)
+listB.push(6)
+
+console.log(sum(listA, listB))
