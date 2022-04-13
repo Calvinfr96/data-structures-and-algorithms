@@ -217,11 +217,21 @@ function partition(list, value) {
     }
 
     return result;
-} 
+}
+
+//Question 2.5
+function sortLists(list1, list2) {
+    const shorter = list1.length > list2.length ? list2 : list1;
+    const longer = list1.length > list2.length ? list1 : list2;
+
+    return [shorter, longer];
+}
 
 function sum(listA, listB) {
-    const longerList = listA.length > listB.length ? listA : listB;
-    const shorterList = listA.legnth > listB.length ? listB : listA;
+    const shorterList = sortLists(listA, listB)[0];
+    const longerList = sortLists(listA, listB)[1];
+    console.log(longerList)
+    console.log(shorterList)
     const resultList  = new SingleLinkedList();
 
     let remainder = 0;
@@ -255,13 +265,67 @@ function sum(listA, listB) {
     return resultList;
 }
 
+//Question 2.6 - 
+function palindrome(list) {
+    let pointer1 = 0;
+    let pointer2 = list.length - 1;
+
+    while(pointer1 < pointer2) {
+        if(list.get(pointer1).value !== list.get(pointer2).value) {
+            return false;
+        }
+
+        pointer1++;
+        pointer2--;
+    }
+
+    return true;
+}
+
+//Question 2.7 - 
+function intersection(listA, listB) {
+    const nodeTableA = {};
+    const nodeTableB = {};
+    
+    for(let i = 0; i < listA.length; i++) {
+        nodeTableA[listA.get(i).value] || (nodeTableA[listA.get(i).value] = listA.get(i))
+    }
+
+    for(let j = 0; j < listB.length; j++) {
+        console.log("looping...")
+        nodeTableB[listB.get(j).value] || (nodeTableB[listB.get(j).value] = listB.get(j))
+    }
+    
+    for(let key in nodeTableA) {
+        if(nodeTableA[key] === nodeTableB[key]) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+const node1A = new Node(1);
+const node2A = new Node(2);
+const node3A = new Node(3)
+
+const node1B = new Node(1);
+const node2B = node2A;
+const node3B = new Node(3);
+
 const listA = new SingleLinkedList();
 const listB = new SingleLinkedList();
-listA.push(7)
-listA.push(1)
-listA.push(6)
-listB.push(7)
-listB.push(1)
-listB.push(6)
 
-console.log(sum(listA, listB))
+listA.head = node1A
+listA.head.next = node2A
+listA.head.next.next = node3A
+listA.tail = node3A
+listA.length = 3;
+
+listB.head = node1B
+listB.head.next = node2B
+listB.head.next.next = node3B
+listB.tail = node3B
+listB.length = 3;
+
+console.log(intersection(listA, listB))
