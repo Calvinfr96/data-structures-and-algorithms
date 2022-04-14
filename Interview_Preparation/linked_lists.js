@@ -305,6 +305,46 @@ function intersection(listA, listB) {
     return false;
 }
 
+//Question 2.9
+function loopDetection(list) {
+    //The "Fast Runner / Slow Runner Approach":
+    //In this algorithm, you have two pointers, for every x steps one pointer takes, the other takes n*x steps.
+    //Like two sin waves with differing frequencies, the two pointers will periodically overlap when they are in a looped
+    //linked list.
+    //0 1 2 3 4 5 6 7 8 9 10 11 (slow runner, 1x steps)
+    //0 2 4 8 8 10 4 6 8 10 4 6 (fast runner, 2x steps)
+    //The meet at 8.
+    //When the fast pointer moves twice as fast as the slow one. When the slow one reaches the beginning of the loop after
+    //k steps, the fast one is k steps into the loop.
+    //This means the two pointers are LOOP_SIZE - k nodes apart. They will meet at LOOP_SIZE - k steps.
+    //Both will be k nodes from the start of the loop.
+
+    let fastPointer = list.head;
+    let slowPointer = list.head;
+
+    while(fastPointer !== null && fastPointer.next !== null) {
+        slowPointer= slowPointer.next;
+        fastPointer = fastPointer.next.next;
+
+        if(slowPointer === fastPointer) {
+            break;
+        }
+    }
+
+    if(fastPointer === null | fastPointer.next === null) {
+        return null;
+    }
+
+    slowPointer = this.head;
+
+    while(slowPointer !== fastPointer) {
+        slowPointer = slowPointer.next;
+        fastPointer = fastPointer.next;
+    }
+
+    return fastPointer;
+}
+
 const node1A = new Node(1);
 const node2A = new Node(2);
 const node3A = new Node(3)
