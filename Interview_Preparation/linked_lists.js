@@ -306,34 +306,40 @@ function intersection(listA, listB) {
 }
 
 //Question 2.9
-function loopDetection(list) {
-    //The "Fast Runner / Slow Runner Approach":
-    //In this algorithm, you have two pointers, for every x steps one pointer takes, the other takes n*x steps.
-    //Like two sin waves with differing frequencies, the two pointers will periodically overlap when they are in a looped
-    //linked list.
-    //0 1 2 3 4 5 6 7 8 9 10 11 (slow runner, 1x steps)
-    //0 2 4 8 8 10 4 6 8 10 4 6 (fast runner, 2x steps)
-    //The meet at 8.
-    //When the fast pointer moves twice as fast as the slow one. When the slow one reaches the beginning of the loop after
-    //k steps, the fast one is k steps into the loop.
-    //This means the two pointers are LOOP_SIZE - k nodes apart. They will meet at LOOP_SIZE - k steps.
-    //Both will be k nodes from the start of the loop.
-
-    let fastPointer = list.head;
-    let slowPointer = list.head;
-
-    while(fastPointer !== null && fastPointer.next !== null) {
-        slowPointer= slowPointer.next;
-        fastPointer = fastPointer.next.next;
-
-        if(slowPointer === fastPointer) {
-            break;
-        }
+function basicLoopDetection(list) {
+    if(list.head = null) { //prevents null pointer exception when assigning fast and slow pointers
+        return false;
     }
 
-    if(fastPointer === null | fastPointer.next === null) {
+    let slowPointer = list.head;
+    let fastPointer = list.head.next;
+
+    while(fastPointer !== null && slowPointer !== null && fastPointer.next !== null) {
+        //If the list contains a loop, this could be an infinite loop. If not, the loop will terminate when the 
+        //fast pointer reaches the end of the list.
+        if(fastPointer === slowPointer) {
+            return [slowPointer, fastPointer];//breaks out of the loop when the pointers meet, preventing an infinite loop.
+        }
+
+        //advances each pointer according to the "runner" technique.
+        slowPointer = slowPointer.next;
+        fastPointer = fastPointer.next.next;
+    }
+
+    //if we break out of the loop without returning true, the list does not contain a loop.
+    return null;
+}
+
+function loopDetection(list) {
+    //If the list has a non-looped portion (K) and looped portion and the pointers move at 2:1 ratio, by the time the slow runner enters the looped portion of the list, the fast runner will be k steps into the loop (When K >> Loop_Size, it's K % Loop_Size. Each subsequent step will move the runners one step closer to one another.
+    //When the slow runner first enters the loop, the fast runner is Loop_Size - K steps behind it (K steps ahead). This means it will take Loop_Size - K steps for the two to meet each other. At this collision point, they will be K steps behind the head of the loop. The head of the loop is also K steps from the head of the loop.
+    //If we move one pointer back to the head and keep the other one at the collision point, then move both pointers at the same speed, they will meet again at the head of the loop and you can simply return this node.
+
+    if(!basicLoopDetection(list)) {
         return null;
     }
+
+    let [slowPointer, fastPointer] = basicLoopDetection(list);
 
     slowPointer = this.head;
 
