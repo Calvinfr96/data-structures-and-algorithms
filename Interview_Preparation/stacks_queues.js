@@ -61,6 +61,21 @@ class Queue {
         }
     }
 
+    remove() {
+        if(this.first === null) {
+            return undefined;
+        }
+
+        const node = this.first;
+        this.first = this.first.next;
+
+        if(this.first === null) {
+            this.last = null
+        }
+
+        return node.value;
+    }
+
     peek() {
         if(this.first === null) {
             return undefined;
@@ -134,5 +149,32 @@ class ThreeInOne {
     }
 }
 
-const stack = new ThreeInOne(2,3);
-console.log(stack)
+//Question 3.2 - Stack Min
+class MinStack {
+    constructor() {
+        this.stack = new Stack();
+        this.minimums = new Stack();
+    }
+
+    push(value) {
+        if(this.minimums.isEmpty() || value < this.minimums.peek()) {
+            this.minimums.push(value);
+        }
+        this.stack.push(value);
+    }
+    
+    pop() {
+        if(this.stack.peek() === this.minimums.peek()) {
+            this.minimums.pop();
+        }
+        this.stack.pop();
+    }
+
+    top() {
+        return this.stack.peek();
+    }
+
+    getMin() {
+        return this.minimums.peek();
+    }
+}
