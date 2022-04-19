@@ -9,6 +9,7 @@ class Node {
 class Stack {
     constructor() {
         this.top = null;
+        this.size = 0;
     }
 
     pop() {
@@ -18,6 +19,7 @@ class Stack {
 
         const node = this.top;
         this.top = this.top.next;
+        this.size--;
 
         return node.value;
     }
@@ -26,6 +28,9 @@ class Stack {
         const node = new Node(value);
         node.next = this.top;
         this.top = node;
+        this.size++;
+
+        return this.size;
     }
 
     peek() {
@@ -81,7 +86,7 @@ class Queue {
             return undefined;
         }
 
-        return this.first.data;
+        return this.first.value;
     }
 
     isEmpty() {
@@ -137,7 +142,7 @@ class ThreeInOne {
         return value;
     }
 
-    peak(stack) {
+    peek(stack) {
         if(stack > this.numArrays - 1) {
             return `Stack ${stack} does not exist`;
         }
@@ -176,5 +181,178 @@ class MinStack {
 
     getMin() {
         return this.minimums.peek();
+    }
+}
+
+//Question 3.2A - Min Stack 2
+class MinNode {
+    constructor(value) {
+        this.value = value
+        this.next = null;
+        this.minimum = 0;
+    }
+}
+
+class MinNodeStack {
+    constructor() {
+        this.top = null;
+    }
+
+    push(value) {
+        const node = new MinNode(value);
+        node.next = this.top;
+        this.top = node;
+
+        if(this.top === null) {
+            node.minimum = node.value;
+        }
+        if(node.value < node.next.minimum) {
+            node.minimum = node.value;
+        }
+        node.minimum = node.next.minimum;
+
+        return node.value;
+    }
+
+    pop() {
+        if(this.top === null) {
+            return undefined;
+        }
+
+        const top =  this.top;
+        this.top = this.top.next;
+
+        return top.value;
+    }
+
+    getMin() {
+        return this.top.minimum;
+    }
+}
+
+//Question 3.3 - Set of Stacks
+class setOfStacks {
+    constructor() {
+        this.stacks = [];
+        this.capacity = 2;
+    }
+
+    push(value) {
+        if(this.isEmpty() || this.stackFull()) {
+            console.log("Pushing...")
+            this.stacks.push(new Stack())
+        }
+
+        return this.stacks[this.stacks.length - 1].push(value)
+    }
+
+    isEmpty() {
+        return this.stacks.length === 0;
+    }
+
+    stackFull() {
+        if(this.isEmpty()) {
+            return false;
+        }
+
+        return this.stacks[this.stacks.length - 1].size === this.capacity;
+    }
+}
+
+//Question 3.4 - Queue With Two Stacks
+class StacksQueue {
+    // The oldestOnTop represents the actual queue and the newestOnTop represents items waiting to be added to the queue. When the queue is emptied, everyone waiting to be added to the queue will be added.
+    constructor() {
+        this.newestOnTop = new Stack();
+        this.oldestOnTop = new Stack();
+    }
+
+    equeue(value) {
+        this.newestOnTop.push(value)
+    }
+
+    peak() {
+        this.shiftStacks();
+        return this.oldestOnTop.peek();
+    }
+
+    dequeue() {
+        this.shiftStacks();
+        return this.oldestOnTop.pop();
+    }
+
+    shiftStacks() {
+        if(this.oldestOnTop.isEmpty()) {
+            while(!this.newestOnTop.isEmpty()) {
+                this.oldestOnTop.push(this.newestOnTop.pop())
+            }
+        }
+    }
+}
+
+function sortStack(stack) {
+    const sortedStack = new Stack();
+    let max = findMax(stack, Infinity);
+
+    while(max > -Infinity) {
+        sortedStack.push(max)
+        max = findMax(stack, max)
+    }
+
+    return sortedStack;
+}
+
+function findMax(stack, maximum) {
+    let node = stack.top;
+    let currentMaximum = -Infinity;
+
+    while(node) {
+        if(node.value < maximum) {
+            if(node.value > currentMaximum) {
+                currentMaximum = node.value;
+            }
+        }
+
+        node = node.next
+    }
+
+    return currentMaximum;
+}
+
+//Question 3.6 - Animal Shelter
+class AnimalShelter {
+    constructor() {
+        this.dogQueue = new Queue();
+        this.catQueue = new Queue();
+    }
+
+    enqueue(animal) {
+        if(animal === "dog") {
+            this.dogQueue.enqueue(animal)
+        } else {
+            this.catQueue.enqueue(animal)
+        }
+    }
+
+    adopt(animal) {
+        if(animal === "dog") {
+            this.dogQueue.dequeue()
+        } else {
+            this.catQueue.dequeue()
+        }
+    }
+
+    adoptAny() {
+        const random = this.getRandomInt(1,100)
+
+        if(random % 2 === 0) {
+            this.dogQueue.dequeue();
+        } else {
+            this.catQueue.dequeue()
+        }
+    }
+
+    getRandomInt(min, max) {
+        return Math.floor(Math.random()*(max - min) + min)
     }
 }
