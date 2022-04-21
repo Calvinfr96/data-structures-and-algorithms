@@ -1,5 +1,0 @@
-/**
- * Trees
- */
-public class Trees {
-}
