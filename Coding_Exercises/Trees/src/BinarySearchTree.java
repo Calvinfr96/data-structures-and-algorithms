@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 /*
 * Binary Search Trees:
@@ -71,7 +73,104 @@ public class BinarySearchTree {
         return null;
     }
 
-    
+    public void breadthFirstSearch() {
+        List<BsTNode<Integer>> visited = new ArrayList<>();
+        List<BsTNode<Integer>> queue = new ArrayList<>();
+
+        queue.add(root);
+
+        while(!queue.isEmpty()) {
+            BsTNode<Integer> node = queue.remove(0);
+            if(!Objects.isNull(node.left)) {
+                queue.add(node.left);
+            }
+            if(!Objects.isNull(node.right)) {
+                queue.add(node.right);
+            }
+
+            visited.add(node);
+        }
+
+        printList(visited);
+    }
+
+    public void breadthFirstSearchR() {
+        List<BsTNode<Integer>> visited = new ArrayList<>();
+        List<BsTNode<Integer>> queue = new ArrayList<>();
+
+        queue.add(root);
+        traverse(queue, visited);
+        printList(visited);
+    }
+
+    private void traverse(List<BsTNode<Integer>> queue, List<BsTNode<Integer>> visited) {
+        BsTNode<Integer> node = queue.remove(0);
+        if(!Objects.isNull(node.left)) {
+            queue.add(node.left);
+        }
+        if(!Objects.isNull(node.right)) {
+            queue.add(node.right);
+        }
+
+        visited.add(node);
+        if(!queue.isEmpty()) {
+            traverse(queue, visited);
+        }
+    }
+
+    public void preOrderSearch() {
+        List<BsTNode<Integer>> visited = new ArrayList<>();
+        preOrderVisit(root, visited);
+        printList(visited);
+    }
+
+    private void preOrderVisit(BsTNode<Integer> node, List<BsTNode<Integer>> visited) {
+        visited.add(node);
+        if(!Objects.isNull(node.left)) {
+            preOrderVisit(node.left, visited);
+        }
+        if(!Objects.isNull(node.right)) {
+            preOrderVisit(node.right, visited);
+        }
+    }
+
+    public void inOrderSearch() {
+        List<BsTNode<Integer>> visited = new ArrayList<>();
+        inOrderVisit(root, visited);
+        printList(visited);
+    }
+
+    private void inOrderVisit(BsTNode<Integer> node, List<BsTNode<Integer>> visited) {
+        if(!Objects.isNull(node.left)) {
+            inOrderVisit(node.left, visited);
+        }
+        visited.add(node);
+        if(!Objects.isNull(node.right)) {
+            inOrderVisit(node.right, visited);
+        }
+    }
+
+    public void postOrderSearch() {
+        List<BsTNode<Integer>> visited = new ArrayList<>();
+        postOrderVisit(root, visited);
+        printList(visited);
+    }
+
+    private void postOrderVisit(BsTNode<Integer> node, List<BsTNode<Integer>> visited) {
+        if(!Objects.isNull(node.left)) {
+            postOrderVisit(node.left, visited);
+        }
+        if(!Objects.isNull(node.right)) {
+            postOrderVisit(node.right, visited);
+        }
+        visited.add(node);
+    }
+
+    private void printList(List<BsTNode<Integer>> visited) {
+        for(BsTNode<Integer> node : visited) {
+            System.out.print(node.value + " ");
+        }
+    }
 
     @Override
     public String toString() {

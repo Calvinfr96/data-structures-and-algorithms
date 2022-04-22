@@ -1,4 +1,3 @@
-
 public class BsTNode<T> {
     public T value;
     public BsTNode<T> left;
@@ -12,6 +11,6 @@ public class BsTNode<T> {
 
     @Override
     public String toString() {
-        return String.format(" { value : %d, left : %d, right : %d } ", value, left.value, right.value);
+        return String.format(" { value : %d, left : %s, right : %s } ", value, left, right);
     }
 }

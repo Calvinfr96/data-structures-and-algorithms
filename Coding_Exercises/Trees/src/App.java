@@ -11,8 +11,12 @@ public class App {
         tree.insert(11);
         tree.insert(13);
 
-        System.out.println(tree);
-        System.out.println(tree.root.left);
-        System.out.println(tree.root.right);
+        BinaryHeap heap = new BinaryHeap();
+        heap.insert(4);
+        heap.insert(50);
+        heap.insert(7);
+        heap.insert(5);
+
+        System.out.println(heap.findParent(7));
     }
 }
