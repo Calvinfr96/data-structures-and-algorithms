@@ -12,11 +12,18 @@ public class App {
         tree.insert(13);
 
         BinaryHeap heap = new BinaryHeap();
-        heap.insert(4);
         heap.insert(50);
+        heap.insert(5);
+        heap.insert(4);
         heap.insert(7);
         heap.insert(5);
 
-        System.out.println(heap.findParent(7));
+        System.out.println(heap);
+        System.out.println(heap.remove());
+        System.out.println(heap.remove());
+        System.out.println(heap.remove());
+        System.out.println(heap.remove());
+        System.out.println(heap.remove());
+        System.out.println(heap);
     }
 }
