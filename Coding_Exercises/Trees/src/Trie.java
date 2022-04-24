@@ -44,18 +44,10 @@ public class Trie {
     }
 
     public boolean remove(String word) {
-        char[] characters= word.toCharArray();
-        Node current = root.get(characters[0]);
-        for(int i = 1; i < characters.length; i++) {
-            if(!Objects.isNull(current)) {
-                current = current.children.get(characters[i]);
-            } else {
-                return false;
-            } 
-        }
-
-        if(current.terminal) {
-            current.terminal = false;
+        Node endingNode = endingNode(word);
+        
+        if(!Objects.isNull(endingNode) && endingNode.terminal) {
+            endingNode.terminal = false;
             return true;
         } else {
             return false;
@@ -63,38 +55,36 @@ public class Trie {
     }
 
     public boolean isWord(String word) {
-        char[] characters = word.toCharArray();
-        Node current = root.get(characters[0]);
-        for(int i = 1; i < characters.length; i++) {
-            if(!Objects.isNull(current)) {
-                current = current.children.get(characters[i]);
-            } else {
-                return false;
-            } 
-        }
+        Node endingNode = endingNode(word);
 
-        if(!Objects.isNull(current)) {
-            return current.terminal;
+        if(!Objects.isNull(endingNode)) {
+            return endingNode.terminal;
         } else {
             return false;
         }
     }
 
     public boolean isPrefix(String prefix) {
-        char[] characters = prefix.toCharArray();
+        Node endingNode = endingNode(prefix);
+
+        if(!Objects.isNull(endingNode)) {
+            return !endingNode.children.isEmpty();
+        } else {
+            return false;
+        }
+    }
+
+    public Node endingNode(String word) {
+        char[] characters = word.toCharArray();
         Node current = root.get(characters[0]);
         for(int i = 1; i < characters.length; i++) {
             if(!Objects.isNull(current)) {
                 current = current.children.get(characters[i]);
             } else {
-                return false;
+                return null;
             } 
         }
 
-        if(!Objects.isNull(current)) {
-            return !current.children.isEmpty();
-        } else {
-            return false;
-        }
+        return current;
     }
 }

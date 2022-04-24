@@ -27,7 +27,7 @@ public class App {
         System.out.println(trie.remove("Zebra"));
         System.out.println(trie.remove("Apple"));
         System.out.println(trie.insert("Apple"));
-        System.out.println(trie.isPrefix("Apple"));
+        System.out.println(trie.isWord("Ap"));
 
     }
 }
