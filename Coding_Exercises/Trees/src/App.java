@@ -18,12 +18,16 @@ public class App {
         heap.insert(7);
         heap.insert(5);
 
-        System.out.println(heap);
-        System.out.println(heap.remove());
-        System.out.println(heap.remove());
-        System.out.println(heap.remove());
-        System.out.println(heap.remove());
-        System.out.println(heap.remove());
-        System.out.println(heap);
+        Trie trie = new Trie();
+        System.out.println(trie.insert("Apple"));
+        System.out.println(trie.insert("Apple"));
+        System.out.println(trie.insert("Application"));
+        System.out.println(trie.insert("Application"));
+        System.out.println(trie.insert("App"));
+        System.out.println(trie.remove("Zebra"));
+        System.out.println(trie.remove("Apple"));
+        System.out.println(trie.insert("Apple"));
+        System.out.println(trie.isPrefix("Apple"));
+
     }
 }

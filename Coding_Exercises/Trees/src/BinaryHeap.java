@@ -52,11 +52,11 @@ public class BinaryHeap {
     }
 
     public Integer remove() {
-        Integer value = root.value;
-
         if(Objects.isNull(root)) {
             return null;
         }
+        
+        Integer value = root.value;
         if(Objects.isNull(root.left) && Objects.isNull(root.right)) {
             root = null;
             return value;
@@ -148,7 +148,9 @@ public class BinaryHeap {
         Node leftChild = node.left;
         Node rightChild = node.right;
 
-        if(Objects.isNull(leftChild)) {
+        if(Objects.isNull(leftChild) && Objects.isNull(rightChild)) {
+            return null;
+        } else if(Objects.isNull(leftChild)) {
             if(!Objects.isNull(rightChild) && rightChild.value.compareTo(node.value) < 0) {
                 return rightChild;
             }
@@ -158,8 +160,6 @@ public class BinaryHeap {
                 return leftChild;
             }
             return null;
-        } else if(Objects.isNull(leftChild) && Objects.isNull(rightChild)) {
-            return null;
         } else {
             return leftChild.value.compareTo(rightChild.value) < 0 ? leftChild : rightChild;
         }
@@ -167,6 +167,9 @@ public class BinaryHeap {
 
     @Override
     public String toString() {
+        if(Objects.isNull(root)) {
+            return "empty";
+        }
         List<Integer> nodes = breadthFirstSearch();
         return nodes.toString();
     }
