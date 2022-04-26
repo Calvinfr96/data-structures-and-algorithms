@@ -1,6 +1,10 @@
 public class App {
     public static void main(String[] args) throws Exception {
         BinarySearchTree tree  = new BinarySearchTree();
+        int[] nums = {7,8,9,10,11,12,13};
+        BsTNode<Integer> node = BinarySearchTree.createMinimalBST(nums);
+        BinarySearchTree tree2 = new BinarySearchTree();
+        tree2.root = node;
 
         tree.insert(10);
         tree.insert(8);
