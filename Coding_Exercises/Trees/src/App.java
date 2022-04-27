@@ -1,10 +1,15 @@
 public class App {
-    public static void main(String[] args) throws Exception {
-        BinarySearchTree tree  = new BinarySearchTree();
+    public static void minimalTree() {
         int[] nums = {7,8,9,10,11,12,13};
         BsTNode<Integer> node = BinarySearchTree.createMinimalBST(nums);
         BinarySearchTree tree2 = new BinarySearchTree();
         tree2.root = node;
+        tree2.breadthFirstSearch();
+    }
+
+    public static void main(String[] args) throws Exception {
+        BinarySearchTree tree  = new BinarySearchTree();
+        minimalTree();
 
         tree.insert(10);
         tree.insert(8);
@@ -23,15 +28,17 @@ public class App {
         heap.insert(5);
 
         Trie trie = new Trie();
-        System.out.println(trie.insert("Apple"));
-        System.out.println(trie.insert("Apple"));
-        System.out.println(trie.insert("Application"));
-        System.out.println(trie.insert("Application"));
-        System.out.println(trie.insert("App"));
-        System.out.println(trie.remove("Zebra"));
-        System.out.println(trie.remove("Apple"));
-        System.out.println(trie.insert("Apple"));
-        System.out.println(trie.isWord("Ap"));
+        trie.insert("Apple");
+        trie.insert("Apple");
+        trie.insert("Application");
+        trie.insert("Application");
+        trie.insert("App");
+        trie.remove("Zebra");
+        trie.remove("Apple");
+        trie.insert("Apple");
+        trie.isWord("Ap");
 
+        //List of Depths
+        System.out.println(tree.createLevelList(tree.root));
     }
 }

@@ -183,10 +183,39 @@ public class BinarySearchTree {
         return node;
     }
 
+    public List<List<BsTNode<Integer>>> createLevelList(BsTNode<Integer> root) {
+        List<BsTNode<Integer>> queue = new ArrayList<>();
+        List<List<BsTNode<Integer>>> result = new ArrayList<>();
+        queue.add(root);
+
+        while(true) {
+            List<BsTNode<Integer>> listToAdd = new ArrayList<>();
+            while(!queue.isEmpty()) {
+                listToAdd.add(queue.remove(0));
+            }
+            if(listToAdd.isEmpty()) {
+                break;
+            }
+
+            for(BsTNode<Integer> node : listToAdd) {
+                if(!Objects.isNull(node.left)) {
+                    queue.add(node.left);
+                }
+                if(!Objects.isNull(node.right)) {
+                    queue.add(node.right);
+                }
+            }
+            result.add(listToAdd);
+        }
+
+        return result;
+    }
+
     private void printList(List<BsTNode<Integer>> visited) {
         for(BsTNode<Integer> node : visited) {
             System.out.print(node.value + " ");
         }
+        System.out.println();
     }
 
     @Override

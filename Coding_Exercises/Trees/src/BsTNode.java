@@ -11,6 +11,6 @@ public class BsTNode<T> {
 
     @Override
     public String toString() {
-        return String.format(" { value : %d, left : %s, right : %s } ", value, left, right);
+        return value.toString();
     }
 }
