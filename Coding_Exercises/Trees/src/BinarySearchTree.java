@@ -211,6 +211,11 @@ public class BinarySearchTree {
         return result;
     }
 
+    public boolean checkBalanced() {
+        //A Binary tree is balanced if all nodes satisfy the following condition: The left and right subtrees cannot differ in height by more than one level.
+        return false;
+    }
+
     private void printList(List<BsTNode<Integer>> visited) {
         for(BsTNode<Integer> node : visited) {
             System.out.print(node.value + " ");
