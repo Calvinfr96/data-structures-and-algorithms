@@ -23,13 +23,10 @@ public class BasicRecursion {
     }
 
     public static int factorial(int num) {
-<<<<<<< HEAD
         if(num < 0) {
             return 0;
         }
 
-=======
->>>>>>> fb925574b2a4852d4300f137d151c1a61707c3b8
         if(num == 0 || num == 1) {//Base Case
             return 1;
         }
@@ -71,7 +68,6 @@ public class BasicRecursion {
         newArray.addAll(arrayToAdd);
         return newArray;
     }
-<<<<<<< HEAD
 
     public static double power(int base, int exponent) {
         if(exponent == 0) {
@@ -137,15 +133,7 @@ public class BasicRecursion {
     private static String capitalize(String string) {
         return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
-    public static void main(String[] args) {
-        countDown(10);
-        System.out.println(sumRange(10));
-        System.out.println(reverse("Hello"));
-        
 
-        List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-        System.out.println(capitalizeStrings(Arrays.asList("alpha", "bravo", "charlie", "delta")));
-=======
     public static void main(String[] args) {
         countDown(10);
         System.out.println(sumRange(10));
@@ -153,6 +141,5 @@ public class BasicRecursion {
 
         List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         System.out.println(collectOddValuesPR(nums));
->>>>>>> fb925574b2a4852d4300f137d151c1a61707c3b8
     }  
 }
