@@ -19,6 +19,8 @@ public class App {
         tree.insert(7);
         tree.insert(11);
         tree.insert(13);
+        tree.insert(30);
+        tree.insert(31);
 
         BinaryHeap heap = new BinaryHeap();
         heap.insert(50);
@@ -39,6 +41,6 @@ public class App {
         trie.isWord("Ap");
 
         //List of Depths
-        System.out.println(tree.createLevelList(tree.root));
+        System.out.println(tree.checkBalanced(tree.root));
     }
 }

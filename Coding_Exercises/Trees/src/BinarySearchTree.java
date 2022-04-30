@@ -211,9 +211,29 @@ public class BinarySearchTree {
         return result;
     }
 
-    public boolean checkBalanced() {
+    public boolean checkBalanced(BsTNode<Integer> node) {
         //A Binary tree is balanced if all nodes satisfy the following condition: The left and right subtrees cannot differ in height by more than one level.
-        return false;
+        //The height of a node can be thought of simply as the number of nodes you can go down before hitting a leaf node.
+        //A leaf node has a height of zero.
+        if(Objects.isNull(node.left) && Objects.isNull(node.right)) {
+            return true;
+        }
+
+        int leftHeight = !Objects.isNull(node.left) ? getHeight(node.left) : 0;
+        int rightHeight = !Objects.isNull(node.right) ? getHeight(node.right) : 0;
+
+        return Math.abs(leftHeight - rightHeight) <= 1;
+    }
+
+    public int getHeight(BsTNode<Integer> node) {
+        if(Objects.isNull(node.left) && Objects.isNull(node.right)) {
+            return 0;
+        }
+
+        int leftHeight = !Objects.isNull(node.left) ? getHeight(node.left) + 1 : 0;
+        int rightHeight = !Objects.isNull(node.right) ? getHeight(node.right) + 1 : 0;
+
+        return Math.max(leftHeight, rightHeight);
     }
 
     private void printList(List<BsTNode<Integer>> visited) {
