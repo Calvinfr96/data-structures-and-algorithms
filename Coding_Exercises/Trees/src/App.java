@@ -41,6 +41,8 @@ public class App {
         trie.isWord("Ap");
 
         //List of Depths
-        System.out.println(tree.checkBalanced(tree.root));
+        tree.root.left.right.right = new BsTNode<Integer>(12);
+        System.out.println(tree.validateBST(tree.root));
+        tree.inOrderSearch();
     }
 }

@@ -236,6 +236,26 @@ public class BinarySearchTree {
         return Math.max(leftHeight, rightHeight);
     }
 
+    public boolean validateBST(BsTNode<Integer> node) {
+        if(Objects.isNull(node.left) && Objects.isNull(node.right)) {
+            return true;
+        }
+
+        boolean leftResult  = !Objects.isNull(node.left) ? validateBST(node.left) : true;
+        if(!leftResult) {
+            return false;
+        }
+        boolean rightResult = !Objects.isNull(node.right) ? validateBST(node.right) : true;
+        if(!rightResult) {
+            return false;
+        }
+
+        boolean leftChild = !Objects.isNull(node.left) ? node.left.value < node.value : true;
+        boolean rightChild = !Objects.isNull(node.right) ? node.right.value > node.value : true;
+
+        return leftChild && rightChild;
+    }
+
     private void printList(List<BsTNode<Integer>> visited) {
         for(BsTNode<Integer> node : visited) {
             System.out.print(node.value + " ");
