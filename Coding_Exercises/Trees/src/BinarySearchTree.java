@@ -24,6 +24,7 @@ public class BinarySearchTree {
 
         if(Objects.isNull(root)) {
             root = node;
+            node.parent = null;
         } else {
             BsTNode<Integer> currentNode = root;
             while(true) {
@@ -34,6 +35,7 @@ public class BinarySearchTree {
                 if(value.compareTo(currentNode.value) < 0) {
                     if(Objects.isNull(currentNode.left)) {
                         currentNode.left = node;
+                        node.parent = currentNode;
                         return this;
                     } else {
                         currentNode = currentNode.left;
@@ -43,6 +45,7 @@ public class BinarySearchTree {
                 if(value.compareTo(currentNode.value) > 0) {
                     if(Objects.isNull(currentNode.right)) {
                         currentNode.right = node;
+                        node.parent = currentNode;
                         return this;
                     } else {
                         currentNode = currentNode.right;
@@ -254,6 +257,41 @@ public class BinarySearchTree {
         boolean rightChild = !Objects.isNull(node.right) ? node.right.value > node.value : true;
 
         return leftChild && rightChild;
+
+        //NOTE: This solution doesn't work because it only checks the immediate children for validity and not the tree as whole.
+        //Instead, you can run an in-order depth-first search and see if the list of nodes is sorted.
+    }
+
+    public BsTNode<Integer> inOrderSuccessor(BsTNode<Integer> node) {
+        //The In-Order successor of a node is the leftmost node of its right subtree. This means that, when doing an In-Order traversal of a tree, it is the first node you visit on the node's right side.
+        if(Objects.isNull(node)) {
+            return null;
+        }
+        if(!Objects.isNull(node.right)) {
+            return leftMostChild(node.right);
+        } else {
+            //If the node doesn't have a right subtree, it's in-order successor is the node for which it is a left child
+            BsTNode<Integer> child = node;
+            BsTNode<Integer> parent = child.parent;
+
+            while(!Objects.isNull(parent) && parent.left != child) {
+                child = parent;
+                parent = parent.parent;
+            }
+
+            return parent;
+        }
+    }
+
+    private BsTNode<Integer> leftMostChild(BsTNode<Integer> node) {
+        if(Objects.isNull(node)) {
+            return null;
+        }
+
+        while(!Objects.isNull(node.left)) {
+            node = node.left;
+        }
+        return node;
     }
 
     private void printList(List<BsTNode<Integer>> visited) {
