@@ -294,6 +294,75 @@ public class BinarySearchTree {
         return node;
     }
 
+    public BsTNode<Integer> commonAncestor(BsTNode<Integer> a, BsTNode<Integer> b) {
+        int delta = getDepth(a) - getDepth(b);
+        BsTNode<Integer> shallowNode = delta > 0 ? b :a;
+        BsTNode<Integer> deepNode = delta > 0 ? a : b;
+        shallowNode = goUpBy(shallowNode, Math.abs(delta));
+
+        while(shallowNode != deepNode && !Objects.isNull(shallowNode) && !Objects.isNull(deepNode)) {
+            shallowNode = shallowNode.parent;
+            deepNode = deepNode.parent;
+        }
+
+        return Objects.isNull(shallowNode) || Objects.isNull(deepNode) ? null : shallowNode;
+    }
+
+    private int getDepth(BsTNode<Integer> node) {
+        int depth = 0;
+
+        while(!Objects.isNull(node)) {
+            node = node.parent;
+            depth++;
+        }
+
+        return depth;
+    }
+
+    private BsTNode<Integer> goUpBy(BsTNode<Integer> node, int delta) {
+        while(delta > 0 && !Objects.isNull(node)) {
+            node = node.parent;
+            delta--;
+        }
+
+        return node;
+    }
+
+    //Same problem, but without using a reference to the parent node.
+    public BsTNode<Integer> commonAncestor(BsTNode<Integer> root, BsTNode<Integer> a, BsTNode<Integer> b) {
+        if(!covers(root, a) || !covers(root, b)) {
+            return null;
+        }
+
+        return commonAncestorHelper(root, a, b);
+    }
+
+    private BsTNode<Integer> commonAncestorHelper(BsTNode<Integer> root, BsTNode<Integer> a, BsTNode<Integer> b) {
+        if(Objects.isNull(root) || root == a || root == b) {
+            return root;
+        }
+
+        boolean aIsOnLeft = covers(root.left, a);
+        boolean bIsOnLeft = covers(root.left, b);
+        if(aIsOnLeft != bIsOnLeft) {
+            return root;
+        }
+
+        BsTNode<Integer> childSide = aIsOnLeft ? root.left : root.right;
+        return commonAncestorHelper(childSide, a, b);
+    }
+
+    private boolean covers(BsTNode<Integer> root, BsTNode<Integer> node) {
+        if(Objects.isNull(root)) {
+            return false;
+        }
+        if(root == node) {
+            return true;
+        }
+
+        return covers(root.left, node) || covers(root.right, node);
+    }
+
     private void printList(List<BsTNode<Integer>> visited) {
         for(BsTNode<Integer> node : visited) {
             System.out.print(node.value + " ");
