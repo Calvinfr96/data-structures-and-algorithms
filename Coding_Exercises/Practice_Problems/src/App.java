@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class App {
@@ -38,9 +39,22 @@ public class App {
           //There is a third solution that involves sorting and multiple pointers that has O(N*log(N)) time and O(N) space.
       }
 
+      public static boolean isValidSubsequence(List<Integer> array, List<Integer> sequence) {
+        // Write your code here.
+            int pointer2 = 0;
+            for(int pointer1 = 0; pointer1 < array.size() && pointer2 < sequence.size(); pointer1++) {
+                //Whenever we're indexing arrays, we need to make sure we control for out of bounds indices for all arrays we work with.
+                if(array.get(pointer1) == sequence.get(pointer2)) {
+                    pointer2++;
+                }
+            }
+        return pointer2 == sequence.size();
+        //Time: O(N) where N is the length of the array. Space: O(1).
+      }
+
     public static void main(String[] args) throws Exception {
-        int[] array = {3,5,-4,8,11,1,-1,6};
-        String result = Arrays.toString(twoNumberSumOptimal(array, 10));
-        System.out.println(result);
+        List<Integer> array = Arrays.asList(5,1,22,25,6,-1,8,10);
+        List<Integer> sequence = Arrays.asList(5);
+        System.out.println(isValidSubsequence(array, sequence));
     }
 }
