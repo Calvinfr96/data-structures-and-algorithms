@@ -52,9 +52,41 @@ public class App {
         //Time: O(N) where N is the length of the array. Space: O(1).
       }
 
+      public static int[] sortedSquaredArray(int[] array) {
+        //This method must account for arrays that contain negative integers, you can't just square each element and return.
+        int[] squaredInts = new int[array.length];
+            
+            for(int i = 0; i < array.length; i++) {
+                squaredInts[i] = (int) Math.pow(array[i], 2.0);
+            }
+            
+            Arrays.sort(squaredInts);
+            return squaredInts;
+            //Time: O(n*log(n)) Space: O(n).
+      }
+
+      public static int[] sortedSquaredArrayOptimal(int[] array) {
+          //The optimal solution takes advantage of the fact that the array is sorted. The previous solution would work even for an unsorted array.
+          int[] squaredInts = new int[array.length];
+
+          //These two pointers track the largest number in the array. For an array that contains positives and negatives, the largest square will be at either end. Ex: [-7, -3, 1, 5, 9]. 9 is the largest square
+          int start = 0;
+          int end = array.length - 1;
+
+          for(int i = array.length - 1; i >=0; i--) {
+              if(Math.abs(array[start]) > Math.abs(array[end])) {
+                  squaredInts[i] = array[start] * array[start];
+                  start++;
+              } else {
+                  squaredInts[i] = array[end] * array[end];
+                  end--;
+              }
+          }
+
+          return squaredInts;
+      } 
     public static void main(String[] args) throws Exception {
-        List<Integer> array = Arrays.asList(5,1,22,25,6,-1,8,10);
-        List<Integer> sequence = Arrays.asList(5);
-        System.out.println(isValidSubsequence(array, sequence));
+        int[] nums = new int[] {-7,1,3,5};
+        System.out.println(Arrays.toString(sortedSquaredArrayOptimal(nums)));
     }
 }
