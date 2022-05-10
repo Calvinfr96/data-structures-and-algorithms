@@ -1,6 +1,9 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class App {
@@ -84,7 +87,35 @@ public class App {
           }
 
           return squaredInts;
+          //Time: O(n) Space: O(n)
       } 
+
+      public static String tournamentWinner(
+        ArrayList<ArrayList<String>> competitions, ArrayList<Integer> results) {
+      // Write your code here.
+          Map<String, Integer> scoreBoard = new HashMap<>();
+          int AWAY_TEAM_WON = 0;
+          String currentBestTeam = "";
+          Integer currentBestPoints = 0;
+          scoreBoard.put(currentBestTeam, currentBestPoints);
+          
+          for(int i = 0; i < competitions.size(); i++) {
+              ArrayList<String> competition = competitions.get(i);
+              String homeTeam = competition.get(0);
+              String awayTeam = competition.get(1);
+
+              String winningTeam = results.get(i) == AWAY_TEAM_WON ? awayTeam : homeTeam;
+              scoreBoard.putIfAbsent(winningTeam, 0);
+              scoreBoard.put(winningTeam, scoreBoard.get(winningTeam) + 3);
+
+              if(scoreBoard.get(winningTeam) > currentBestPoints) {
+                  currentBestTeam = winningTeam;
+                  currentBestPoints = scoreBoard.get(winningTeam);
+              }
+          }
+          
+      return currentBestTeam;
+    }
     public static void main(String[] args) throws Exception {
         int[] nums = new int[] {-7,1,3,5};
         System.out.println(Arrays.toString(sortedSquaredArrayOptimal(nums)));
