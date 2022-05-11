@@ -115,9 +115,63 @@ public class App {
           }
           
       return currentBestTeam;
+      //Time: O(n) where n is the number of competitions. Space: O(k) where k is the number of teams.
     }
+
+    public static int nonConstructibleChangeBrute(int[] coins) {
+        // Write your code here.
+        int minimumChange = 1;
+        if(coins.length == 0) {
+            return minimumChange;
+        }
+
+        Arrays.sort(coins);
+        
+        while(true) {
+            int total = minimumChange;
+            for(int i = coins.length - 1; i >= 0; i--) {
+                if(coins[i] <= total) {
+                    total -= coins[i];
+                }
+                if(total == 0) {
+                    break;
+                }
+            }
+            
+            if(total == 0) {
+                minimumChange++;
+            } else {
+                return minimumChange;
+            }
+        }
+
+        //Time: O(n*m) where n is the size of coins and m is the value of minimumChange.
+        //Space: O(1) because we don't use additional data structures.
+        //This is the brute-force solution because you incremement the minimumChange by 1, checking every possible value until you find one that doesn't work.
+      }
+
+      public static int nonConstructibleChangeOptimal(int[] coins) {
+          //This solution can find the minimum impossible change by stepping through the array just one time.
+          //You start with a minimum change of zero and sort the array. For each element in the sorted array, you compare the value of that element to change + 1. If it's greater than that, the minimum impossible change is 'change + 1'.
+          //Example: If you don't have any pennies, the minimum amount of change you can't create is one.
+          //[1, 2, 5] -> change starts at 0. 1 ~> change + 1, so change = 0 + 1. 2 ~> change + 1, so change = 1 + 2.
+          //5 > change + 1 (4), so the minimum impossible change is 4.
+          Arrays.sort(coins);
+
+          int change = 0;
+          for(int coin : coins) {
+              if(coin > change + 1) {
+                  return change + 1;
+              } else {
+                  change += coin;
+              }
+          }
+
+          return change + 1;
+      }
+
     public static void main(String[] args) throws Exception {
-        int[] nums = new int[] {-7,1,3,5};
-        System.out.println(Arrays.toString(sortedSquaredArrayOptimal(nums)));
+        int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
+        System.out.println(nonConstructibleChangeOptimal(nums));
     }
 }
