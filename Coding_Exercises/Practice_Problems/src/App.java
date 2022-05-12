@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class App {
@@ -170,8 +171,55 @@ public class App {
           return change + 1;
       }
 
+      public static int findClosestValueInBst(BST tree, int target) {
+        // Write your code here.
+        List<BST> queue = new ArrayList<>();
+        queue.add(tree);
+        
+        int minimumDifference = Integer.MAX_VALUE;
+        BST currentTree = tree;
+        BST minimumTree = null;
+        while(!Objects.isNull(currentTree)) {
+            int value = currentTree.value;
+            
+            int difference = Math.abs(target - value);
+            if(difference < minimumDifference) {
+                minimumDifference = difference;
+                minimumTree = currentTree;
+                
+                if(minimumDifference == 0) {
+                    break;
+                }
+            }
+            
+            if(value > target) {//If the value of the current node is greater than the target value, moving right isn't efficient because it will widen the difference between the two values.
+                currentTree = currentTree.left;
+            }
+            if(value < target) {
+                currentTree = currentTree.right;
+            }
+            System.out.println(minimumDifference);
+        }
+            
+        return minimumTree.value;
+        //Average: Time: O(log(n)) Space: (O(1))
+        //Worst: Time: O(n) Space: O(1) 
+      }
+    
+      static class BST {
+        public int value;
+        public BST left;
+        public BST right;
+    
+        public BST(int value) {
+          this.value = value;
+        }
+        //Time: O(log(n)) Space: O(1).
+      }
+
     public static void main(String[] args) throws Exception {
         int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
         System.out.println(nonConstructibleChangeOptimal(nums));
+        System.out.println(Math.abs(-5));
     }
 }
