@@ -10,18 +10,18 @@ import java.util.Set;
 public class App {
     public static int[] twoNumberSumNaive(int[] array, int targetSum) {
         // Write your code here.
-            for(int i = 0; i < array.length - 1; i++) {
-							int firstNum = array[i];
-                for(int j = i + 1; j < array.length; j++) {
-									int secondNum = array[j];
-                    if(firstNum + secondNum == targetSum) {
-											 return new int[] {firstNum, secondNum};
-                    }
+        for(int i = 0; i < array.length - 1; i++) {
+            int firstNum = array[i];
+            for(int j = i + 1; j < array.length; j++) {
+                int secondNum = array[j];
+                if(firstNum + secondNum == targetSum) {
+                    return new int[] {firstNum, secondNum};
                 }
             }
-			
-			return new int[0];
-            // Time: O(n^2), Space: O(n)
+        }
+        
+        return new int[0];
+        // Time: O(n^2), Space: O(n)
       }
 
       public static int[] twoNumberSumOptimal(int[] array, int targetSum) {
@@ -45,13 +45,13 @@ public class App {
 
       public static boolean isValidSubsequence(List<Integer> array, List<Integer> sequence) {
         // Write your code here.
-            int pointer2 = 0;
-            for(int pointer1 = 0; pointer1 < array.size() && pointer2 < sequence.size(); pointer1++) {
-                //Whenever we're indexing arrays, we need to make sure we control for out of bounds indices for all arrays we work with.
-                if(array.get(pointer1) == sequence.get(pointer2)) {
-                    pointer2++;
-                }
+        int pointer2 = 0;
+        for(int pointer1 = 0; pointer1 < array.size() && pointer2 < sequence.size(); pointer1++) {
+            //Whenever we're indexing arrays, we need to make sure we control for out of bounds indices for all arrays we work with.
+            if(array.get(pointer1) == sequence.get(pointer2)) {
+                pointer2++;
             }
+        }
         return pointer2 == sequence.size();
         //Time: O(N) where N is the length of the array. Space: O(1).
       }
@@ -60,63 +60,63 @@ public class App {
         //This method must account for arrays that contain negative integers, you can't just square each element and return.
         int[] squaredInts = new int[array.length];
             
-            for(int i = 0; i < array.length; i++) {
-                squaredInts[i] = (int) Math.pow(array[i], 2.0);
-            }
-            
-            Arrays.sort(squaredInts);
-            return squaredInts;
-            //Time: O(n*log(n)) Space: O(n).
+        for(int i = 0; i < array.length; i++) {
+            squaredInts[i] = (int) Math.pow(array[i], 2.0);
+        }
+        
+        Arrays.sort(squaredInts);
+        return squaredInts;
+        //Time: O(n*log(n)) Space: O(n).
       }
 
       public static int[] sortedSquaredArrayOptimal(int[] array) {
-          //The optimal solution takes advantage of the fact that the array is sorted. The previous solution would work even for an unsorted array.
-          int[] squaredInts = new int[array.length];
+        //The optimal solution takes advantage of the fact that the array is sorted. The previous solution would work even for an unsorted array.
+        int[] squaredInts = new int[array.length];
 
-          //These two pointers track the largest number in the array. For an array that contains positives and negatives, the largest square will be at either end. Ex: [-7, -3, 1, 5, 9]. 9 is the largest square
-          int start = 0;
-          int end = array.length - 1;
+        //These two pointers track the largest number in the array. For an array that contains positives and negatives, the largest square will be at either end. Ex: [-7, -3, 1, 5, 9]. 9 is the largest square
+        int start = 0;
+        int end = array.length - 1;
 
-          for(int i = array.length - 1; i >=0; i--) {
-              if(Math.abs(array[start]) > Math.abs(array[end])) {
-                  squaredInts[i] = array[start] * array[start];
-                  start++;
-              } else {
-                  squaredInts[i] = array[end] * array[end];
-                  end--;
-              }
-          }
+        for(int i = array.length - 1; i >=0; i--) {
+            if(Math.abs(array[start]) > Math.abs(array[end])) {
+                squaredInts[i] = array[start] * array[start];
+                start++;
+            } else {
+                squaredInts[i] = array[end] * array[end];
+                end--;
+            }
+        }
 
-          return squaredInts;
-          //Time: O(n) Space: O(n)
+        return squaredInts;
+        //Time: O(n) Space: O(n)
       } 
 
       public static String tournamentWinner(
         ArrayList<ArrayList<String>> competitions, ArrayList<Integer> results) {
-      // Write your code here.
-          Map<String, Integer> scoreBoard = new HashMap<>();
-          int AWAY_TEAM_WON = 0;
-          String currentBestTeam = "";
-          Integer currentBestPoints = 0;
-          scoreBoard.put(currentBestTeam, currentBestPoints);
-          
-          for(int i = 0; i < competitions.size(); i++) {
-              ArrayList<String> competition = competitions.get(i);
-              String homeTeam = competition.get(0);
-              String awayTeam = competition.get(1);
+        // Write your code here.
+        Map<String, Integer> scoreBoard = new HashMap<>();
+        int AWAY_TEAM_WON = 0;
+        String currentBestTeam = "";
+        Integer currentBestPoints = 0;
+        scoreBoard.put(currentBestTeam, currentBestPoints);
+        
+        for(int i = 0; i < competitions.size(); i++) {
+            ArrayList<String> competition = competitions.get(i);
+            String homeTeam = competition.get(0);
+            String awayTeam = competition.get(1);
 
-              String winningTeam = results.get(i) == AWAY_TEAM_WON ? awayTeam : homeTeam;
-              scoreBoard.putIfAbsent(winningTeam, 0);
-              scoreBoard.put(winningTeam, scoreBoard.get(winningTeam) + 3);
+            String winningTeam = results.get(i) == AWAY_TEAM_WON ? awayTeam : homeTeam;
+            scoreBoard.putIfAbsent(winningTeam, 0);
+            scoreBoard.put(winningTeam, scoreBoard.get(winningTeam) + 3);
 
-              if(scoreBoard.get(winningTeam) > currentBestPoints) {
-                  currentBestTeam = winningTeam;
-                  currentBestPoints = scoreBoard.get(winningTeam);
-              }
-          }
+            if(scoreBoard.get(winningTeam) > currentBestPoints) {
+                currentBestTeam = winningTeam;
+                currentBestPoints = scoreBoard.get(winningTeam);
+            }
+        }
           
-      return currentBestTeam;
-      //Time: O(n) where n is the number of competitions. Space: O(k) where k is the number of teams.
+        return currentBestTeam;
+        //Time: O(n) where n is the number of competitions. Space: O(k) where k is the number of teams.
     }
 
     public static int nonConstructibleChangeBrute(int[] coins) {
@@ -217,6 +217,41 @@ public class App {
         //Time: O(log(n)) Space: O(1).
       }
 
+      public static class BinaryTree {
+        int value;
+        BinaryTree left;
+        BinaryTree right;
+    
+        BinaryTree(int value) {
+          this.value = value;
+          this.left = null;
+          this.right = null;
+        }
+      }
+    
+      public static List<Integer> branchSums(BinaryTree root) {
+        // Write your code here.
+        List<Integer> sums = new ArrayList<>();
+        postOrderTraversal(root, sums, root.value);
+        return sums;
+      }
+        
+    public static void postOrderTraversal(BinaryTree node, List<Integer> sums, int currentSum) {
+        if(!Objects.isNull(node.left)) {
+            postOrderTraversal(node.left, sums, currentSum + node.left.value);
+        }
+        if(!Objects.isNull(node.right)) {
+            postOrderTraversal(node.right, sums, currentSum + node.right.value);
+        }
+        if(Objects.isNull(node.left) && Objects.isNull(node.right)) {
+            System.out.println(currentSum);
+            sums.add(currentSum);
+        }
+
+        //Time: O(n) where n is the number of nodes. Space: O(log(n)) in the average or best case (balanced binary tree). This is because you will never have more than n recursive calls on the call stack *at once*. For a skewed binary tree (worst case), the space complexity is O(n). For the list you return, the space complexity is O(n).
+
+        //Overall: Time: O(n) Space: O(n).
+    }
     public static void main(String[] args) throws Exception {
         int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
         System.out.println(nonConstructibleChangeOptimal(nums));
