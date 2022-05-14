@@ -252,6 +252,60 @@ public class App {
 
         //Overall: Time: O(n) Space: O(n).
     }
+
+    public static int nodeDepths(BinaryTree root) {
+        // Write your code here.
+        return nodeDepthsHelper(root, 0);
+        //Time: O(n) where n is the number of nodes in the binary tree.
+        //Space: O(h) where h is the height of the binary tree.
+    }
+    
+    public static int nodeDepthsHelper(BinaryTree node, int currentDepth) {
+        int depthSum = currentDepth;
+        if(!Objects.isNull(node.left)) {
+            depthSum += nodeDepthsHelper(node.left, currentDepth + 1);
+        }
+        if(!Objects.isNull(node.right)) {
+            depthSum += nodeDepthsHelper(node.right, currentDepth + 1);
+        }
+        
+        return depthSum;
+    }
+
+    public static int nodeDepthsIterative(BinaryTree root) {
+        // Write your code here.
+        int depthSum = 0;
+        List<Map<BinaryTree, Integer>> stack = new ArrayList<>();
+        
+        Map<BinaryTree, Integer> rootDepth = new HashMap<>();
+        rootDepth.put(root, 0);
+        stack.add(0, rootDepth);
+        
+        while(!stack.isEmpty()) {
+            Map<BinaryTree, Integer> nodeDepth = stack.remove(0);
+            for(Map.Entry<BinaryTree, Integer> entry : nodeDepth.entrySet()) {
+                BinaryTree node = entry.getKey();
+                Integer depth = entry.getValue();
+                
+                depthSum += depth;
+                
+                if(!Objects.isNull(node.left)) {
+                    Map<BinaryTree, Integer> leftChildDepth = new HashMap<>();
+                    leftChildDepth.put(node.left, depth + 1);
+                    stack.add(0, leftChildDepth);
+                }
+                if(!Objects.isNull(node.right)) {
+                    Map<BinaryTree, Integer> rightChildDepth = new HashMap<>();
+                    rightChildDepth.put(node.right, depth + 1);
+                    stack.add(0, rightChildDepth);
+                }
+            }
+        }
+        
+        return depthSum;
+        //Time: O(n) where n is the number of nodes in the binary tree.
+        //Space: O(h) where h is the height of the binary tree.
+      }
     public static void main(String[] args) throws Exception {
         int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
         System.out.println(nonConstructibleChangeOptimal(nums));
