@@ -306,6 +306,35 @@ public class App {
         //Time: O(n) where n is the number of nodes in the binary tree.
         //Space: O(h) where h is the height of the binary tree.
       }
+
+      static class Node {
+        String name;
+        List<Node> children = new ArrayList<Node>();
+    
+        public Node(String name) {
+          this.name = name;
+        }
+    
+        public List<String> depthFirstSearch(List<String> array) {
+          // Write your code here.
+          traverse(this, array);
+          return array;
+        }
+            
+        private void traverse(Node node, List<String> visited) {
+            visited.add(node.name);
+            
+            for(int i = 0; i < node.children.size(); i++) {
+                traverse(node.children.get(i), visited);
+            }
+        }
+            
+        public Node addChild(String name) {
+          Node child = new Node(name);
+          children.add(child);
+          return this;
+        }
+      }
     public static void main(String[] args) throws Exception {
         int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
         System.out.println(nonConstructibleChangeOptimal(nums));
