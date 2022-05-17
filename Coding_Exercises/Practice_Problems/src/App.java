@@ -319,6 +319,8 @@ public class App {
           // Write your code here.
           traverse(this, array);
           return array;
+          //Time: O(v + e) where v and e are the number of vertices and edges in the graph, respectively.
+          //Space: O(v) where v is the number of vertices (this is the size of the return array). There are also v frames added to the call stack, so the complexity is O(2v) in the worst case. The worst case is a linear graph (one branch).
         }
             
         private void traverse(Node node, List<String> visited) {
@@ -334,6 +336,24 @@ public class App {
           children.add(child);
           return this;
         }
+      }
+
+      public int minimumWaitingTime(int[] queries) {
+        // Write your code here.
+            if(queries.length == 1) {
+                return 0;
+            }
+            
+            Arrays.sort(queries);
+            int minimumWaitingTime = 0;
+            for(int i = 1; i < queries.length; i++) {
+                minimumWaitingTime += queries[i - 1]*(queries.length - i);
+            }
+        
+        return minimumWaitingTime;
+            //Example of a Greedy algorithm because you make a 'greedy' choice about what to execute first.
+            //We execute the shortest queries first so that the waiting time for the other queries is minimized.
+            //Time: O(n*log(n)) Space: O(1)
       }
     public static void main(String[] args) throws Exception {
         int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
