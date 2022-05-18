@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -355,6 +356,34 @@ public class App {
             //We execute the shortest queries first so that the waiting time for the other queries is minimized.
             //Time: O(n*log(n)) Space: O(1)
       }
+
+      public boolean classPhotos(
+      ArrayList<Integer> redShirtHeights, ArrayList<Integer> blueShirtHeights) {
+    // Write your code here. Another greedy algorithm. We sort the arrays, then look at them in descending order.
+		//All students in the first array must be taller or shorter than students in the second.
+		//There can't be any students of equal heights
+		Collections.sort(redShirtHeights, Collections.reverseOrder());
+		Collections.sort(blueShirtHeights, Collections.reverseOrder());
+		
+		String shirtColorInFirstRow = redShirtHeights.get(0) < blueShirtHeights.get(0) ? "RED" : "BLUE";
+		for(int i = 0; i < redShirtHeights.size(); i++) {
+			int redShirtHeight = redShirtHeights.get(i);
+			int blueShirtHeight = blueShirtHeights.get(i);
+			
+			if(shirtColorInFirstRow == "RED") {
+				if(redShirtHeight >= blueShirtHeight) {
+					return false;
+				}
+			} else {
+				if(blueShirtHeight >= redShirtHeight) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+		//Time: O(n*log(n)) //Space: O(1)
+	}
     public static void main(String[] args) throws Exception {
         int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
         System.out.println(nonConstructibleChangeOptimal(nums));
