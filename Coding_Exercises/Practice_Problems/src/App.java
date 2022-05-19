@@ -384,6 +384,26 @@ public class App {
 		return true;
 		//Time: O(n*log(n)) //Space: O(1)
 	}
+
+    public int tandemBicycle(int[] redShirtSpeeds, int[] blueShirtSpeeds, boolean fastest) {
+        // Write your code here. Another example of a greedy algorithm, where we pair the smallest number in one array to the largest number in the other array.
+        //Greedy algorithms typically involve sorting the input arrays. Always sort arrays if it makes sense to do so.
+        //Then, look back and refactor to see if sorting is really necessary.
+        Arrays.sort(redShirtSpeeds);
+        Arrays.sort(blueShirtSpeeds);
+        
+        int speed = 0;		
+        for(int i = 0; i < redShirtSpeeds.length; i++) {
+            if(fastest) {
+                speed += Math.max(redShirtSpeeds[i], blueShirtSpeeds[blueShirtSpeeds.length - (i + 1)]);
+            } else {
+                speed += Math.max(redShirtSpeeds[i], blueShirtSpeeds[i]);
+            }
+        }
+        
+        return speed;
+        //Time: O(n*log(n)) Space: O(1)
+      }
     public static void main(String[] args) throws Exception {
         int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
         System.out.println(nonConstructibleChangeOptimal(nums));
