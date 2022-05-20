@@ -409,4 +409,35 @@ public class App {
         System.out.println(nonConstructibleChangeOptimal(nums));
         System.out.println(Math.abs(-5));
     }
+
+    public static class LinkedList {
+        public int value;
+        public LinkedList next;
+    
+        public LinkedList(int value) {
+          this.value = value;
+          this.next = null;
+        }
+      }
+    
+      public LinkedList removeDuplicatesFromLinkedList(LinkedList linkedList) {
+        // Write your code here.
+        LinkedList currentNode = linkedList;
+        LinkedList nextNode = currentNode.next;
+        
+        while(!Objects.isNull(nextNode)) {
+            if(currentNode.value == nextNode.value) {
+                nextNode = nextNode.next;
+            } else {
+                currentNode.next = nextNode;
+                currentNode = nextNode;
+                nextNode = nextNode.next;
+            }
+        }
+        
+        currentNode.next = nextNode;
+            
+        return linkedList;
+        //Time: O(n) Space: O(1)
+      }
 }
