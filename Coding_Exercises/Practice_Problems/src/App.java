@@ -440,4 +440,46 @@ public class App {
         return linkedList;
         //Time: O(n) Space: O(1)
       }
+
+      public static int getNthFibDP(int n) {
+        // Write your code here.
+            if(n == 1 || n== 2) {
+                return n - 1;
+            }
+            
+            int[] fibonacciNumbers = new int[n];
+            fibonacciNumbers[0] = 0;
+            fibonacciNumbers[1] = 1;
+            
+            for(int i = 2; i < n; i++) {
+                fibonacciNumbers[i] = fibonacciNumbers[i - 1] + fibonacciNumbers[i - 2];
+            }
+            
+        return fibonacciNumbers[n - 1];
+        //Time: O(n) Space: O(n)
+        //Note: This solution uses Dyanmic Programming (memoization), instead of recursion.
+        //      The recursive solution has a time complexity of O(2^n) and a space complexity of O(n) because of all of the
+        //      redundant recursive calls.
+      }
+
+      public static int getNthFibIterative(int n) {
+        // Write your code here.
+            if(n == 1 || n == 2) {
+                return n - 1;
+            }
+            
+            int fib1 = 0;
+            int fib2 = 1;
+            int result = fib1 + fib2;
+            
+            for(int i = 3; i < n; i++) {
+                fib1 = fib2;
+                fib2 = result;
+                result = fib1 + fib2;
+            }
+            
+            return result;
+            //Time: O(n) Space: O(1)
+            //This solution improves upon the one that uses dynamic programming by eliminating the need for the array.
+      }
 }

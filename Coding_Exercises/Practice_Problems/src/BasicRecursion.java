@@ -83,13 +83,12 @@ public class BasicRecursion {
         if(nums.isEmpty()) {
             return 1;
         }
-
         return nums.get(0) * productOfArray(nums.subList(1, nums.size()));
     }
 
     public static int fibonacci(int num) {
-        if(num <= 2) {
-            return 1;
+        if(num == 0 || num == 1) {
+            return num;
         }
 
         return fibonacci(num - 1) + fibonacci(num - 2);
@@ -136,7 +135,12 @@ public class BasicRecursion {
 
     public static void main(String[] args) {
         countDown(10);
-        System.out.println(sumRange(10));
+        System.out.println("Fibonacci: " + fibonacci(0));
+        System.out.println("Fibonacci: " + fibonacci(1));
+        System.out.println("Fibonacci: " + fibonacci(2));
+        System.out.println("Fibonacci: " + fibonacci(3));
+        System.out.println("Fibonacci: " + fibonacci(4));
+        System.out.println("Fibonacci: " + fibonacci(5));
         System.out.println(factorial(15));
 
         List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
