@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -404,11 +405,6 @@ public class App {
         return speed;
         //Time: O(n*log(n)) Space: O(1)
       }
-    public static void main(String[] args) throws Exception {
-        int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
-        System.out.println(nonConstructibleChangeOptimal(nums));
-        System.out.println(Math.abs(-5));
-    }
 
     public static class LinkedList {
         public int value;
@@ -482,4 +478,47 @@ public class App {
             //Time: O(n) Space: O(1)
             //This solution improves upon the one that uses dynamic programming by eliminating the need for the array.
       }
+
+      public static int productSum(List<Object> array) {
+        // Write your code here.
+        //Call helper method with the list and a depth of 1.
+        return productSum(array, 1);
+      }
+        
+        private static int productSum(List<Object> array, int depth) {
+            //initialize a sum to be zero.
+            int sum = 0;
+            for(int i = 0; i < array.size(); i++) {
+                Object element = array.get(i);
+                //If the object in the array is an integer, add it to the sum.
+                if(element instanceof Integer) {
+                    Integer number = Integer.class.cast(element);
+                    sum += number;
+                }
+                //If the object in the array is a List, recursively call the method with that List and depth + 1.
+                if(element instanceof List) {
+                    //Annotation is needed to allow code to compile even though Java doesn't like the casting you're attempting below.
+                    @SuppressWarnings("unchecked")
+                    List<Object> list = new ArrayList<>((Collection<Object>) element);
+                    //Add the sum returned to the total sum.
+                    sum += productSum(list, depth + 1);
+                }
+            }
+            
+            //Multiply the sum by its respective depth
+            sum *= depth;
+            
+            //return the sum to the previous caller
+            //return the total sum
+            return sum;
+            //Time: O(n) where n is the total number of elements, including subarrays and their elements.
+            //Example: For [1,[2, 3]], n would be 4 because you have 3 integers and 1 subarray.
+            //Space: O(d) where d is the maximum depth of the subarrays in the data structure.
+        }
+
+        public static void main(String[] args) throws Exception {
+            int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
+            System.out.println(nonConstructibleChangeOptimal(nums));
+            System.out.println(Math.abs(-5));
+        }
 }
