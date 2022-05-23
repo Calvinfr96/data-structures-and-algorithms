@@ -516,6 +516,54 @@ public class App {
             //Space: O(d) where d is the maximum depth of the subarrays in the data structure.
         }
 
+        public static int binarySearch(int[] array, int target) {
+            // Write your code here.
+            //Initialize a start at 0 and an end at array length - 1.
+            int start = 0;
+            int end = array.length - 1;
+            
+            //While the start is less than the end, lookup the element at the middle index.
+            while(start <= end) {
+                //Calulate the middle to be start + (end - start) / 2.
+                int middle = start + (end - start) / 2;
+                //If the element equals the target, return the element.
+                if(array[middle] == target) {
+                    return middle;
+            //If the element is less than the target, assign start to (middle + 1) and recalculate the middle.
+                } else if(array[middle] < target) {
+                    start = middle + 1;
+            //If the element is greater than the target, assign the end to be middle - 1 and reculaculate the middle.
+                } else {
+                    end = middle - 1;
+                }
+                
+            }
+            //Retrun -1 if the element is not found.
+            return -1;
+            //Time: O(log(n)) Space(O(1))
+          }
+
+          public static int binarySearchR(int[] array, int target) {
+            // Write your code here.
+            return binarySearchR(array, target, 0, array.length - 1);
+            //Time: O(log(n)) Space: O(log(n))
+          }
+            
+            private static int binarySearchR(int[] array, int target, int start, int end) {
+                if(start > end) {
+                    return -1;
+                }
+                
+                int middle = start + (end - start) / 2;
+                if(array[middle] < target) {
+                    return binarySearchR(array, target, middle + 1, end);
+                } else if(array[middle] > target) {
+                    return binarySearchR(array, target, start, middle - 1);
+                } else {
+                    return middle;
+                }
+            }
+
         public static void main(String[] args) throws Exception {
             int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
             System.out.println(nonConstructibleChangeOptimal(nums));
