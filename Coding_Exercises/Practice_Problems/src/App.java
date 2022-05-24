@@ -564,6 +564,35 @@ public class App {
                 }
             }
 
+    public static int[] findThreeLargestNumbers(int[] array) {
+        // Write your code here.
+            int[] result = {Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE};
+            for(int num : array) {
+                updateLargest(result, num);
+            }
+            return result;
+        }
+        
+        private static void updateLargest(int[] result, int num) {
+            if(num > result[2]) {
+                shiftAndUpdate(result, num, 2);
+            } else if(num > result[1]) {
+                shiftAndUpdate(result, num, 1);
+            } else if(num > result[0]) {
+                shiftAndUpdate(result, num, 0);
+            }
+        }
+        
+        private static void shiftAndUpdate(int[] result, int num, int index) {
+            for(int i = 0; i <= index; i++) {
+                if(i == index) {
+                    result[i] = num;
+                } else {
+                    result[i] = result[i + 1];
+                }
+            }
+        }
+
         public static void main(String[] args) throws Exception {
             int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
             System.out.println(nonConstructibleChangeOptimal(nums));
