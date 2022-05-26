@@ -666,6 +666,23 @@ public class App {
         return true;
         //Time: O(n) Space: O(1)
       }
+      
+      public static String caesarCypherEncryptor(String str, int key) {
+        System.out.println(str + " " + key);
+        // Write your code here.
+        char[] alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        StringBuilder encryptedWord = new StringBuilder();
+        for(int i = 0; i < str.length(); i++) {
+          char currentChar = str.charAt(i);
+          int charIndex = Character.getNumericValue(currentChar) - 10;
+          int shiftedIndex = (charIndex + key) % 26;
+          encryptedWord.append(alphabet[shiftedIndex]);
+        }
+    
+        System.out.println(encryptedWord.toString());
+        return encryptedWord.toString();
+        //Time: O(n) Space: O(n)
+      }
     public static void main(String[] args) throws Exception {
         int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
         System.out.println(nonConstructibleChangeOptimal(nums));
