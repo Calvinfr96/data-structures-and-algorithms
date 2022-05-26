@@ -649,6 +649,23 @@ public class App {
         array[i] = array[j];
         array[j] = temp;
     }
+
+    public static boolean isPalindrome(String str) {
+        // Write your code here.
+        int start = 0;
+        int end = str.length() - 1;
+    
+        while(start < end) {
+          if(str.charAt(start) != str.charAt(end)) {
+            return false;
+          }
+          start++;
+          end--;
+        }
+        
+        return true;
+        //Time: O(n) Space: O(1)
+      }
     public static void main(String[] args) throws Exception {
         int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
         System.out.println(nonConstructibleChangeOptimal(nums));
