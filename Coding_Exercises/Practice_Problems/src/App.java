@@ -479,90 +479,90 @@ public class App {
             //This solution improves upon the one that uses dynamic programming by eliminating the need for the array.
       }
 
-      public static int productSum(List<Object> array) {
-        // Write your code here.
-        //Call helper method with the list and a depth of 1.
-        return productSum(array, 1);
-      }
+    public static int productSum(List<Object> array) {
+    // Write your code here.
+    //Call helper method with the list and a depth of 1.
+    return productSum(array, 1);
+    }
         
-        private static int productSum(List<Object> array, int depth) {
-            //initialize a sum to be zero.
-            int sum = 0;
-            for(int i = 0; i < array.size(); i++) {
-                Object element = array.get(i);
-                //If the object in the array is an integer, add it to the sum.
-                if(element instanceof Integer) {
-                    Integer number = Integer.class.cast(element);
-                    sum += number;
-                }
-                //If the object in the array is a List, recursively call the method with that List and depth + 1.
-                if(element instanceof List) {
-                    //Annotation is needed to allow code to compile even though Java doesn't like the casting you're attempting below.
-                    @SuppressWarnings("unchecked")
-                    List<Object> list = new ArrayList<>((Collection<Object>) element);
-                    //Add the sum returned to the total sum.
-                    sum += productSum(list, depth + 1);
-                }
+    private static int productSum(List<Object> array, int depth) {
+        //initialize a sum to be zero.
+        int sum = 0;
+        for(int i = 0; i < array.size(); i++) {
+            Object element = array.get(i);
+            //If the object in the array is an integer, add it to the sum.
+            if(element instanceof Integer) {
+                Integer number = Integer.class.cast(element);
+                sum += number;
+            }
+            //If the object in the array is a List, recursively call the method with that List and depth + 1.
+            if(element instanceof List) {
+                //Annotation is needed to allow code to compile even though Java doesn't like the casting you're attempting below.
+                @SuppressWarnings("unchecked")
+                List<Object> list = new ArrayList<>((Collection<Object>) element);
+                //Add the sum returned to the total sum.
+                sum += productSum(list, depth + 1);
+            }
+        }
+        
+        //Multiply the sum by its respective depth
+        sum *= depth;
+        
+        //return the sum to the previous caller
+        //return the total sum
+        return sum;
+        //Time: O(n) where n is the total number of elements, including subarrays and their elements.
+        //Example: For [1,[2, 3]], n would be 4 because you have 3 integers and 1 subarray.
+        //Space: O(d) where d is the maximum depth of the subarrays in the data structure.
+    }
+
+    public static int binarySearch(int[] array, int target) {
+        // Write your code here.
+        //Initialize a start at 0 and an end at array length - 1.
+        int start = 0;
+        int end = array.length - 1;
+        
+        //While the start is less than the end, lookup the element at the middle index.
+        while(start <= end) {
+            //Calulate the middle to be start + (end - start) / 2.
+            int middle = start + (end - start) / 2;
+            //If the element equals the target, return the element.
+            if(array[middle] == target) {
+                return middle;
+        //If the element is less than the target, assign start to (middle + 1) and recalculate the middle.
+            } else if(array[middle] < target) {
+                start = middle + 1;
+        //If the element is greater than the target, assign the end to be middle - 1 and reculaculate the middle.
+            } else {
+                end = middle - 1;
             }
             
-            //Multiply the sum by its respective depth
-            sum *= depth;
-            
-            //return the sum to the previous caller
-            //return the total sum
-            return sum;
-            //Time: O(n) where n is the total number of elements, including subarrays and their elements.
-            //Example: For [1,[2, 3]], n would be 4 because you have 3 integers and 1 subarray.
-            //Space: O(d) where d is the maximum depth of the subarrays in the data structure.
+        }
+        //Retrun -1 if the element is not found.
+        return -1;
+        //Time: O(log(n)) Space(O(1))
         }
 
-        public static int binarySearch(int[] array, int target) {
-            // Write your code here.
-            //Initialize a start at 0 and an end at array length - 1.
-            int start = 0;
-            int end = array.length - 1;
-            
-            //While the start is less than the end, lookup the element at the middle index.
-            while(start <= end) {
-                //Calulate the middle to be start + (end - start) / 2.
-                int middle = start + (end - start) / 2;
-                //If the element equals the target, return the element.
-                if(array[middle] == target) {
-                    return middle;
-            //If the element is less than the target, assign start to (middle + 1) and recalculate the middle.
-                } else if(array[middle] < target) {
-                    start = middle + 1;
-            //If the element is greater than the target, assign the end to be middle - 1 and reculaculate the middle.
-                } else {
-                    end = middle - 1;
-                }
-                
-            }
-            //Retrun -1 if the element is not found.
+    public static int binarySearchR(int[] array, int target) {
+    // Write your code here.
+    return binarySearchR(array, target, 0, array.length - 1);
+    //Time: O(log(n)) Space: O(log(n))
+    }
+    
+    private static int binarySearchR(int[] array, int target, int start, int end) {
+        if(start > end) {
             return -1;
-            //Time: O(log(n)) Space(O(1))
-          }
-
-          public static int binarySearchR(int[] array, int target) {
-            // Write your code here.
-            return binarySearchR(array, target, 0, array.length - 1);
-            //Time: O(log(n)) Space: O(log(n))
-          }
-            
-            private static int binarySearchR(int[] array, int target, int start, int end) {
-                if(start > end) {
-                    return -1;
-                }
-                
-                int middle = start + (end - start) / 2;
-                if(array[middle] < target) {
-                    return binarySearchR(array, target, middle + 1, end);
-                } else if(array[middle] > target) {
-                    return binarySearchR(array, target, start, middle - 1);
-                } else {
-                    return middle;
-                }
-            }
+        }
+        
+        int middle = start + (end - start) / 2;
+        if(array[middle] < target) {
+            return binarySearchR(array, target, middle + 1, end);
+        } else if(array[middle] > target) {
+            return binarySearchR(array, target, start, middle - 1);
+        } else {
+            return middle;
+        }
+    }
 
     public static int[] findThreeLargestNumbers(int[] array) {
         // Write your code here.
@@ -573,29 +573,85 @@ public class App {
             return result;
         }
         
-        private static void updateLargest(int[] result, int num) {
-            if(num > result[2]) {
-                shiftAndUpdate(result, num, 2);
-            } else if(num > result[1]) {
-                shiftAndUpdate(result, num, 1);
-            } else if(num > result[0]) {
-                shiftAndUpdate(result, num, 0);
+    private static void updateLargest(int[] result, int num) {
+        if(num > result[2]) {
+            shiftAndUpdate(result, num, 2);
+        } else if(num > result[1]) {
+            shiftAndUpdate(result, num, 1);
+        } else if(num > result[0]) {
+            shiftAndUpdate(result, num, 0);
+        }
+    }
+    
+    private static void shiftAndUpdate(int[] result, int num, int index) {
+        for(int i = 0; i <= index; i++) {
+            if(i == index) {
+                result[i] = num;
+            } else {
+                result[i] = result[i + 1];
+            }
+        }
+    }
+
+    public static int[] bubbleSort(int[] array) {
+        // Write your code here.
+        for(int i = array.length - 1; i > 0; i--) {
+            int swaps = 0;
+            
+            for(int j = 0; j < i; j++) {
+                if(array[j] > array[j + 1]) {
+                    swap(array, j, j + 1);
+                    swaps++;
+                }
+            }
+            
+            if(swaps == 0) {
+                break;
             }
         }
         
-        private static void shiftAndUpdate(int[] result, int num, int index) {
-            for(int i = 0; i <= index; i++) {
-                if(i == index) {
-                    result[i] = num;
-                } else {
-                    result[i] = result[i + 1];
-                }
+        return array;
+        //Time: O(n^2) [in the best case, time is O(n)] Space: O(1)
+    }
+
+    public static int[] insertionSort(int[] array) {
+        // Write your code here.
+        for(int i = 1; i < array.length; i++) {
+            for(int j = i - 1; j>= 0 && array[j] > array[j + 1]; j--) {
+            swap(array, j, j + 1);
             }
         }
 
-        public static void main(String[] args) throws Exception {
-            int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
-            System.out.println(nonConstructibleChangeOptimal(nums));
-            System.out.println(Math.abs(-5));
+        return array;
+        //Time: O(n^2) [in the best case, time is O(n)] Space: O(1)
+    }
+
+    public static int[] selectionSort(int[] array) {
+        // Write your code here.
+        for(int i = 0; i < array.length; i++) {
+          int minIndex = i;
+          for(int j = i + 1; j < array.length; j++) {
+            if(array[j] < array[minIndex]) {
+              minIndex = j;
+            }
+          }
+    
+          if(minIndex != i) {
+            swap(array, i, minIndex);
+          }
         }
+        return array;
+        //Time: O(n^2) Space: O(1)
+      }
+        
+    private static void swap(int[] array, int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    public static void main(String[] args) throws Exception {
+        int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
+        System.out.println(nonConstructibleChangeOptimal(nums));
+        System.out.println(Math.abs(-5));
+    }
 }
