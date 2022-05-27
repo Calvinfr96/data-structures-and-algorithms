@@ -712,6 +712,34 @@ public class App {
         return encryptedWord.toString();
         //Time: O(n) Space: O(n)
       }
+
+      public String runLengthEncoding(String string) {
+        StringBuilder encodedString = new StringBuilder();
+        int currentPointer = 1;
+        int prevPointer = 0;
+        int counter = 1;
+    
+        while(currentPointer < string.length()) {
+          char currentChar = string.charAt(currentPointer);
+          char prevChar = string.charAt(prevPointer);
+    
+          if(currentChar == prevChar && counter < 9) {
+            counter++;
+          } else {
+            String runLength =  Integer.toString(counter) + prevChar;
+            encodedString.append(runLength);
+            counter = 1;
+          }
+          currentPointer++;
+          prevPointer++;
+        }
+    
+        char finalChar = string.charAt(prevPointer);
+        encodedString.append(Integer.toString(counter) + finalChar);
+        
+        return encodedString.toString();
+        //Time: O(n) Space: O(n)
+      }
     public static void main(String[] args) throws Exception {
         int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
         System.out.println(nonConstructibleChangeOptimal(nums));
