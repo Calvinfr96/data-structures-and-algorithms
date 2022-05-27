@@ -593,6 +593,35 @@ public class App {
         }
     }
 
+    public static int[] findThreeLargestNumbersAlt(int[] array) {
+        // Write your code here.
+        int[] threeLargest = {Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE};
+    
+        for(int num : array) {
+          if(num < threeLargest[0]) {
+            continue;
+          }
+    
+          if(num > threeLargest[2]) {
+            shiftAndUpdateAlt(threeLargest, 2, num);
+          } else if(num > threeLargest[1]) {
+            shiftAndUpdateAlt(threeLargest, 1, num);
+          } else {
+            shiftAndUpdateAlt(threeLargest, 0, num);
+          }
+        }
+    
+        return threeLargest;
+      }
+    
+      private static void shiftAndUpdateAlt(int[] array, int index, int update) {
+        for(int i = 1; i <= index; i++) {
+          array[i - 1] = array[i];
+        }
+    
+        array[index] = update;
+      }
+
     public static int[] bubbleSort(int[] array) {
         // Write your code here.
         for(int i = array.length - 1; i > 0; i--) {
