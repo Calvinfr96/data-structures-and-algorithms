@@ -740,6 +740,45 @@ public class App {
         return encodedString.toString();
         //Time: O(n) Space: O(n)
       }
+
+      public static boolean generateDocument(String characters, String document) {
+        // Write your code here.
+        if(document.length() > characters.length()) {
+          return false;
+        }
+        
+        Map<Character, Integer> charactersFreqs = getCharFrequencies(characters);//O(n)
+    
+        for(int i=0; i < document.length(); i++) {//O(m)
+          char currentChar = document.charAt(i);
+          if(!charactersFreqs.containsKey(currentChar)) {
+            return false;
+          } else if(charactersFreqs.get(currentChar) == 0) {
+            return false;
+          } else {
+            int frequency = charactersFreqs.get(currentChar);
+            frequency--;
+            charactersFreqs.put(currentChar, frequency);
+          }
+        }
+    
+        return true;
+        //Time: O(n +m) where n is the length of characters and m is the length of document.
+        //Space: O(c) where c is the number of unique character in characters.
+      }
+    
+      private static Map<Character, Integer> getCharFrequencies(String string) {
+        Map<Character, Integer> frequencies = new HashMap<>();
+    
+        for(int i = 0; i < string.length(); i++) {
+          Character currentChar = string.charAt(i);
+          Integer frequency = frequencies.getOrDefault(currentChar, 0);
+          frequency++;
+          frequencies.put(currentChar, frequency);
+        }
+    
+        return frequencies;
+      }
     public static void main(String[] args) throws Exception {
         int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
         System.out.println(nonConstructibleChangeOptimal(nums));
