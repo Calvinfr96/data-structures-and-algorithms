@@ -798,6 +798,33 @@ public class App {
         }
         return -1;
       }
+
+      public static List<Integer[]> threeNumberSum(int[] array, int targetSum) {
+        // Write your code here.
+        Arrays.sort(array);//O(n*log(n)) where n is the number of elements in 'array'
+        List<Integer[]> sums = new ArrayList<>();
+        
+        for(int index = 0; index < array.length - 2; index++) {//O(n)
+          int secondIndex = index + 1;
+          int thirdIndex = array.length - 1;
+    
+          while(secondIndex < thirdIndex) {//O(n)
+            int sum = array[index] + array[secondIndex] + array[thirdIndex];
+            if(sum < targetSum) {
+              secondIndex++;
+            } else if(sum > targetSum) {
+              thirdIndex--;
+            } else {
+              sums.add(new Integer[] {array[index], array[secondIndex], array[thirdIndex]});
+              secondIndex++;
+              thirdIndex--;
+            }
+          }
+        }
+    
+        return sums;
+        //Time: O(n*log(n) + n^2) Space: O(n)
+      }
     public static void main(String[] args) throws Exception {
         int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
         System.out.println(nonConstructibleChangeOptimal(nums));
