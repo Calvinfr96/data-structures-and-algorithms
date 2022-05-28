@@ -779,6 +779,25 @@ public class App {
     
         return frequencies;
       }
+
+      public int firstNonRepeatingCharacter(String string) {
+        // Write your code here.
+        Map<Character, Integer> frequencies =  new HashMap<>();
+    
+        for(int i = 0; i < string.length(); i++) {
+          Character current = string.charAt(i);
+          Integer frequency = frequencies.getOrDefault(current, 0);
+          frequency++;
+          frequencies.put(current, frequency);
+        }
+    
+        for(int i = 0; i < string.length(); i++) {
+          if(frequencies.get(string.charAt(i)) == 1) {
+            return i;
+          }
+        }
+        return -1;
+      }
     public static void main(String[] args) throws Exception {
         int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
         System.out.println(nonConstructibleChangeOptimal(nums));
