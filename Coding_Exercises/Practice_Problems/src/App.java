@@ -825,6 +825,41 @@ public class App {
         return sums;
         //Time: O(n*log(n) + n^2) Space: O(n)
       }
+
+      public static int[] smallestDifference(int[] arrayOne, int[] arrayTwo) {
+        // Write your code here.
+        Arrays.sort(arrayOne);
+        Arrays.sort(arrayTwo);
+        
+        int smallestDifference = Integer.MAX_VALUE;
+        int[] result = new int[2];
+        int pointerOne = 0;
+        int pointerTwo = 0;
+    
+        while(pointerOne < arrayOne.length && pointerTwo < arrayTwo.length) {
+          int numOne = arrayOne[pointerOne];//-1
+          int numTwo = arrayTwo[pointerTwo];//15
+    
+          if(numOne < numTwo) {
+            pointerOne++;
+          } else if(numOne > numTwo) {
+            pointerTwo++;
+          } else {
+            result[0] = numOne;
+            result[1] = numTwo;
+            break;
+          }
+    
+          if(Math.abs(numOne - numTwo) < smallestDifference) {
+            smallestDifference = Math.abs(numOne - numTwo);
+            result[0] = numOne;
+            result[1] = numTwo;
+          }
+        }
+    
+        return result;
+        //Time: O(n*log(n) + m*log(m)) Space: O(1)
+      }
     public static void main(String[] args) throws Exception {
         int[] nums = new int[] {5,7,1,1,2,3,22};//1,1,2,3,5,7,22
         System.out.println(nonConstructibleChangeOptimal(nums));
