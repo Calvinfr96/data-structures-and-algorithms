@@ -64,4 +64,51 @@ public class MediumDifficultyQuestions {
         return result;
         //Time: O(n*log(n) + m*log(m)) Space: O(1)
       }
+
+      public static List<Integer> moveElementToEnd(List<Integer> array, int toMove) {
+        // Write your code here.
+        //Algorithm: Consider the multiple pointers technique when dealing with array manipulation.
+        //Place two pointers, 'start' and 'end' at each end of the array.
+        //While 'start' < 'end':
+          //If 'start' is not the target element increment it.
+          //If 'end' is the target element, decrement it.
+          //If 'start' is the target element and 'end' is not, you can swap them.
+            //After swapping, move 'start' and 'end' inwards.
+        int left = 0;
+        int right = array.size() - 1;
+    
+        while(left < right) {
+          if(array.get(left) == toMove && array.get(right) != toMove) {
+            swap(array, left, right);
+            left++;
+            right--;
+          }
+          if(array.get(left) != toMove) {
+            left++;
+          }
+          if(array.get(right) == toMove) {
+            right--;
+          }
+        }
+
+        // ALTERNATIVE SOLUTION
+        // while(left < right) {
+        //     while(left < right && array.get(right) == toMove) {
+        //         right--;
+        //     }
+        //     if(left == toMove) {
+        //         swap(array, left, right);
+        //     }
+        //     left++;
+        // }
+        
+        return array;
+        //Time: O(n) Space: O(1)
+      }
+    
+      private static void swap(List<Integer> array, int i, int j) {
+        int temp = array.get(i);
+        array.set(i, array.get(j));
+        array.set(j, temp);
+      }
 }
