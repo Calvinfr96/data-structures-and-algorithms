@@ -141,4 +141,50 @@ public class MediumDifficultyQuestions {
           return difference > 0; 
         }
       }
+
+      public static List<Integer> spiralTraverse(int[][] array) {
+        // Write your code here.
+        int startRow = 0;
+        int endRow = array.length - 1;
+        int startColumn = 0;
+        int endColumn = array[0].length - 1;
+        List<Integer> traversal = new ArrayList<>();
+    
+        while(startRow <= endRow && startColumn <= endColumn) {
+          for(int i = startColumn; i <= endColumn; i++) {
+            traversal.add(array[startRow][i]);
+          }
+          
+          for(int j = startRow + 1; j <= endRow; j++) {
+            traversal.add(array[j][endColumn]);
+          }
+          
+          for(int k = endColumn - 1; k >= startColumn; k-- ) {
+            //Handles edge case where there's a single middle row in the matrix. This row is covered by the traversal in the
+            //first for loop.
+            if(startRow == endRow) {
+              break;
+            }
+            traversal.add(array[endRow][k]);
+          }
+          
+          for(int m = endRow - 1; m > startRow; m--) {
+            //Handles edge case where there's a single middle column in the matrix. This row is covered by the traversal in the
+            //second for loop.
+            if(startColumn == endColumn) {
+              break;
+            }
+            traversal.add(array[m][startColumn]);
+          }
+    
+          startRow++;
+          endRow--;
+          startColumn++;
+          endColumn--;
+        }
+    
+        return traversal;
+        //Time: O(N) where N is the total number of elements in the 2D array.
+        //Space: O(N) space where N is the total number of elements in the 2D array.
+      }
 }
