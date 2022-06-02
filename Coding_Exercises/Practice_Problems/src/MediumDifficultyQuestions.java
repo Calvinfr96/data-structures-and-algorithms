@@ -187,4 +187,76 @@ public class MediumDifficultyQuestions {
         //Time: O(N) where N is the total number of elements in the 2D array.
         //Space: O(N) space where N is the total number of elements in the 2D array.
       }
+
+      public static int longestPeak(int[] array) {
+        // Write your code here.
+        //To solve this problem, you need to break it down into two steps:
+        //First, you find the peaks within the array.
+        //Second, you find the length of each peak, compare them, and return the largest one.
+        if(array.length < 3) {
+          return 0;
+        }
+        //Finds the index of each peak in the array
+        List<Integer> peakIndices = findPeaks(array);
+        //Establishes a minimum longest peak to be updated later.
+        int longestPeakLength = 0;
+    
+        for(Integer peakIndex : peakIndices) {
+          //For each peak, we find its length and update the longest peak if necessary.
+          int peakLength = findPeakLength(array, peakIndex);
+          if(peakLength > longestPeakLength) {
+            longestPeakLength = peakLength;
+          }
+        }
+        
+        return longestPeakLength;
+        //Time: O(n) Space: O(m) where m is the number of peak in the array.
+      }
+    
+      private static List<Integer> findPeaks(int[] array) {
+        //A number is a peak if it is larger than the numbers to the left and right of it.
+        List<Integer> peakIndices = new ArrayList<>();
+        //A peak cannot exist at the ends of the array, by definition.
+        for(int i = 1; i < array.length - 1; i++) {
+          if(array[i - 1] < array[i] && array[i + 1] < array[i]) {
+            peakIndices.add(i);
+          }
+        }
+    
+        return peakIndices;
+      }
+      
+      private static int findPeakLength(int[] array, int i) {
+        int length = 1;
+        int left = i - 1;
+        int right = i + 1;
+    
+        while(true) {
+          boolean peakLengthIncreased = false;
+          if(left >= 0) {
+            if(array[left] < array[left + 1]) {
+              length++;
+              peakLengthIncreased = true;
+              left--;
+            }
+          }
+    
+          if(right < array.length) {
+            if(array[right] < array[right - 1]) {
+              length++;
+              peakLengthIncreased = true;
+              right++;
+            }
+          }
+    
+          if(left < 0 && right >= array.length) {
+            break;
+          }
+          if(!peakLengthIncreased) {
+            break;
+          }
+        }
+    
+        return length;
+      }
 }
