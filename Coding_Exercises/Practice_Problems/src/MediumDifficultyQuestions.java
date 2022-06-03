@@ -259,4 +259,38 @@ public class MediumDifficultyQuestions {
     
         return length;
       }
+
+      public int[] arrayOfProducts(int[] array) {
+        // Write your code here.
+        int[] leftProducts = getLeftProducts(array);
+        return getProducts(array, leftProducts);
+        //Time: O(n) Space: O(n)
+      }
+    
+      private int[] getLeftProducts(int[] array) {
+        int[] leftProducts = new int[array.length];
+        int product = 1;
+        leftProducts[0] = product;
+        
+        for(int i = 1; i < array.length; i++) {
+          product*= array[i - 1];
+          leftProducts[i] = product;
+        }
+    
+        return leftProducts;
+      }
+    
+      private int[] getProducts(int[] array, int[] leftProducts) {
+        //[5,1,4,2]
+        //[1,5,5,20]
+        int[] products = new int[array.length];
+        int product = 1;
+    
+        for(int i = array.length - 1; i>=0; i--) {
+          products[i] = product*leftProducts[i];
+          product *= array[i];
+        }
+    
+        return products;
+      }
 }
