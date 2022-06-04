@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MediumDifficultyQuestions {
     public static List<Integer[]> threeNumberSum(int[] array, int targetSum) {
@@ -292,5 +294,48 @@ public class MediumDifficultyQuestions {
         }
     
         return products;
+      }
+
+      public int firstDuplicateValue(int[] array) {
+        // Write your code here.
+        Set<Integer> uniqueValues = new HashSet<>();
+    
+        for(int i = 0; i < array.length; i++) {
+          int element = array[i];
+          if(!uniqueValues.contains(element)) {
+            uniqueValues.add(element);
+          } else {
+            return element;
+          }
+        }
+    
+        return -1;
+        //Time: O(n) Space: O(n)
+      }
+      
+      public int firstDuplicateValueAlt(int[] array) {
+        // Write your code here.
+        //This solution takes advantage of the fact that the values of the array
+        //range from 1 to n (the length of the array), inclusive.
+        //This means you can "sort" array by subtracting one from each value. This gives
+        //you the position it would be in if you actually sorted the array.
+    
+        //abs(value) - 1 = index
+        //At array[index], check if the value is negative. If it's not, multiply array[i]
+        //by -1. If array[index] is negative, return abs(array[i])
+    
+        for(int value : array) {
+          int absValue = Math.abs(value);
+          if(array[absValue - 1] < 0) {
+            return absValue;
+          } else {
+            array[absValue - 1] *= -1;
+          }
+        }
+    
+        return -1;
+        //Time: O(n) Space: O(1).
+        //While this solution has a more optimal space complexity, it is harder to grasp intuitively. Depending on
+        //the average use case, this may not be worth the reduced space usage.
       }
 }
