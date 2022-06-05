@@ -338,4 +338,49 @@ public class MediumDifficultyQuestions {
         //While this solution has a more optimal space complexity, it is harder to grasp intuitively. Depending on
         //the average use case, this may not be worth the reduced space usage.
       }
+
+      public int[][] mergeOverlappingIntervals(int[][] intervals) {
+        // Write your code here.
+        //The intervals in the input array aren't necessarily sorted. This means that,
+        //for each interval, you need to look at the other intervals to determine if
+        //they overlap with the current interval.
+        //Intervals overlap if the the end of one interval is greater than or equal to
+        //the start of the other.
+        //**This is only true when the intervals are sorted in ascending order with respect
+        //to the start value** Ex: [3, 4], [1, 2], this would be an overlap even though it's
+        //not. [1, 2], [3, 4] do not overlap.
+    
+        //You first need to sort the input array with respect to the start of each interval.
+        //Starting with the second interval in the array, look to the left and see if the left
+        //overlaps with the current interval. If they do, merge them.
+        //To merge to intervals, you take the start of the first interval, then
+        //max of the end of both intervals.
+        //As you iterate through the array, you compare the current interval to the current
+        //merged interval and update the current merged interval as needed.
+    
+        int[][] sortedIntervals = intervals.clone();
+        Arrays.sort(sortedIntervals, (a, b) -> Integer.compare(a[0], b[0]));
+    
+        List<int[]> mergedIntervals = new ArrayList<int[]>();
+        int[] currentInterval = sortedIntervals[0];
+        mergedIntervals.add(currentInterval);
+    
+        for(int[] nextInterval : sortedIntervals) {
+          int currentIntervalEnd = currentInterval[1];
+          int nextIntervalStart = nextInterval[0];
+          int nextIntervalEnd = nextInterval[1];
+    
+          if(currentIntervalEnd >= nextIntervalStart) {
+            //Primitive arrays are pass by reference, so this line will modify the interval that most
+            //recently added to the ArrayList.
+            currentInterval[1] = Math.max(currentIntervalEnd, nextIntervalEnd);
+          } else {
+            currentInterval = nextInterval;
+            mergedIntervals.add(currentInterval);
+          }
+        }
+        
+        return mergedIntervals.toArray(new int[mergedIntervals.size()][]);
+        //Time: O(n*log(n)) Space: O(n)
+      }
 }
