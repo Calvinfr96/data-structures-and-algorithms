@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 public class MediumDifficultyQuestions {
@@ -382,5 +383,137 @@ public class MediumDifficultyQuestions {
         
         return mergedIntervals.toArray(new int[mergedIntervals.size()][]);
         //Time: O(n*log(n)) Space: O(n)
+      }
+
+      static class BST {
+        public int value;
+        public BST left;
+        public BST right;
+    
+        public BST(int value) {
+          this.value = value;
+        }
+    
+        public BST insert(int value) {
+          // Write your code here.
+          // Do not edit the return statement of this method.
+          BST current = this;
+          BST newNode = new BST(value);
+          while(!Objects.isNull(current)) {
+            if(value < current.value) {
+              if(Objects.isNull(current.left)) {
+                current.left = newNode;
+                break;
+              } else {
+                current = current.left;
+              }
+            } else {
+              if(Objects.isNull(current.right)) {
+                current.right = newNode;
+                break;
+              } else {
+                current = current.right;
+              }
+            }
+          }
+          
+          return this;
+          //Average Time: O(log(n))
+          //Worst Time: O(n) - skewed BST
+          //Space: O(1) for the iterative approach
+          //Space: O(log(n)) to O(n) for the recursive approach
+        }
+    
+        public boolean contains(int value) {
+          // Write your code here.
+          BST current = this;
+          while(!Objects.isNull(current)) {
+            if(value == current.value) {
+              return true;
+            } else if(value < current.value) {
+              current = current.left;
+            } else {
+              current = current.right;
+            }
+          }
+          return false;
+          //Average Time: O(log(n))
+          //Worst Time: O(n) - skewed BST
+          //Space: O(1) for the iterative approach
+          //Space: O(log(n)) to O(n) for the recursive approach
+        }
+    
+        public BST remove(int value) {
+          // Write your code here.
+          // Do not edit the return statement of this method.
+          //To remove a node in a BST, you must replace it with its in-order successor,
+          //which is the left-most value in its right subtree.
+          //The removal process occurs in two steps: first you find the node, then you
+          //remove the node.
+          remove(value, null);
+          return this;
+          //Average Time: O(log(n))
+          //Worst Time: O(n) - skewed BST
+          //Space: O(1) for the iterative approach
+          //Space: O(log(n)) to O(n) for the recursive approach
+        }
+    
+        public void remove(int value, BST parent) {
+          BST current = this;
+          while(!Objects.isNull(current)) {
+            if(value < current.value) {
+              parent = current;
+              current = current.left;
+            } else if(value > current.value) {
+              parent = current;
+              current = current.right;
+            } else {
+              //If the node you're removing has a left and right subtree, you want to find
+              //the left-most node of the right subtree and replace it with the value
+              //you want to remove
+              if(!Objects.isNull(current.left) && !Objects.isNull(current.right)) {
+                //Overide the current node's value with the value of that node.
+                current.value = current.right.getMinValue();
+                //Now, to remove the node, you call the remove method on the right subtree of
+                //current (the subtree where the replacement node was found) and you specify 
+                //the parent of that subtree as the current node.
+                current.right.remove(current.value, current);
+              } else if(Objects.isNull(parent)) {
+                if(!Objects.isNull(current.left)) {
+                  current.value = current.left.value;
+                  current.right = current.left.right;
+                  current.left = current.left.left;
+                } else if(!Objects.isNull(current.right)) {
+                  current.value = current.right.value;
+                  current.left = current.right.left;
+                  current.right = current.right.right;
+                } else {
+                  //do nothing
+                }
+              } else if(parent.left == current) {
+                if(!Objects.isNull(current.left)) {
+                  parent.left = current.left;
+                } else {
+                  parent.left = current.right;
+                }
+              } else if(parent.right == current) {
+                if(!Objects.isNull(current.left)) {
+                  parent.right = current.left;
+                } else {
+                  parent.right = current.right;
+                }
+              }
+              break;
+            }
+          }
+        }
+    
+        private int getMinValue() {
+          BST current = this;
+          while(!Objects.isNull(current.left)) {
+            current = current.left;
+          }
+          return current.value;
+        }
       }
 }
