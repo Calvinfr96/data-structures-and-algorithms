@@ -516,4 +516,31 @@ public class MediumDifficultyQuestions {
           return current.value;
         }
       }
+
+      public static boolean validateBst(BST tree) {
+        // Write your code here.
+        //You must validate the BST holistically. You can't simply validate node-by-node
+        //by checking that node's left and right children.
+        //Each given node has maximum and minimum possible value based on its position within
+        //the tree.
+        //Each node must be less than its closest right parent and greater than or equal
+        //to its closest left parent.
+        return validateBst(tree, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        //Time: O(n) where n is the number of nodes in the BST
+        //Space: O(d) where d is the depth of the tree.
+      }
+    
+      private static boolean validateBst(BST tree, int maxValue, int minValue) {
+        if(tree.value < minValue || tree.value >= maxValue) {
+          return false;
+        }
+        if(!Objects.isNull(tree.left) && !validateBst(tree.left, minValue, tree.value)) {
+          return false;
+        }
+        if(!Objects.isNull(tree.right) && !validateBst(tree.right, tree.value, maxValue)) {
+          return false;
+        }
+    
+        return true;
+      }
 }
