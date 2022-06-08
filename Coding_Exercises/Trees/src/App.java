@@ -9,7 +9,6 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         BinarySearchTree tree  = new BinarySearchTree();
-        minimalTree();
 
         tree.insert(10);
         tree.insert(8);
@@ -41,8 +40,8 @@ public class App {
         trie.isWord("Ap");
 
         //List of Depths
-        tree.root.left.right.right = new BsTNode<Integer>(12);
-        System.out.println(tree.validateBST(tree.root));
+        tree.inOrderSearch();
+        tree.remove(10);
         tree.inOrderSearch();
     }
 }

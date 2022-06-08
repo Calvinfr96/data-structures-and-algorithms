@@ -57,6 +57,49 @@ public class BinarySearchTree {
         return this;
     }
 
+    public BinarySearchTree remove(Integer value) {
+        BsTNode<Integer> node = find(value);
+        if(Objects.isNull(node)) {
+            return this;
+        }
+        if(Objects.isNull(root.left) && Objects.isNull(root.right)) {
+            root = null;
+        }
+
+        //If the node is a leaf node
+        if(Objects.isNull(node.left) && Objects.isNull(node.right)) {
+            //If the node is left child, remove the left reference from its parent.
+            if(node.equals(node.parent.left)) {
+                node.parent.left = null;
+            //If the node is right child, remove the right reference from its parent.
+            } else {
+                node.parent.right = null;
+            }
+        //If the node has two children
+        } else if(!Objects.isNull(node.left) && !Objects.isNull(node.right)) {
+            Integer successor = leftMostChild(node.right).value;
+            remove(successor);
+            node.value = successor;
+        //If the node has one child
+        } else {
+            if(Objects.isNull(node.right)) {
+                if(node.equals(node.parent.left)) {
+                    node.parent.left = node.left;
+                } else {
+                    node.parent.right = node.left;
+                }
+            } else {
+                if(node.equals(node.parent.left)) {
+                    node.parent.left = node.right;
+                } else {
+                    node.parent.right = node.right;
+                }
+            }
+        }
+
+        return this;
+    }
+
     public BsTNode<Integer> find(Integer value) {
         if(Objects.isNull(root)) {
             return null;
