@@ -543,4 +543,43 @@ public class MediumDifficultyQuestions {
     
         return true;
       }
+
+      public static List<Integer> inOrderTraverse(BST tree, List<Integer> array) {
+        // Write your code here.
+        if(!Objects.isNull(tree.left)) {
+          inOrderTraverse(tree.left, array);
+        }
+        array.add(tree.value);
+        if(!Objects.isNull(tree.right)) {
+          inOrderTraverse(tree.right, array);
+        }
+        return array;
+        //Time: O(n) Space: O(n) 
+      }
+    
+      public static List<Integer> preOrderTraverse(BST tree, List<Integer> array) {
+        // Write your code here.
+        array.add(tree.value);
+        if(!Objects.isNull(tree.left)) {
+          preOrderTraverse(tree.left, array);
+        }
+        if(!Objects.isNull(tree.right)) {
+          preOrderTraverse(tree.right, array);
+        }
+        return array;
+        //Time: O(n) Space O(n)
+      }
+    
+      public static List<Integer> postOrderTraverse(BST tree, List<Integer> array) {
+        // Write your code here.
+        if(!Objects.isNull(tree.left)) {
+          postOrderTraverse(tree.left, array);
+        }
+        if(!Objects.isNull(tree.right)) {
+          postOrderTraverse(tree.right, array);
+        }
+        array.add(tree.value);
+        return array;
+        //Time: O(n) Space: O(n)
+      }
 }
