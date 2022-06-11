@@ -582,4 +582,49 @@ public class MediumDifficultyQuestions {
         return array;
         //Time: O(n) Space: O(n)
       }
+
+      public static BST minHeightBstNaive(List<Integer> array) {
+        // Write your code here.
+        return minHeightBstNaive(null, array, 0, array.size() - 1);
+        //Using the insert method - Time: O(n*log(n)) Space: O(n)
+      }
+    
+      private static BST minHeightBstNaive(BST root, List<Integer> array, int start, int end) {
+        if(end < start) {
+          return root;
+        }
+        
+        int middle = end + (start - end) / 2;
+        int valueToAdd = array.get(middle);
+        if(Objects.isNull(root)) {
+          root = new BST(valueToAdd);
+        } else {
+          root.insert(valueToAdd);
+        }
+    
+        minHeightBstNaive(root, array, start, middle - 1);
+        minHeightBstNaive(root, array, middle + 1, end);
+        
+        return root;
+      }
+
+      public static BST minHeightBst(List<Integer> array) {
+        // Write your code here.
+        return minHeightBst(array, 0, array.size() - 1);
+        //Directly inserting the nodes - Time: O(n) Space: O(n)
+      }
+    
+      private static BST minHeightBst(List<Integer> array, int start, int end) {
+        if(end < start) {
+          return null;
+        }
+    
+        int middle = (start + end) / 2;
+        BST node = new BST(array.get(middle));
+        
+        node.left = minHeightBst(array, start, middle - 1);
+        node.right = minHeightBst(array, middle + 1, end);
+        
+        return node;
+      }
 }
