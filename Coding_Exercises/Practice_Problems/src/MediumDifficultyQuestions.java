@@ -627,4 +627,36 @@ public class MediumDifficultyQuestions {
         
         return node;
       }
+
+      static class TreeInfo {
+        public int numVisitedNodes;
+        public int lastVisitedNode;
+    
+        public TreeInfo(int numVisitedNodes, int lastVisitedNode) {
+          this.numVisitedNodes = numVisitedNodes;
+          this.lastVisitedNode = lastVisitedNode;
+        }
+      }
+    
+      public int findKthLargestValueInBst(BST tree, int k) {
+        // Write your code here.
+        TreeInfo treeInfo = new TreeInfo(0, -1);
+        reverseOrderTraversal(tree, k, treeInfo);
+        return treeInfo.lastVisitedNode;
+        //Time: O(h + k) where h is the height of the tree and k is the input.
+        //Space: O(h) because we need to place h frames on the call stack.
+      }
+    
+      public void reverseOrderTraversal(BST node, int k, TreeInfo treeInfo) {
+        if(Objects.isNull(node) || treeInfo.numVisitedNodes >= k) {
+          return;
+        }
+    
+        reverseOrderTraversal(node.right, k, treeInfo);
+        if(treeInfo.numVisitedNodes < k) {
+          treeInfo.numVisitedNodes += 1;
+          treeInfo.lastVisitedNode = node.value;
+          reverseOrderTraversal(node.left, k, treeInfo);
+        }
+      }
 }
