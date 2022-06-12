@@ -701,4 +701,56 @@ public class MediumDifficultyQuestions {
         //Time: O(n) Spece: O(n) where n is the size of the array.
         //The recursion takes up h frames on the callstack, where h is the height of the tree.
       }
+
+      public static void invertBinaryTree(BinaryTree tree) {
+        // Write your code here.
+        BinaryTree leftSubtree = swapChildren(tree.right);
+        BinaryTree rightSubtree = swapChildren(tree.left);
+        tree.left = leftSubtree;
+        tree.right = rightSubtree;
+        //Time: O(n) Space: O(d) where d is the depth of the tree
+      }
+    
+      public static BinaryTree swapChildren(BinaryTree tree) {
+        if(Objects.isNull(tree)) {
+          return tree;
+        }
+        if(Objects.isNull(tree.left) && Objects.isNull(tree.right)) {
+          return tree;
+        }
+    
+        BinaryTree leftSubtree = swapChildren(tree.right);
+        BinaryTree rightSubtree = swapChildren(tree.left);
+        tree.left = leftSubtree;
+        tree.right = rightSubtree;
+    
+        return tree;
+      }
+
+      public static void invertBinaryTree2(BinaryTree tree) {
+        // Write your code here.
+        if(Objects.isNull(tree)) {
+          return;
+        }
+    
+        swapChildren(tree);
+        invertBinaryTree(tree.left);
+        invertBinaryTree(tree.right);
+      }
+    
+      public static void swapChildren2(BinaryTree tree) {
+        BinaryTree left = tree.left;
+        tree.left = tree.right;
+        tree.right = left;
+      }
+      
+      static class BinaryTree {
+        public int value;
+        public BinaryTree left;
+        public BinaryTree right;
+    
+        public BinaryTree(int value) {
+          this.value = value;
+        }
+      }
 }
