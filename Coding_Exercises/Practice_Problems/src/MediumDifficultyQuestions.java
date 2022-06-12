@@ -659,4 +659,46 @@ public class MediumDifficultyQuestions {
           reverseOrderTraversal(node.left, k, treeInfo);
         }
       }
+
+      static class TreeRootInfo {
+        //Represents the root of the subtree we're trying to build.
+        public int rootIdx;
+    
+        public TreeRootInfo(int rootIdx) {
+          this.rootIdx = rootIdx;
+        }
+      }
+    
+      public BST reconstructBst(ArrayList<Integer> preOrderTraversalValues) {
+        // Write your code here.
+        TreeRootInfo treeInfo = new TreeRootInfo(0);
+        return reconstructBstFromRange(Integer.MIN_VALUE, Integer.MAX_VALUE,
+                                       preOrderTraversalValues, treeInfo);
+      }
+    
+      public BST reconstructBstFromRange(int lowerBound, int upperBound,
+                                         List<Integer> preOrderTraversalValues,
+                                         TreeRootInfo currentSubtreeInfo) {
+        if(currentSubtreeInfo.rootIdx == preOrderTraversalValues.size()) {
+          return null;
+        }
+        
+        int rootValue = preOrderTraversalValues.get(currentSubtreeInfo.rootIdx);
+        if(rootValue < lowerBound || rootValue >= upperBound) {
+          return null;
+        }
+    
+        currentSubtreeInfo.rootIdx += 1;
+        BST leftSubtree = reconstructBstFromRange(lowerBound, rootValue, preOrderTraversalValues,
+                                                  currentSubtreeInfo);
+        BST rightSubtree = reconstructBstFromRange(rootValue, upperBound, preOrderTraversalValues,
+                                                  currentSubtreeInfo);
+    
+        BST bst = new BST(rootValue);
+        bst.left = leftSubtree;
+        bst.right = rightSubtree;
+        return bst;
+        //Time: O(n) Spece: O(n) where n is the size of the array.
+        //The recursion takes up h frames on the callstack, where h is the height of the tree.
+      }
 }
