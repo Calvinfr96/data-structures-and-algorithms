@@ -753,4 +753,50 @@ public class MediumDifficultyQuestions {
           this.value = value;
         }
       }
+
+      static class BinaryTreeWithParent {
+        public int value;
+        public BinaryTreeWithParent left = null;
+        public BinaryTreeWithParent right = null;
+        public BinaryTreeWithParent parent = null;
+    
+        public BinaryTreeWithParent(int value) {
+          this.value = value;
+        }
+      }
+    
+      public BinaryTreeWithParent findSuccessor(BinaryTreeWithParent tree, BinaryTreeWithParent node) {
+        // Write your code here.
+        //This problem is unique in that we have a reference to a node's parent.
+        //The in-order successor of any given node is the left-most node of its right subtree.
+        //When a node does not have a right subtree, its in-order successor must be an ancestor node.
+        //It must be a left decedent of its ancestor, not a right decedent. If it were a right decedet,
+        //it's ancestor would have already been visited and couldn't be a successor.
+        //To find the successor ancestor, you reference parent nodes until you find one where the node
+        //in question is in its left subtree (the parent must be to the right).
+        if(!Objects.isNull(node.right)) {
+          return leftMostNode(node.right);
+        }
+    
+        return getRightMostParent(node);
+        //Time: O(h) where h is the height of the tree. Space: O(1)
+      }
+    
+      private BinaryTreeWithParent leftMostNode(BinaryTreeWithParent node) {
+        BinaryTreeWithParent current = node;
+        while(!Objects.isNull(current.left)) {
+          current = current.left;
+        }
+    
+        return current;
+      }
+    
+      private BinaryTreeWithParent getRightMostParent(BinaryTreeWithParent node) {
+        BinaryTreeWithParent current = node;
+        while(!Objects.isNull(current.parent) && current.parent.right == current) {
+          current = current.parent;
+        }
+    
+        return current.parent;
+      }
 }
