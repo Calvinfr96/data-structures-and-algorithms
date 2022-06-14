@@ -799,4 +799,24 @@ public class MediumDifficultyQuestions {
     
         return current.parent;
       }
+
+      public int binaryTreeDiameter(BinaryTree tree) {
+        // Write your code here.
+        //The diameter of a tree is the length of the longest path. The longest path does not
+        //necessarily go through the root of the binary tree.
+        //The length of the path is defined by the number of edges, not the number of nodes.
+        //To find the diameter of a tree, it makes sense to use a depth-first search.
+        //At each step of the depth-first traversal, as you start to recurse back up the tree,
+        //you return the diameter and the height.
+        //The base case (a null node) has a height and diameter of 0.
+        //The diameter of a tree rooted at a node is the maximum of the diameters of its
+        //left and right subtrees .
+        //The height of a leaf node is one.
+        //After looking at a node's left and right subtrees, you take the maximum of their diameters.
+        //This gives you the diameter of the node. The height of the node is the maximum of the height
+        //of the left and right subtrees, plus one
+        return -1;
+        //Time: O(n), where n is the number of nodes in the tree.
+        //Space: O(h) average, where h is the height. O(n) wost case
+      }
 }
