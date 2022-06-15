@@ -800,23 +800,35 @@ public class MediumDifficultyQuestions {
         return current.parent;
       }
 
-      public int binaryTreeDiameter(BinaryTree tree) {
-        // Write your code here.
-        //The diameter of a tree is the length of the longest path. The longest path does not
-        //necessarily go through the root of the binary tree.
-        //The length of the path is defined by the number of edges, not the number of nodes.
-        //To find the diameter of a tree, it makes sense to use a depth-first search.
-        //At each step of the depth-first traversal, as you start to recurse back up the tree,
-        //you return the diameter and the height.
-        //The base case (a null node) has a height and diameter of 0.
-        //The diameter of a tree rooted at a node is the maximum of the diameters of its
-        //left and right subtrees .
-        //The height of a leaf node is one.
-        //After looking at a node's left and right subtrees, you take the maximum of their diameters.
-        //This gives you the diameter of the node. The height of the node is the maximum of the height
-        //of the left and right subtrees, plus one
-        return -1;
+      static class TreeDHInfo {
+        public int diameter;
+        public int height;
+    
+        public TreeDHInfo(int diameter, int height) {
+          this.diameter = diameter;
+          this.height = height;
+        }
+      }
+    
+      public int binaryTreeDiameter(BinaryTree tree) { 
+        return getTreeDHInfo(tree).diameter;
         //Time: O(n), where n is the number of nodes in the tree.
         //Space: O(h) average, where h is the height. O(n) wost case
+      }
+    
+      public TreeDHInfo getTreeDHInfo(BinaryTree tree) {
+        if(Objects.isNull(tree)) {
+          return new TreeDHInfo(0, 0);
+        }
+    
+        TreeDHInfo leftSubtree = getTreeDHInfo(tree.left);
+        TreeDHInfo rightSubtree = getTreeDHInfo(tree.right);
+    
+        int longestPathThroughRoot = leftSubtree.height + rightSubtree.height;
+        int maxDiameterSoFar = Math.max(leftSubtree.diameter, rightSubtree.diameter);
+        int currentDiameter = Math.max(maxDiameterSoFar, longestPathThroughRoot);
+        int currentHeight = Math.max(leftSubtree.height, rightSubtree.height) + 1;
+    
+        return new TreeDHInfo(currentDiameter, currentHeight);
       }
 }
