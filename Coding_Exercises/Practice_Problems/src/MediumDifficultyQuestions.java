@@ -831,4 +831,41 @@ public class MediumDifficultyQuestions {
     
         return new TreeDHInfo(currentDiameter, currentHeight);
       }
+
+      static class TreeBalancedInfo {
+        public final boolean isBalanced;
+        public final int height;
+    
+        public TreeBalancedInfo(int height, boolean isBalanced) {
+          this.height = height;
+          this.isBalanced = isBalanced;
+        }
+      }
+    
+      public boolean heightBalancedBinaryTree(BinaryTree tree) {
+        // Write your code here.
+        return calculateTreeInfo(tree).isBalanced;
+        //Time: O(n) where n is the number of nodes in the tree
+        //Space: O(h) where h is the height of the tree.
+      }
+    
+      public TreeBalancedInfo calculateTreeInfo(BinaryTree tree) {
+        if(Objects.isNull(tree)) {
+          return new TreeBalancedInfo(-1, true);
+        }
+    
+        TreeBalancedInfo leftSubtree = calculateTreeInfo(tree.left);
+        if(!leftSubtree.isBalanced) {
+          return new TreeBalancedInfo(-1, false);
+        }
+        TreeBalancedInfo rightSubtree = calculateTreeInfo(tree.right);
+    
+        int leftSubtreeHeight = leftSubtree.height + 1;
+        int rightSubtreeHeight = rightSubtree.height + 1;
+        int subtreeHeight = Math.max(leftSubtreeHeight, rightSubtreeHeight);
+        boolean subtreesBalanced = leftSubtree.isBalanced && rightSubtree.isBalanced;
+        boolean isBalanced = subtreesBalanced && Math.abs(leftSubtreeHeight - rightSubtreeHeight) <= 1;
+    
+        return new TreeBalancedInfo(subtreeHeight, isBalanced);
+      }
 }
