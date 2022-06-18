@@ -868,4 +868,64 @@ public class MediumDifficultyQuestions {
     
         return new TreeBalancedInfo(subtreeHeight, isBalanced);
       }
+
+      public static int maxSubsetSumNoAdjacent(int[] array) {
+        // Write your code here.
+        //This problem requires dynamic programming. We start witht the simplest form of the
+        //problem and use that solution to find the solution of incrementally harder versions
+        //of the same problem.
+    
+        //To solve the problem, you start at the first element and calculate the largest
+        //sum of non-adjacent integers from index 0 up to that that element.
+    
+        //Example: [7, 10, 12, 7, 9, 14]
+        //Largest Sum Array: [7, 10, 19, 19, 28, 33]
+        //As the size of the subarray grows, so does the number of possible sums. For example,
+        //when we get to index 3, the possible sums are 19, 17, and 14. THis is because
+        //you can skip more than one number to be considered non-adjacent.
+    
+        //There is a pattern between the maximum sum at a given index and the maximum sum at the
+        //previous index. Consider an input array named 'array' and a corresponding maximum sum array
+        //named 'maxSums'.
+        //maxSums[i] = max(maxSums[i - 1], maxSums[i - 2] + array[i])
+    
+        //There are two base cases in this algorithm. You need to be able to generate the maxSum for the
+        //first two indices without using the formula.
+        //maxSum[9] = array[0] and maxSum[1] = max(array[0], array[1])
+    
+        //Time: O(n) Space: O(n) where n is the number of elements in the input array.
+    
+        //Since the formula only relys on maxSum[i - 1] and maxSum[i - 2], you only need to
+        //store the two previous maximumSums
+        //Instead of using an array, you could use two variables:
+        //first = maxSums[i - 1]
+        //second = maxSums[i - 2]
+        //current = max(first, second + array[i])
+        //At the end of each iteration second = first and first = current.
+    
+        //Time: O(n) Space: O(1) where n is the number of elements in the input array.
+        
+        if(array.length == 0) {
+          return 0;
+        } else if(array.length == 1) {
+          return array[0];
+        } else if(array.length == 2) {
+          return Math.max(array[0], array[1]);
+        } else {
+          int first = Math.max(array[0], array[1]);
+          int second = array[0];
+          int maxSum = 0;
+          
+          for(int i = 2; i < array.length; i++) {
+            maxSum = Math.max(first, second + array[i]);
+            second = first;
+            first = maxSum;
+          }
+    
+          //[7, 10, 12, 7, 9, 14]
+          //[7, 10, 19, 19, 28, 33]
+          return maxSum;
+          //Time: O(n) Space: O(1) where n is the number of elements in the input array.
+        }
+      }
 }
