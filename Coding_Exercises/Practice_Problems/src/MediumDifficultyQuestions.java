@@ -928,4 +928,33 @@ public class MediumDifficultyQuestions {
           //Time: O(n) Space: O(1) where n is the number of elements in the input array.
         }
       }
+
+      public static int numberOfWaysToMakeChange(int n, int[] denoms) {
+        // Write your code here.
+        //This problem requires dynamic programming.
+        //To start you need to initialize an array from 0 to n (inclusive).
+        //This array will represent the number of ways you can make change for that
+        //amount of money using the available denominations.
+        //You assume there is only 1 way to make change for $0, to use no coins.
+        //We can call this array 'possibilities'.
+    
+        //For each denomination is 'denoms', you iterate through 'possibilities'.
+        //Using j as a pointer for 'possibilities' and i as a pointer for 'denoms':
+        //if(denoms[i] <= possibilities[j]) you skip the possibility. Otherwise,
+        //possibilities[j] += possibilities[j - denoms[i]].
+    
+        int[] possibilities = new int[n+1];
+        possibilities[0] = 1;
+    
+        for(int denomination : denoms) {
+          for(int amount = 1; amount < possibilities.length; amount++) {
+            if(denomination <= amount) {
+              possibilities[amount] += possibilities[amount - denomination];
+            }
+          }
+        }
+        
+        return possibilities[n];
+        //Time: O(n*m) Space: O(n) where n is the amount and m is the number of denominations
+      }
 }
