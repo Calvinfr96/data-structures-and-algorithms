@@ -957,4 +957,32 @@ public class MediumDifficultyQuestions {
         return possibilities[n];
         //Time: O(n*m) Space: O(n) where n is the amount and m is the number of denominations
       }
+
+      public static int minNumberOfCoinsForChange(int n, int[] denoms) {
+        // Write your code here.
+        int[] possibilities = new int[n + 1];
+        //We want to be able to get the minimum number of coins needed to make each possibility,
+        //so we initialize the array with very large numbers to make initial comparisons easy.
+        Arrays.fill(possibilities, 1, possibilities.length, Integer.MAX_VALUE);
+    
+        int candidate = 0;
+        for(int denomination : denoms) {
+          for(int amount = 1; amount < n + 1; amount++) {
+            if(denomination <= amount) {
+              //You can't add 1 to Integer.MAX_VALUE, so we need to check the element at index
+              //[amount - denomination] before trying to add to it.
+              if(possibilities[amount - denomination] == Integer.MAX_VALUE) {
+                candidate = possibilities[amount - denomination];
+              } else {
+                candidate = possibilities[amount - denomination] + 1;
+              }
+    
+              possibilities[amount] = Math.min(possibilities[amount], candidate);
+            }
+          }
+        }
+        
+        return possibilities[n] != Integer.MAX_VALUE ? possibilities[n] : -1;
+        //Time: O(n*m) Space: O(n) where n is the amount and m is the number of denominations.
+      }
 }
