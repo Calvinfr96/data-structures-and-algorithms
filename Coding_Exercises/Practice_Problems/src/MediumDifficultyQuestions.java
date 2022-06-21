@@ -985,4 +985,49 @@ public class MediumDifficultyQuestions {
         return possibilities[n] != Integer.MAX_VALUE ? possibilities[n] : -1;
         //Time: O(n*m) Space: O(n) where n is the amount and m is the number of denominations.
       }
+
+      public static int levenshteinDistance(String str1, String str2) {
+        // Write your code here.
+        //This problem requires dynamic programming.
+        //You start by building a two-dimensional array that contains the minimum number
+        //of edit operations that we can perform on a substring of the first string to turn it
+        //into another substring of the second string.
+        //For each element in the 2D array, you look at the three neighboring elements.
+        //If the letters you're comparing are not equal, the element is equal to 
+        //min(three neighbors) + 1. Otherwise, if the letters are equal, the element is
+        //equal to min(three neighbors). In this case, the minimum is the element diagonally
+        //up and to the left.
+    
+        //if(str1[r - 1] == str2[c- 1]) : E[r][c] = E[r - 1][c - 1].
+        //else : E[r][c] = 1 + min(E[r][c - 1], E[r - 1][c], E[r - 1][c - 1]).
+        //Time: O(m * n) where m is the size of the first string and n is the size of the second.
+        //Space: O(m * n) where m is the size of the first string and n is the size of the second.
+    
+        //Note: Since we only need value in the preceding row and column, we can reduce our space
+        //complexity by only keeping track of the current row and previous row.
+        //This reduces our space complexity to O(n), where n is the length of the shorter string.
+        int[][] edits = new int[str2.length() + 1][str1.length() + 1];
+        
+        for(int i = 0; i < str2.length() + 1; i++) {
+          for(int j = 0; j < str1.length(); j++) {
+            edits[i][j] = j;
+          }
+          edits[i][0] = i;
+        }
+    
+        for(int i = 1; i < str2.length() + 1; i++) {
+          for(int j = 1; j < str1.length() + 1; j++) {
+            if(str2.charAt(i - 1) == str1.charAt(j - 1)) {
+              edits[i][j] = edits[i - 1][j - 1];
+            } else {
+              edits[i][j] = 
+                1 + Math.min(edits[i - 1][j - 1], Math.min(edits[i - 1][j], edits[i][j - 1]));
+            }
+          }
+        }
+    
+        return edits[str2.length()][str1.length()];
+        //Time: O(m * n) where m is the size of the first string and n is the size of the second.
+        //Space: O(n) where n is the length of the shorter string.
+      }
 }
