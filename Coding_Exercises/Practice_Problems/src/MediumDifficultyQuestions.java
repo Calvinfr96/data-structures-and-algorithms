@@ -1030,4 +1030,69 @@ public class MediumDifficultyQuestions {
         //Time: O(m * n) where m is the size of the first string and n is the size of the second.
         //Space: O(n) where n is the length of the shorter string.
       }
+
+      public int numberOfWaysToTraverseGraphRec(int width, int height) {
+        // Write your code here.
+        TraversalHelper helper = new TraversalHelper(0);
+        numberOfWaysToTraverseGraphRec(helper, 1, 1, width, height);
+        return helper.paths;
+        //Time: O(2^(n + m)) where n is the width and m is the height.
+        //This is because, for each position in the graph, you need to make two recursive calls
+        //until you reach your base case.
+        //Space: O(n + m) because it takes n + m recursive calls to reach a base case.
+      }
+    
+      static class TraversalHelper {
+        public int paths;
+    
+        public TraversalHelper(int paths) {
+          this.paths = paths;
+        }
+      }
+    
+      public void numberOfWaysToTraverseGraphRec(TraversalHelper helper,
+                                              int xpos, int ypos, int width, int height) {
+        if(xpos == width && ypos == height) {
+          helper.paths++;
+        }
+    
+        if(xpos < width) {
+          numberOfWaysToTraverseGraphRec(helper, xpos + 1, ypos, width, height);
+        }
+        if(ypos < height) {
+          numberOfWaysToTraverseGraphRec(helper, xpos, ypos + 1, width, height);
+        }
+      }
+
+      public int numberOfWaysToTraverseGraph(int width, int height) {
+        // Write your code here.
+        //This approach uses Dynamic Programming to store the result of the problem.
+        //Each intermediate problem involves finding the number of ways to get to an
+        //adjacent square in the graph.
+        //The number of ways to get to any given square is the sum of the number of
+        //ways to get to its adjacent (upper and left) squares.
+        //You start by filling out the border of your graph. When you're on a border
+        //square, there is only one way to reach it from the start (going either left
+        //or up).
+    
+        int[][] ways = new int[height][width];
+        
+        for(int i = 0; i < width; i++) {
+          for(int j = 0; j < height; j++) {
+            if(i == 0 || j == 0) {
+              ways[j][i] = 1;
+            } else {
+              int waysLeft = ways[j][i - 1];
+              int waysUp = ways[j - 1][i];
+              ways[j][i] = waysLeft + waysUp;
+            }
+          }
+        }
+    
+        return ways[height - 1][width - 1];
+        //Time: O(n*m) where n is the width of the graph and m is the height.
+        //The time complexity is lower because we don't need to make two recursive calls
+        //at each position.
+        //Space: O(n*m)
+      }
 }
