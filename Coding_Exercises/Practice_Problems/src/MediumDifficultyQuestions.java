@@ -1095,4 +1095,29 @@ public class MediumDifficultyQuestions {
         //at each position.
         //Space: O(n*m)
       }
+
+      public static int kadanesAlgorithm(int[] array) {
+        // Write your code here.
+        //This problem involves dynamic programming and the 'sliding window' approach.
+        //You start with a 'window' that only includes the first element.
+        //You find the maximum sum of numbers that ends at the right end of the window.
+        //This maximum sum will end up being either the sum of all numbers in the window
+        //or just the number at the right end of the window.
+        //Example:
+          //Array:       [3,5,-9,1,3,-2,3,4,7,2-9,6,3,1,-5,4]
+          //Largest Sum: [3,8,-1,1,4,2,5,9,16,18,9,15,18,19,14,18]
+        //In other words, at index i, the maximum sum is:
+          //max(previousSum + array[i], array[i])
+    
+        int maxSum = array[0];
+        int maxSumAtIndex = array[0];
+        
+        for(int i = 1; i < array.length; i++) {
+          maxSumAtIndex = Math.max(maxSumAtIndex + array[i], array[i]);
+          maxSum = Math.max(maxSumAtIndex, maxSum);
+        }
+        
+        return maxSum;
+        //Time: O(n) Space: O(1)
+      }
 }
