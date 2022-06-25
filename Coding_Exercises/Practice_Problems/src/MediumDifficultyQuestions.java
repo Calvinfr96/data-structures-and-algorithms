@@ -1120,4 +1120,36 @@ public class MediumDifficultyQuestions {
         return maxSum;
         //Time: O(n) Space: O(1)
       }
+
+      public static boolean hasSingleCycle(int[] array) {
+        // Write your code here.
+        Set<Integer> visitedIndices = new HashSet<>();
+        int startingIndex = 0;
+        
+        while(visitedIndices.size() < array.length) {
+          int jump = array[startingIndex];
+          int nextIndex = calculateIndex(startingIndex, jump, array.length);
+          if(!visitedIndices.contains(nextIndex)) {
+            visitedIndices.add(nextIndex);
+            startingIndex = nextIndex;
+          } else {
+            return false;
+          }
+        }
+        
+        return true;
+        //Time: O(n) //Space: O(n)
+      }
+    
+      private static int calculateIndex(int startIndex, int jump, int arrayLength) {
+        int endingIndex = startIndex + jump;
+        if(endingIndex >= arrayLength) {
+          endingIndex = endingIndex % arrayLength;
+        }
+        if(endingIndex < 0) {
+          endingIndex = arrayLength + (endingIndex % arrayLength);
+        }
+    
+        return endingIndex;
+      }
 }
