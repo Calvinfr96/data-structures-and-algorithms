@@ -1127,8 +1127,7 @@ public class MediumDifficultyQuestions {
         int startingIndex = 0;
         
         while(visitedIndices.size() < array.length) {
-          int jump = array[startingIndex];
-          int nextIndex = calculateIndex(startingIndex, jump, array.length);
+          int nextIndex = calculateIndex(startingIndex, array);
           if(!visitedIndices.contains(nextIndex)) {
             visitedIndices.add(nextIndex);
             startingIndex = nextIndex;
@@ -1141,15 +1140,42 @@ public class MediumDifficultyQuestions {
         //Time: O(n) //Space: O(n)
       }
     
-      private static int calculateIndex(int startIndex, int jump, int arrayLength) {
-        int endingIndex = startIndex + jump;
-        if(endingIndex >= arrayLength) {
-          endingIndex = endingIndex % arrayLength;
+      private static int calculateIndex(int currentIndex, int[] array) {
+        int jump = array[currentIndex];
+        int endingIndex = currentIndex + jump;
+        if(endingIndex >= array.length) {
+          endingIndex = endingIndex % array.length;
         }
         if(endingIndex < 0) {
-          endingIndex = arrayLength + (endingIndex % arrayLength);
+          endingIndex = array.length + (endingIndex % array.length);
         }
     
         return endingIndex;
+      }
+
+      public static boolean hasSingleCycle2(int[] array) {
+        // Write your code here.
+        int indicesVisited = 0;
+        int currentIndex = 0;
+        
+        while(indicesVisited < array.length) {
+          if(indicesVisited > 0 && currentIndex == 0) {
+            return false;
+          }
+    
+          indicesVisited++;
+          currentIndex = calculateIndex2(currentIndex, array);
+          
+        }
+        
+        return currentIndex == 0;
+        //Time: O(n) //Space: O(1)
+      }
+    
+      private static int calculateIndex2(int currentIndex, int[] array) {
+        int jump = array[currentIndex];
+        int nextIndex = (currentIndex + jump) % array.length;
+        
+        return nextIndex >= 0 ? nextIndex : nextIndex + array.length;
       }
 }
