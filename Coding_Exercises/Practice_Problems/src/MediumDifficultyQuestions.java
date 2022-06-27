@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Queue;
 import java.util.Set;
 
 public class MediumDifficultyQuestions {
@@ -1177,5 +1179,40 @@ public class MediumDifficultyQuestions {
         int nextIndex = (currentIndex + jump) % array.length;
         
         return nextIndex >= 0 ? nextIndex : nextIndex + array.length;
+      }
+
+      static class Node {
+        String name;
+        List<Node> children = new ArrayList<Node>();
+    
+        public Node(String name) {
+          this.name = name;
+        }
+    
+        public List<String> breadthFirstSearch(List<String> array) {
+          // Write your code here.
+          Queue<Node> queue = new LinkedList<>();
+          queue.add(this);
+          
+          while(!queue.isEmpty()) {
+            Node currentNode = queue.remove();
+            array.add(currentNode.name);
+            for(Node child : currentNode.children) {
+              queue.add(child);
+            }
+          }
+          return array;
+          //Time: O(V + E) where V is the number of vertices (nodes) and E is the number
+          //of edges (connections). You need to add a node to the list AND visit the node,
+          //which is why it's greater than O(V).
+          //Space: O(V) due to the size of the queue being used to perform the search,
+          //as well as the additional data added to the input array.
+        }
+    
+        public Node addChild(String name) {
+          Node child = new Node(name);
+          children.add(child);
+          return this;
+        }
       }
 }
