@@ -1215,4 +1215,93 @@ public class MediumDifficultyQuestions {
           return this;
         }
       }
+
+      public static List<Integer> riverSizes(int[][] matrix) {
+        // Write your code here.
+        //This is a graph traversal algorithm. Each time you encounter a a 1, you
+        //need to treet it as the root node of a graph. 
+        //To find the river size, you perform a DFS or BFS. You need to find the river
+        //size in this manner because each 1 you encounter isn't necessarily at either
+        //end of the river it belongs to.
+        //Each point in the matrix can be treated as a graph node, with up to 4 neighboring
+        //nodes. Each time you encounter a 1, you beform a B/DFS to find the river size.
+        //As you traverse the graph (matrix), you keep track of all of the nodes (points)
+        //you've visited to avoid visiting nodes more than once.
+    
+        boolean[][] visited = new boolean[matrix.length][matrix[0].length];
+        List<Integer> sizes = new ArrayList<>();
+    
+        for(int y = 0; y < matrix.length; y++) {
+          for(int x = 0; x < matrix[y].length; x++) {
+            if(visited[y][x]) {
+              continue;
+            } else {
+              findRiverSize(x, y, matrix, visited, sizes);
+            }
+          }
+        }
+        return sizes;
+        //Time: O(n) where n is the number of elements in the matrix
+        //Spece: O(n) because of the boolean matrix tracking visited elements.
+      }
+    
+      static class Point {
+        public int x;
+        public int y;
+    
+        public Point(int x, int y) {
+          this.x = x;
+          this.y = y;
+        }
+      }
+    
+      private static void findRiverSize(int x, int y, int[][] matrix,
+                                   boolean[][] visited, List<Integer> sizes) {
+        int currentSize = 0;
+        Queue<Point> pointsToVisit = new LinkedList<>();
+        pointsToVisit.add(new Point(x, y));
+    
+        while(!pointsToVisit.isEmpty()) {
+          Point currentPoint = pointsToVisit.remove();
+          int xPosition = currentPoint.x;
+          int yPosition = currentPoint.y;
+    
+          if(visited[yPosition][xPosition]) {
+            continue;
+          }
+    
+          visited[yPosition][xPosition] = true;
+          if(matrix[yPosition][xPosition] == 0) {
+            continue;
+          }
+    
+          currentSize += 1;
+          List<Point> unvisitedNeighbors = getUnvisitedNeighbors(xPosition, yPosition, matrix, visited);
+          pointsToVisit.addAll(unvisitedNeighbors);
+        }
+    
+        if(currentSize > 0) {
+          sizes.add(currentSize);
+        }
+      }
+    
+      private static List<Point> getUnvisitedNeighbors(int x, int y, int[][] matrix,
+                                                         boolean[][] visited) {
+        List<Point> unvisitedNeighbors = new ArrayList<>();
+    
+        if(x > 0 && !visited[y][x - 1]) {
+          unvisitedNeighbors.add(new Point(x - 1, y));
+        }
+        if(x < matrix[y].length - 1 && !visited[y][x + 1]) {
+          unvisitedNeighbors.add(new Point(x + 1, y));
+        }
+        if(y > 0 && !visited[y - 1][x]) {
+          unvisitedNeighbors.add(new Point(x, y - 1));
+        }
+        if(y < matrix.length - 1 && !visited[y + 1][x]) {
+          unvisitedNeighbors.add(new Point(x, y + 1));
+        }
+        
+        return unvisitedNeighbors;
+      }
 }
