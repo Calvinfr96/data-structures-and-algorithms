@@ -1304,4 +1304,69 @@ public class MediumDifficultyQuestions {
         
         return unvisitedNeighbors;
       }
+
+      public static AncestralTree getYoungestCommonAncestor(
+        AncestralTree topAncestor, AncestralTree descendantOne, AncestralTree descendantTwo) {
+      // Write your code here.
+      //One approach would be to iterate through the tree upwards to try and find the
+      //common ancestor. This only works if the two ancestors are at equal depths within
+      //the tree.
+      
+      //To fix this, you need to calculate the depth of each descendant until by going
+      //up until you hit the top ancestor, counting the each node along the way.
+      //Once you find the difference in depths, you give the deeper descendant a 'head start'
+      //by starting its upward iteration first, then starting the upward iteration
+      //of the shallower descendant once you've reached an equal playing field.
+      
+      //Example: If descendant T has a depth of 4 and I a depth of 2, you would move
+      //up from T two times, then start moving up from both T and I until you 
+      //found a common ancestor.
+      //This approach works in all cases.
+      int depthOne = calculateDepth(descendantOne);
+      int depthTwo = calculateDepth(descendantTwo);
+      int depthDifference = Math.abs(depthOne - depthTwo);
+      AncestralTree deeperTree = depthOne > depthTwo ? descendantOne : descendantTwo;
+      AncestralTree shallowerTree = depthOne > depthTwo ? descendantTwo : descendantOne;
+  
+      for(int i = 0; i < depthDifference; i++) {
+        deeperTree = deeperTree.ancestor;
+      }
+  
+      while(deeperTree != shallowerTree) {
+        deeperTree = deeperTree.ancestor;
+        shallowerTree = shallowerTree.ancestor;
+      }
+      
+      return shallowerTree;
+      //Time: O(d) where d is the depth of the deepest descendant.
+      //Space: O(1) because this can be implemented iteratively.
+    }
+  
+    private static int calculateDepth(AncestralTree tree) {
+      int depth = 0;
+  
+      while(!Objects.isNull(tree.ancestor)) {
+        depth++;
+        tree = tree.ancestor;
+      }
+  
+      return depth;
+    }
+  
+    static class AncestralTree {
+      public char name;
+      public AncestralTree ancestor;
+  
+      AncestralTree(char name) {
+        this.name = name;
+        this.ancestor = null;
+      }
+  
+      // This method is for testing only.
+      void addAsAncestor(AncestralTree[] descendants) {
+        for (AncestralTree descendant : descendants) {
+          descendant.ancestor = this;
+        }
+      }
+    }
 }
