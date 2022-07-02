@@ -1369,4 +1369,91 @@ public class MediumDifficultyQuestions {
         }
       }
     }
+
+    public int[][] removeIslands(int[][] matrix) {
+      // Write your code here.
+      //Perform a BFS on each element in the border of the matrix that is a one.
+      //During the search, mark a node as visited when it is removed from the queue.
+      //If an ajacent node is one, add it to the BFS queue and mark all other 
+      //adjacent nodes as visited.
+      //After doing this, go back through the matrix, looking at unvisited nodes.
+      //If a node has a value of 1, change it to a zero.
+      //Return the modified input matrix.
+      boolean[][] visited = new boolean[matrix.length][matrix[0].length];
+  
+      for(int i = 0; i < matrix.length; i++) {
+        if(!visited[i][0]) {
+          breadthFirstSearch(0, i, matrix, visited);
+        }
+        if(!visited[i][matrix[i].length - 1]) {
+          breadthFirstSearch(matrix[i].length - 1, i, matrix, visited);
+        }
+      }
+  
+      for(int i = 0; i < matrix[0].length; i++) {
+        if(!visited[0][i]) {
+          breadthFirstSearch(i, 0, matrix, visited);
+        }
+        if(!visited[matrix.length - 1][i]) {
+          breadthFirstSearch(i, matrix.length - 1, matrix, visited);
+        }
+      }
+  
+      for(int y = 1; y < matrix.length - 1; y++) {
+        for(int x = 1; x < matrix[y].length - 1; x++) {
+          if(!visited[y][x] && matrix[y][x] == 1) {
+            matrix[y][x] = 0;
+          }
+        }
+      }
+  
+      return matrix;
+      //Time: O(n) where n is the number of elements in the input matrix.
+      //Space: O(n) where n is the number of elements in the 'visited' matrix.
+      //Note: To improve the space complexity, you could change all of the bordering ones to twos. In rhe
+      //second step of the algorithm, you change the twos back to ones and ones to zeros.
+      //This helps you avoid the auxilary 'visited' matrix.
+    }
+  
+    private void breadthFirstSearch(int x, int y, int[][] matrix, boolean[][] visited) {
+      Queue<IslandPoint> pointsToVisit = new LinkedList<>();
+      pointsToVisit.add(new IslandPoint(x, y));
+  
+      while(!pointsToVisit.isEmpty()) {
+        IslandPoint currentPoint = pointsToVisit.remove();
+        int xPosition = currentPoint.x;
+        int yPosition = currentPoint.y;
+        visited[yPosition][xPosition] = true;
+  
+        if(matrix[yPosition][xPosition] == 0) {
+          continue;
+        }
+  
+        if(xPosition > 0 && !visited[yPosition][xPosition - 1]) {
+          pointsToVisit.add(new IslandPoint(xPosition - 1, yPosition));
+        }
+        
+        if(xPosition < matrix[yPosition].length - 1 && !visited[yPosition][xPosition + 1]) {
+          pointsToVisit.add(new IslandPoint(xPosition + 1, yPosition));
+        }
+        
+        if(yPosition > 0 && !visited[yPosition - 1][xPosition]) {
+          pointsToVisit.add(new IslandPoint(xPosition, yPosition - 1));
+        }
+        
+        if(yPosition < matrix.length - 1 && !visited[yPosition + 1][xPosition]) {
+          pointsToVisit.add(new IslandPoint(xPosition, yPosition + 1));
+        }
+      }
+    }
+  
+    static class IslandPoint {
+      public int x;
+      public int y;
+  
+      public IslandPoint(int x, int y) {
+        this.x = x;
+        this.y = y;
+      }
+    }
 }
