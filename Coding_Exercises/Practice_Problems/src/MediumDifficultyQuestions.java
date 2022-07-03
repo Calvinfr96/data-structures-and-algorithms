@@ -1456,4 +1456,64 @@ public class MediumDifficultyQuestions {
         this.y = y;
       }
     }
+
+    public boolean cycleInGraph(int[][] edges) {
+      // Write your code here.
+      //A cycle occurs in a graph whenever a vertex points to one of its ancestors.
+      //Example: 0 -> 1 -> 2 -> 0. The edges pointing to new nodes in the graph
+      //are called tree edges while edges pointing from a descendant node to an 
+      //ancestor node are called back edges. 2 is a descendent of 0, so when 2
+      //has an edge that points to 0, it's considered a cycle.
+      //A cross edge is an edge that points from an existing node to another existing
+      //node that is no an ancestor node.
+  
+      //You need two auxiliary data structures for this problem:
+      //visited - will keep track of vertices visited.
+      //inStack - will keep track of vertices in the current recursive stack. 
+      //Every time you process a node in your recursion, you add it to visited and inStack.
+      //When you find a node that is in visited, it most also be in inStack for it to be a 
+      //back edge.
+      //When you finish processing a vertex, you remove it from the recursive stack,
+      //but not from visited.
+      int numberOfNodes = edges.length;
+      boolean[] visited = new boolean[numberOfNodes];
+      boolean[] inStack = new boolean[numberOfNodes];
+  
+      for(int node = 0; node < numberOfNodes; node++) {
+        if(visited[node]) {
+          continue;
+        } else {
+          boolean containsCycle = isNodeInCycle(edges, node, visited, inStack);
+          if(containsCycle) {
+            return true;
+          }
+        }
+      }
+      
+      return false;
+      //Time: O(v + e) because you need to consider all vertices and edges in a DFS.
+      //Space: O(v) for the recursive stack. 
+    }
+  
+    private boolean isNodeInCycle(int[][] edges, int node, boolean[] visited,
+                                  boolean[] inStack) {
+      visited[node] = true;
+      inStack[node] = true;
+  
+      int[] neighbors = edges[node];
+      for(int neighbor : neighbors) {
+        if(!visited[neighbor]) {
+          boolean containsCycle = isNodeInCycle(edges, neighbor, visited, inStack);
+          if(containsCycle) {
+            return true;
+          }
+        } else if(inStack[neighbor]) {
+          return true;
+        }
+        
+      }
+  
+      inStack[node] = false;
+      return false;
+    }
 }
