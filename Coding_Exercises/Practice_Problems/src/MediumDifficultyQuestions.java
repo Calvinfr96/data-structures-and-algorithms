@@ -1516,4 +1516,118 @@ public class MediumDifficultyQuestions {
       inStack[node] = false;
       return false;
     }
+
+    public int minimumPassesOfMatrix(int[][] matrix) {
+      // Write your code here.
+      //Create a queue of positions that are positive. When you remove an element,
+      //look at all of its adjacent elements and convert any that are negative to positive.
+      //Add these converted elements to a secondary queue.
+      //When you finish going through the values in the primary queue, increment a variable
+      //that keeps track of the number of passes by one. then swap the references of
+      //the primary and secondary queue so that the primary queue contains elements for
+      //the next pass and the secondary queue is empty again.
+      //When you exhaust both queues, you check to see if any values in the matrix are
+      //still negative. If they are, you return negative one.
+      //Otherwise, you return the number of passes minus one.
+      //To optimize the solution, you keep track of how many elements are in the current
+      //queue at the beginning of the iteration. You loop that many times and then check
+      //if the queue is empty. If it's not, you update the size and repeat.
+  
+      int passes = convertNegatives(matrix);
+  
+      if(!containsNegative(matrix)) {
+        return passes - 1;
+      }
+  
+      return -1;
+      //Time: O(n) where n is the number of elements in the matrix.
+      //Space: O(n).
+    }
+  
+    private int convertNegatives(int[][] matrix) {
+      Queue<MatrixPoint> nextPassQueue = gatAllPositivePositions(matrix);
+      int passes = 0;
+  
+      while(!nextPassQueue.isEmpty()) {
+        Queue<MatrixPoint> currentPassQueue = nextPassQueue;
+        nextPassQueue = new LinkedList<>();
+  
+        while(!currentPassQueue.isEmpty()) {
+          MatrixPoint currentPoint = currentPassQueue.remove();
+          int currentX = currentPoint.x;
+          int currentY = currentPoint.y;
+  
+          List<MatrixPoint> adjacentPositions = getAdjacentPositions(currentX, currentY, matrix);
+          for(MatrixPoint position : adjacentPositions) {
+            int positionX = position.x;
+            int positionY = position.y;
+  
+            int value = matrix[positionY][positionX];
+            if(value < 0) {
+              matrix[positionY][positionX] = value * -1;
+              nextPassQueue.add(new MatrixPoint(positionX, positionY));
+            }
+          }
+        }
+  
+        passes += 1;
+      }
+  
+      return passes;
+    }
+  
+    private Queue<MatrixPoint> gatAllPositivePositions(int[][] matrix) {
+      Queue<MatrixPoint> positivePositions = new LinkedList<>();
+  
+      for(int y = 0; y < matrix.length; y++) {
+        for(int x = 0; x < matrix[y].length; x++) {
+          if(matrix[y][x] > 0) {
+            positivePositions.add(new MatrixPoint(x, y));
+          }
+        }
+      }
+  
+      return positivePositions;
+    }
+  
+    private List<MatrixPoint> getAdjacentPositions(int currentX, int currentY, int[][] matrix) {
+      List<MatrixPoint> adjacentPositions = new ArrayList<>();
+      
+      if(currentX > 0) {
+        adjacentPositions.add(new MatrixPoint(currentX - 1, currentY));
+      }
+      if(currentX < matrix[currentY].length - 1) {
+        adjacentPositions.add(new MatrixPoint(currentX + 1, currentY));
+      }
+      if(currentY > 0) {
+        adjacentPositions.add(new MatrixPoint(currentX, currentY - 1));
+      }
+      if(currentY < matrix.length - 1) {
+        adjacentPositions.add(new MatrixPoint(currentX, currentY + 1));
+      }
+  
+      return adjacentPositions;
+    }
+  
+    private boolean containsNegative(int[][] matrix) {
+      for(int y = 0; y < matrix.length; y++) {
+        for(int x = 0; x < matrix[y].length; x++) {
+          if(matrix[y][x] < 0) {
+            return true;
+          }
+        }
+      }
+  
+      return false;
+    }
+  
+    static class MatrixPoint {
+      public int x;
+      public int y;
+  
+      public MatrixPoint(int x, int y) {
+        this.x = x;
+        this.y = y;
+      }
+    }
 }
