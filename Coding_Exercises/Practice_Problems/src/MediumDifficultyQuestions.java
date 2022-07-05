@@ -1,8 +1,11 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Queue;
 import java.util.Set;
@@ -1629,5 +1632,38 @@ public class MediumDifficultyQuestions {
         this.x = x;
         this.y = y;
       }
+    }
+
+    public ArrayList<ArrayList<Integer>> taskAssignment(int k, ArrayList<Integer> tasks) {
+      // Write your code here.
+      Map<Integer, List<Integer>> taskIndices = new HashMap<>();
+      for(int i = 0; i < tasks.size(); i++) {
+        int task = tasks.get(i);
+        taskIndices.putIfAbsent(task, new ArrayList<>());
+        taskIndices.get(task).add(i);
+      }
+  
+      Collections.sort(tasks);
+      ArrayList<ArrayList<Integer>> optimalAssignments = new ArrayList<>();
+  
+      int left = 0;
+      int right = tasks.size() - 1;
+      
+      while(left < right) {
+        int leftValue = tasks.get(left);
+        int rightValue = tasks.get(right);
+        
+        ArrayList<Integer> optimalAssignment = new ArrayList<>();
+        optimalAssignment.add(taskIndices.get(leftValue).remove(0));
+        optimalAssignment.add(taskIndices.get(rightValue).remove(0));
+        optimalAssignments.add(optimalAssignment);
+        
+        left++;
+        right--;
+      }
+      
+      return optimalAssignments;
+      //Time: O(n*log(n)) where n is the number of tasks.
+      //Space: O(n) where n is the number of tasks.
     }
 }
