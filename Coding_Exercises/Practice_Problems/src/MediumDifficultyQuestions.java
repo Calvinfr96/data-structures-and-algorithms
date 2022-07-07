@@ -1666,4 +1666,27 @@ public class MediumDifficultyQuestions {
       //Time: O(n*log(n)) where n is the number of tasks.
       //Space: O(n) where n is the number of tasks.
     }
+
+    public int validStartingCity(int[] distances, int[] fuel, int mpg) {
+      // Write your code here.
+      //The city you need to start at is counter-intuitively the city you enter with
+      //the least amount of gas. This 'minimum city' will be the same regardless of 
+      //which city you start from.
+      //By starting from this city, you eliminate this deficit from you route.
+      int remainingMiles = 0; 
+      int minimumRemainingMiles = 0;
+      int minimumCity = 0; 
+  
+      for(int i = 1; i < distances.length; i++) {
+        remainingMiles += fuel[i - 1]*mpg - distances[i - 1];
+        if(remainingMiles < minimumRemainingMiles) {
+          minimumRemainingMiles = remainingMiles;
+          minimumCity = i;
+        }
+      }
+  
+      return minimumCity;
+      //Time: O(n) where n is the number of cities
+      //Space: O(1)
+    }
 }
