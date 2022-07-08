@@ -17,6 +17,14 @@ public class BinaryHeap {
     }
 
     public BinaryHeap insert(Integer value) {
+        //A Binary Heap is a complete Binary Tree, so to insert a node, you need to make sure all nodes are filled
+        //optimally (have two children). To insert a node, you perform a BFS on the heap until you find a node with
+        //a null left child or a null right child. Once an empty slot is found, you add the node there.
+
+        //After inserting the node, you need to adjust its position such that the Binary Heap property is maintained
+        //(every node is greater than the root of its left and right subtree).
+
+        //To maintain this property, you nned to 'bubble up' the newly inserted node as long as it is greater than its parent node.
         Node node = new Node(value);
 
         if(Objects.isNull(root)) {
@@ -52,27 +60,35 @@ public class BinaryHeap {
     }
 
     public Integer remove() {
+        //If the heap is empty, return null
         if(Objects.isNull(root)) {
             return null;
         }
         
+        //If the root has no children, set it to null.
         Integer value = root.value;
         if(Objects.isNull(root.left) && Objects.isNull(root.right)) {
             root = null;
             return value;
         }
 
+        //Gets the last node in the heap.
         Node lastNode = getLastNode();
+        //Replaces the root's value with the last node's value.
         root.value = lastNode.value;
+        //Deletes the last node in the heap.
         deleteNode(lastNode);
+        //You maintain the Binary Heap property by 'sinking' the root node down into its proper position
         sink();
 
         return value;
     }
 
     private void bubble(Node node) {
+        //We are constructing a Min Binary Heap, so we need to bubble up as long as a child node is less than its parent
         Node current = node;
 
+        //while the child is less than the parent, we swap their values and update current to be current.parent.
         while(!Objects.isNull(current.parent) && current.value.compareTo(current.parent.value) < 0) {
             Integer value = current.value;
             current.value = current.parent.value;
@@ -84,8 +100,11 @@ public class BinaryHeap {
 
     private void sink() {
         Node current = root;
+        //You find the nodes child that has the lowest value.
         Node child = lesserChild(current);
-
+        
+        //While the child node is not null, you swap the current node with its child node and repeat the process,
+        //looking for the child node's lesser child and swapping it.
         while(!Objects.isNull(child)) {
             Integer currentValue = current.value;
             current.value = child.value;
@@ -117,6 +136,7 @@ public class BinaryHeap {
     }
 
     private Node getLastNode() {
+        //Gets the last node in the heap, which is the right-most leaf node.
         List<Node> queue = new ArrayList<>();
         queue.add(root);
 
@@ -148,19 +168,25 @@ public class BinaryHeap {
         Node leftChild = node.left;
         Node rightChild = node.right;
 
+        //If both children are null (a leaf node), return null.
         if(Objects.isNull(leftChild) && Objects.isNull(rightChild)) {
             return null;
         } else if(Objects.isNull(leftChild)) {
+            //If the left child is null, the right child must be less than the current node's value.
             if(!Objects.isNull(rightChild) && rightChild.value.compareTo(node.value) < 0) {
                 return rightChild;
             }
+            //If the left child is null and the right child is greater than the current node, there is no lesser child.
             return null;
         } else if(Objects.isNull(rightChild)) {
+            //If the right child is nul, the left child must be less than the current node.
             if(!Objects.isNull(leftChild) && leftChild.value.compareTo(node.value) < 0) {
                 return leftChild;
             }
+            //If this is not the case, there is no lesser child.
             return null;
         } else {
+            //If neither child node is null, return the one with the lower value.
             return leftChild.value.compareTo(rightChild.value) < 0 ? leftChild : rightChild;
         }
     }
