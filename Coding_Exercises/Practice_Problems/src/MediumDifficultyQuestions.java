@@ -1699,6 +1699,11 @@ public class MediumDifficultyQuestions {
   
       public List<Integer> buildHeap(List<Integer> array) {
         // Write your code here.
+        //Time: O(n) - You're calling siftDown n times, so you would expect a time of n*log(n).
+        //However, sifting down isn't the same for all nodes, sifting down on a leaf is O(1) while
+        //sifting down on the root takes O(log(n)). Most nodes are at the bottom, with the root node being
+        //the only one that truly takes O(log(n)) time. Therefor, siftDown really reduces to O(1).
+        //Space: O(1)
         int firstParentIndex = (array.size() - 2) / 2;
         for(int currentIndex = firstParentIndex; currentIndex >= 0; currentIndex--) {
           siftDown(currentIndex, array.size() - 1, array);
@@ -1708,6 +1713,9 @@ public class MediumDifficultyQuestions {
   
       public void siftDown(int currentIdx, int endIdx, List<Integer> heap) {
         // Write your code here.
+        //Time: O(log(n)) - This is because the process is similar to binary search due to the relationship
+        //between parent elmements and child elements
+        //Space: O(n)
         int childOneIdx = 2*currentIdx + 1;
         while (childOneIdx <= endIdx) {
           int childTwoIdx = 2*currentIdx + 2 <= endIdx ? 2*currentIdx + 2 : -1;
@@ -1729,6 +1737,8 @@ public class MediumDifficultyQuestions {
   
       public void siftUp(int currentIdx, List<Integer> heap) {
         // Write your code here.
+        //Time: O(log(n)) - This is because the process is similar to binary search due to the relationship
+        //between parent elmements and child elements
         int parentIdx = (currentIdx - 1) / 2;
         while(currentIdx > 0 && heap.get(currentIdx) < heap.get(parentIdx)) {
           swap(currentIdx, parentIdx, heap);
@@ -1739,11 +1749,14 @@ public class MediumDifficultyQuestions {
   
       public int peek() {
         // Write your code here.
+        //Time: O(1) Space: O(1)
         return heap.get(0);
       }
   
       public int remove() {
         // Write your code here.
+        //Time: O(log(n)) - This is because the process is similar to binary search due to the relationship
+        //between parent elmements and child elements
         swap(0, heap.size() - 1, heap);
         int valueToRemove = heap.get(heap.size() - 1);
         heap.remove(heap.size() - 1);
@@ -1753,6 +1766,8 @@ public class MediumDifficultyQuestions {
   
       public void insert(int value) {
         // Write your code here.
+        //Time: O(log(n)) - This is because the process is similar to binary search due to the relationship
+        //between parent elmements and child elements
         heap.add(value);
         siftUp(heap.size() - 1, heap);
       }
