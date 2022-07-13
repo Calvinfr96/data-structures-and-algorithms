@@ -1778,4 +1778,144 @@ public class MediumDifficultyQuestions {
         heap.set(i, temp);
       }
     }
+
+    static class DoublyLinkedList {
+      public DLLNode head;
+      public DLLNode tail;
+  
+      public void setHead(DLLNode node) {
+        // Write your code here.
+        if(Objects.isNull(head)) {
+          head = node;
+          tail = node;
+        } else {
+          insertBefore(head, node);
+        }
+        //Time: O(1) Space: O(1)
+      }
+  
+      public void setTail(DLLNode node) {
+        // Write your code here.
+        if(Objects.isNull(tail)) {
+          setHead(node);
+        } else {
+          insertAfter(tail, node);
+        }
+        //Time: O(1) Space: O(1)
+      }
+  
+      public void insertBefore(DLLNode node, DLLNode nodeToInsert) {
+        // Write your code here.
+        if(nodeToInsert == head && nodeToInsert == tail) {
+          return;
+        }
+        
+        remove(nodeToInsert);
+        nodeToInsert.prev = node.prev;
+        nodeToInsert.next = node;
+        if(node.prev == null) {
+          head = nodeToInsert;
+        } else {
+          node.prev.next = nodeToInsert;
+        }
+        node.prev = nodeToInsert;
+        //Time: O(1) Space: O(1)
+      }
+  
+      public void insertAfter(DLLNode node, DLLNode nodeToInsert) {
+        // Write your code here.
+        if(nodeToInsert == head && nodeToInsert == tail) {
+          return;
+        }
+        
+        remove(nodeToInsert);
+        nodeToInsert.prev = node;
+        nodeToInsert.next = node.next;
+        if(Objects.isNull(node.next)) {
+          node.next = nodeToInsert;
+          tail = nodeToInsert;
+        } else {
+          node.next.prev = nodeToInsert;
+        }
+        node.next = nodeToInsert;
+        //Time: O(1) Space: O(1)
+      }
+  
+      public void insertAtPosition(int position, DLLNode nodeToInsert) {
+        // Write your code here.
+        if(position == 1) {
+          setHead(nodeToInsert);
+        } else {
+          DLLNode current = head;
+          for(int i = 1; i < position && !Objects.isNull(current); i++) {
+            current = current.next; 
+          }
+  
+          if(Objects.isNull(current)) {
+            setTail(nodeToInsert);
+          } else {
+            insertBefore(current, nodeToInsert);
+          }
+        }
+        //Time: O(1) Space: O(1)
+      }
+  
+      public void removeNodesWithValue(int value) {
+        // Write your code here.
+        DLLNode current = head;
+        while(!Objects.isNull(current)) {
+          DLLNode nodeToRemove = current;
+          current = current.next;
+          if(nodeToRemove.value == value) {
+            remove(nodeToRemove);
+          }
+        }
+        //Time: O(n) where n is the numnber of nodes in the linked.
+        //Space: O(1)
+      }
+  
+      public void remove(DLLNode node) {
+        // Write your code here.
+        if(node == head) {
+          head = head.next;
+        }
+        if(node == tail) {
+          tail = tail.prev;
+        }
+        removeNodeBindings(node);
+        //Time: O(1) Space: O(1)
+      }
+  
+      public boolean containsNodeWithValue(int value) {
+        // Write your code here.
+        DLLNode current = head;
+        while(!Objects.isNull(current)) {
+          if(current.value == value) {
+            return true;
+          }
+          current = current.next;
+        }
+        return false;
+        //Time: O(n) where n is the number of nodes in the linked list
+        //Space: O(1)
+      }
+  
+      private void removeNodeBindings(DLLNode node) {
+        if(node.prev != null) node.prev.next = node.next;
+        if(node.next != null) node.next.prev = node.prev;
+        node.prev = null;
+        node.next = null;
+      }
+    }
+  
+    // Do not edit the class below.
+    static class DLLNode {
+      public int value;
+      public DLLNode prev;
+      public DLLNode next;
+  
+      public DLLNode(int value) {
+        this.value = value;
+      }
+    }
 }
