@@ -1918,4 +1918,37 @@ public class MediumDifficultyQuestions {
         this.value = value;
       }
     }
+
+    public static void removeKthNodeFromEnd(LinkedListNode head, int k) {
+      // Write your code here.
+      getLength(head, head, k);
+    }
+  
+    public static int getLength(LinkedListNode head, LinkedListNode current, int k) {
+      if(Objects.isNull(current)) {
+        return 0;
+      }
+  
+      int distanceFromEnd = 1 + getLength(head, current.next, k);
+  
+      if(distanceFromEnd == k + 1) {
+        current.next = current.next.next;
+      } else if(distanceFromEnd == k && head == current) {
+        current.value = current.next.value;
+        current.next = current.next.next;
+      }
+  
+      return distanceFromEnd;
+      //Time: O(n) where n is the number of nodes in the linked list.
+      //Space: O(n)
+    }
+  
+    static class LinkedListNode {
+      int value;
+      LinkedListNode next = null;
+  
+      public LinkedListNode(int value) {
+        this.value = value;
+      }
+    }
 }
