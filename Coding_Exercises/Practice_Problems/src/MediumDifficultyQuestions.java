@@ -1921,26 +1921,34 @@ public class MediumDifficultyQuestions {
 
     public static void removeKthNodeFromEnd(LinkedListNode head, int k) {
       // Write your code here.
-      getLength(head, head, k);
-    }
+      //This question can be solved by traversing the linked list using two pointers.
+      //Both pointers will start at the head. The second pointer will traverse k nodes.
+      //You then move both pointers forward until the second pointer points to null.
+      //This positions the first pointer to be k nodes from the end of the list (null).
+      //Afterwards, you can remove the previou node.
+      //If the first pointer is still pointing to the head, you update its value and
+      //next pointer.
   
-    public static int getLength(LinkedListNode head, LinkedListNode current, int k) {
-      if(Objects.isNull(current)) {
-        return 0;
+      LinkedListNode previous = null;
+      LinkedListNode firstPointer = head;
+      LinkedListNode secondPointer = head;
+  
+      for(int i = 0; i < k; i++) {
+        secondPointer = secondPointer.next;
       }
   
-      int distanceFromEnd = 1 + getLength(head, current.next, k);
-  
-      if(distanceFromEnd == k + 1) {
-        current.next = current.next.next;
-      } else if(distanceFromEnd == k && head == current) {
-        current.value = current.next.value;
-        current.next = current.next.next;
+      while(!Objects.isNull(secondPointer)) {
+        secondPointer = secondPointer.next;
+        previous = firstPointer;
+        firstPointer = firstPointer.next;
       }
   
-      return distanceFromEnd;
-      //Time: O(n) where n is the number of nodes in the linked list.
-      //Space: O(n)
+      if(!Objects.isNull(previous)) {
+        previous.next = previous.next.next;
+      } else {
+        firstPointer.value = firstPointer.next.value;
+        firstPointer.next = firstPointer.next.next;
+      }
     }
   
     static class LinkedListNode {
