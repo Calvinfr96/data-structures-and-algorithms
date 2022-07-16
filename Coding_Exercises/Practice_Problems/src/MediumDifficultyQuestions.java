@@ -1959,4 +1959,63 @@ public class MediumDifficultyQuestions {
         this.value = value;
       }
     }
+
+    class sumOfLinkedListsProgram {
+      // This is an input class. Do not edit.
+      public static class LinkedList {
+        public int value;
+        public LinkedList next;
+    
+        public LinkedList(int value) {
+          this.value = value;
+          this.next = null;
+        }
+      }
+    
+      public LinkedList sumOfLinkedLists(LinkedList linkedListOne, LinkedList linkedListTwo) {
+        // Write your code here.
+        int sum = convertToNumber(linkedListOne) + convertToNumber(linkedListTwo);
+        return convertToLinkedList(sum);
+        //Time O(n) Space: O(n)
+      }
+    
+      public int convertToNumber(LinkedList list) {
+        LinkedList current = list;
+        int sum = current.value;
+        int power = 1;
+        while(!Objects.isNull(current.next)) {
+          current = current.next;
+          sum += current.value * (int) Math.pow(10, power);
+          power++;
+        }
+    
+        return sum;
+        //Time: O(n) where n is the size of the linked list.
+        //Space: O(1).
+      }
+    
+      public LinkedList convertToLinkedList(int num) {
+        int length = getLength(num);
+        LinkedList list = new LinkedList(getDigit(num, 0));
+        LinkedList current = list;
+        for(int i = 1; i < length; i++) {
+          current.next = new LinkedList(getDigit(num, i));
+          current = current.next;
+        }
+    
+        return list;
+        //Time: O(n) where n is the size of the linked list.
+        //Space: O(n).
+      }
+    
+      public int getDigit(int num, int i) {
+        return (num / (int) Math.pow(10, i)) % 10;
+        //Time: O(1) Space: O(1)
+      }
+    
+      public int getLength(int num) {
+        return (int) Math.log10(num) + 1;
+        //Time: O(1) Space: O(1)
+      }
+    }
 }
