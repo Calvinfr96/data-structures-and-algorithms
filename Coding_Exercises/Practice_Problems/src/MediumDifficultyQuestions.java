@@ -2018,4 +2018,65 @@ public class MediumDifficultyQuestions {
         //Time: O(1) Space: O(1)
       }
     }
+
+    class sumOfLinkedListsImprovedProgram {
+      // This is an input class. Do not edit.
+      public static class LinkedList {
+        public int value;
+        public LinkedList next;
+    
+        public LinkedList(int value) {
+          this.value = value;
+          this.next = null;
+        }
+    
+        public String toString() {
+          return String.format("%d", value);
+        }
+      }
+    
+      public LinkedList sumOfLinkedLists(LinkedList linkedListOne, LinkedList linkedListTwo) {
+        // Write your code here.
+        LinkedList pointerOne = linkedListOne;
+        LinkedList pointerTwo = linkedListTwo;
+        LinkedList listSum = null;
+        LinkedList currentDigit = listSum;
+        int carryOver = 0;
+    
+        while(pointerOne != null || pointerTwo != null || carryOver > 0) {
+          int sum = carryOver;
+          sum = pointerOne == null ? sum : sum + pointerOne.value;
+          sum = pointerTwo == null ? sum : sum + pointerTwo.value;
+          
+          LinkedList nextDigit = null;
+          
+          if(sum > 9) {
+            nextDigit = new LinkedList(sum % 10);
+            carryOver = sum / 10;
+          } else {
+            nextDigit = new LinkedList(sum);
+            carryOver = 0;
+          }
+    
+          if(listSum == null) {
+            listSum = nextDigit;
+            currentDigit = listSum;
+          } else {
+            currentDigit.next = nextDigit;
+            currentDigit = nextDigit;
+          }
+    
+          if(pointerOne != null) {
+            pointerOne = pointerOne.next;
+          }
+          if(pointerTwo != null) {
+            pointerTwo = pointerTwo.next;
+          }
+        }
+        
+        return listSum;
+        //Time: O(n) where n is the size of the longer list.
+        //Space: O(n)
+      }
+    }
 }
