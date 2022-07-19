@@ -2080,7 +2080,7 @@ public class MediumDifficultyQuestions {
       }
     }
 
-    class PermuationsProgram {
+    class PermutationsProgram {
       public static List<List<Integer>> getPermutations(List<Integer> array) {
         // Write your code here.
         List<List<Integer>> permutations = new ArrayList<>();
@@ -2108,4 +2108,49 @@ public class MediumDifficultyQuestions {
       }
     }
     
+    class PermutationsProgram2 {
+      public static List<List<Integer>> getPermutations(List<Integer> array) {
+        // Write your code here. Example: [1, 2, 3]
+        //A permutation is a unique ordering of elemens in an array. The number of
+        //permutations for an array of unique integers is n!, where n is the length
+        //of the array.
+        //For each position i in a permutation (zero-indexed), there are n - (i +1)
+        //possibilities for the next number in the permutation. For example. Any
+        //permutation that starys with 1 has two possibilities for the next number.
+        //The same is true for permutations that start with 2 and 3.
+        //Psuedocode:
+        //helper(array, permutation, permutations):
+        //  if(array is empty):
+        //    permutations.add(permutation);
+        //  else:
+        //    for(number in array):
+        //      new array = remove number from array;
+        //      new permutation = permutation + number;
+        //      helper(new array, new permutation, permutations);
+    
+        List<List<Integer>> permutations = new ArrayList<>();
+        getPermutations(array, new ArrayList<>(), permutations);
+        return permutations;
+        //Time: O(n^ 2 * n!) - The base case of the recursive algorithm will be hit
+        //n! times. For each permutation, the recursive case will be hit n times and
+        //requires O(n) work. This leads to a final time complexity of (n^2 * n!).
+        //Space: O(n*n!) - There will be n! permutations of size n. Each permutation
+        //has a length of n.
+      }
+    
+      private static void getPermutations(List<Integer> array, List<Integer> currentPermutation,
+                                          List<List<Integer>> permutations) {
+        if(array.isEmpty() && currentPermutation.size() > 0) {
+          permutations.add(currentPermutation);
+        } else {
+          for(int i = 0; i < array.size(); i++) {
+            List<Integer> newArray = new ArrayList<>(array);
+            newArray.remove(i);
+            List<Integer> newPermutation = new ArrayList<>(currentPermutation);
+            newPermutation.add(array.get(i));
+            getPermutations(newArray, newPermutation, permutations);
+          }
+        }
+      }
+    }
 }
