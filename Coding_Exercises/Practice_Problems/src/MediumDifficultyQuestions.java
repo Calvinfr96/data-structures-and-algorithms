@@ -2153,4 +2153,48 @@ public class MediumDifficultyQuestions {
         }
       }
     }
+
+    class PowersetProgram {
+      public static List<List<Integer>> powerset(List<Integer> array) {
+        // Write your code here.
+        List<List<Integer>> powerset = new ArrayList<>();
+        powerset.add(new ArrayList<>());
+    
+        Map<Integer, Integer> elementIndexes = new HashMap<>();
+        for(int i = 0; i < array.size(); i++) {
+          elementIndexes.put(array.get(i), i);
+        }
+    
+        for(int i = 0; i < array.size(); i++) {
+          List<Integer> baseArray = new ArrayList<>();
+          baseArray.add(array.get(i));
+          addPowersetForElement(powerset, array, baseArray, elementIndexes);
+        }
+    
+        return powerset;
+        //Time: O(2^n * n) where n is the number of elements in the array
+        //Space: O(2^n * n)
+      }
+    
+      private static void addPowersetForElement(List<List<Integer>> powerset, List<Integer> array,
+                                                List<Integer> baseArray, Map<Integer, Integer> elementIndexes) {
+        Queue<List<Integer>> arrayQueue = new LinkedList<>();
+        arrayQueue.add(baseArray);
+        powerset.add(baseArray);
+        
+        while(!arrayQueue.isEmpty()) {
+          List<Integer> currentBaseArray = arrayQueue.remove();
+          Integer lastElement = currentBaseArray.get(currentBaseArray.size() - 1);
+          Integer startIndex = elementIndexes.get(lastElement) + 1;
+          for(int i = startIndex; i < array.size(); i++) {
+            List<Integer> arrayToAdd = new ArrayList<>(currentBaseArray);
+            arrayToAdd.add(array.get(i));
+            if(i < array.size() - 1) {
+              arrayQueue.add(arrayToAdd);
+            }
+            powerset.add(arrayToAdd);
+          }
+        }
+      }
+    }
 }
