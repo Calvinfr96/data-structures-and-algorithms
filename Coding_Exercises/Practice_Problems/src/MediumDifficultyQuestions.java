@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
 
 public class MediumDifficultyQuestions {
     public static List<Integer[]> threeNumberSum(int[] array, int targetSum) {
@@ -2241,6 +2242,7 @@ public class MediumDifficultyQuestions {
         ArrayList<String> mnemonicsFound = new ArrayList<>();
         mnemonicsHelper(0, phoneNumber, currentMnemonic, mnemonicsFound);
         return mnemonicsFound;
+        //Time: O(4^n*n) Space: O(4^n*n) where n is the length of the phone number.
       }
     
       private void mnemonicsHelper(int idx, String phoneNumber, String[] currentMnemonic,
@@ -2256,6 +2258,37 @@ public class MediumDifficultyQuestions {
             mnemonicsHelper(idx + 1, phoneNumber, currentMnemonic, mnemonicsFound);
           }
         }
+      }
+    }
+
+    class BalancedBracketsProgram {
+      public static boolean balancedBrackets(String str) {
+        // Write your code here.
+        Stack<Character> brackets = new Stack<>();
+    
+        Map<Character, Character> matchingBrackets = new HashMap<>();
+        matchingBrackets.put(')', '(');
+        matchingBrackets.put(']', '[');
+        matchingBrackets.put('}', '{');
+    
+        for(char character : str.toCharArray()) {
+          if(character == '(' || character == '[' || character == '{') {
+            brackets.push(character);
+          }
+          if(character == ')' || character == ']' || character == '}') {
+            if(brackets.empty()) {
+              return false;
+            } else {
+              char openingBrace = brackets.pop();
+              if(openingBrace != matchingBrackets.get(character)) {
+                return false;
+              }
+            }
+          }
+        }
+        
+        return brackets.empty();
+        //Time: O(n) Space: O(n) where n is the size of the input string.
       }
     }
 }
