@@ -2291,4 +2291,40 @@ public class MediumDifficultyQuestions {
         //Time: O(n) Space: O(n) where n is the size of the input string.
       }
     }
+
+    class StaircaseTraversalProgram {
+
+      public int staircaseTraversal(int height, int maxSteps) {//5, 2
+        // Write your code here.
+        //Create an array that holds the number of ways to traverse a given number of steps.
+        //Insert 1 into the first position, there is one way to traverse 0 steps (take 0 steps).
+        //Loop from 1 to height.
+        //At each iteration, maxStepsForHeight = min(currentHeight, maxSteps).
+        //The number of steps at currentHeight is the sum of the previous n numbers in the list,
+        //where n is maxStepsForHeight.
+    
+        List<Integer> ways = new ArrayList<>();
+        ways.add(1);//[1, 1, 2, 3, 5, 8]
+    
+        for(int i = 1; i <= height; i++) {//5 <= 5
+          int maxStepsForHeight = Math.min(i, maxSteps);//2
+          int waysForHeight = getWaysForHeight(ways, maxStepsForHeight);
+          ways.add(waysForHeight);
+        }
+        
+        return ways.get(ways.size() - 1);
+        //Time: O(h*m) Space: O(h) where h is the height and m is the max number of steps.
+        //Using a sliding window approach can reduce the time complexity to O(h).
+      }
+    
+      public int getWaysForHeight(List<Integer> ways, int maxStepsForHeight) {//[1, 1, 2, 3, 5], 2
+        int minIndex = ways.size() - maxStepsForHeight;//2
+        int sum = 0;
+        for(int i = ways.size() - 1; i >= minIndex; i--) {
+          sum += ways.get(i);
+        }
+    
+        return sum;
+      }
+    }
 }
