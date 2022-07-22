@@ -2327,4 +2327,62 @@ public class MediumDifficultyQuestions {
         return sum;
       }
     }
+
+    class SortedMatrixBinarySearchProgram {
+      public static int[] searchInSortedMatrix(int[][] matrix, int target) {
+        // Write your code here.
+        for(int i = 0; i < matrix.length; i++) {
+          int[] row = matrix[i];
+          int index = binarySearch(row, target);
+          if(index != -1) {
+            return new int[] {i, index};
+          }
+        }
+        
+        return new int[] {-1, -1};
+        //Time: O(n*log(m)) where in is the number of rows and m is the average length of a row.
+        //Space: O(1);
+      }
+    
+      private static int binarySearch(int[] row, int target) {
+        int start = 0;
+        int end = row.length - 1;
+          
+        while(start <= end) {
+          int middle = start + (end - start) / 2;
+          if(row[middle] == target) {
+            return middle;
+          } else if(row[middle] < target) {
+            start = middle + 1;
+          } else {
+            end = middle - 1;
+          }
+        }
+        
+        return -1;
+      }
+    }
+
+    class SortedMatrixSearchProgram {
+      public static int[] searchInSortedMatrix(int[][] matrix, int target) {
+        // Write your code here.
+        int row = 0;
+        int column = matrix[0].length - 1;
+    
+        while(column >= 0 && row < matrix.length) {
+          int number = matrix[row][column];
+          if(number == target) {
+            return new int[] {row, column};
+          } else if(number > target) {
+            column--;
+          } else {
+            row++;
+          }
+        }
+        
+        return new int[] {-1, -1};
+        //Time: O(n + m) where n is the number of rows and m is the number of columns.
+        //Space: O(1)
+      }
+    }
 }
