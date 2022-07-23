@@ -2385,4 +2385,67 @@ public class MediumDifficultyQuestions {
         //Space: O(1)
       }
     }
+
+    class ThreeNumberSortProgram {
+      //The order array will only ever have three elements.
+      //The array that needs to be sorted will only contain numbers within the order array.
+      //The array to be sorted doesn't need to contain all elements in the order array.
+      //For example, if order = [0, 1, 2], the array could only contain 0's and 1's.
+    
+      //Approach One: Bucket Sort.
+      //Figure out the frequency of each element of the order array within the input array.
+      //Use these frequencies to create 'buckets' in the input array, then overwrite the 
+      //values within each bucket with the correct value.
+    
+      //Apprach Two: Use Subarrays (Two Passes).
+      //Split the array into three subarrays. The left subarray contains the first element in
+      //the order array, the middle subarray contains the second, and the right subarray contains the third.
+      //Passing through the array two times, correctly positioning elements into the first subarray,
+      //then correctly positioning elements into the last subarray. 
+      //You won't need to do a third pass for the middle subarray because it is taken care of by the first two passes.
+    
+      //Approach Three: Use Subarrays (One Pass).
+      //This approach is similar to Approach Two, except it sorts the array in one pass.
+      //Using three pointers, you can do both swaps from Approach Two in one pass.
+      //Pointer1 tells you where to swap elements that should come first, Pointer2 acts
+      //as an iterator, and Pointer3 tells you where to swap elements that should come last.
+      //Pointer1 and Pointer2 start at 0 and Pointer 3 starts at the end of the array.
+      //When Pointer2 points at an element that should be first, you swap the elements
+      //at Pointer1 and Pointer 2, then increment Pointer1 and increment Pointer2.
+      //When Pointer2 points at an element that should be last, you swap the elements
+      //at Pointer3 and Pointer2, the decrement Pointer3.
+      //When Pointer2 points at an element that should be in the middle, you increment it.
+      //When Pointer2 passes Pointer3, you stop iterating.
+      public int[] threeNumberSort(int[] array, int[] order) {
+        // Write your code here.
+        int pointer1 = 0;
+        int pointer2 = 0;
+        int pointer3 = array.length - 1;
+    
+        while(pointer2 <= pointer3) {
+           int current = array[pointer2];
+          if(current == order[0]) {
+            swap(array, pointer1, pointer2);
+            pointer1++;
+            pointer2++;
+          }
+          if(current == order[1]) {
+            pointer2++;
+          }
+          if(current == order[2]) {
+            swap(array, pointer2, pointer3);
+            pointer3--;
+          }
+        }
+        
+        return array;
+        //Time: O(n) Space: O(1).
+      }
+    
+      private void swap(int[] array, int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+    }
 }
