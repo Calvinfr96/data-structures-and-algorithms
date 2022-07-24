@@ -2448,4 +2448,72 @@ public class MediumDifficultyQuestions {
         array[j] = temp;
       }
     }
+
+    class MinMaxStackProgram {
+      // Feel free to add new properties and methods to the class.
+      //Time (All Operations): O(1).
+      //Space (All Operations): O(1). The extra space required to support getMin and getMax is O(n).
+      static class MinMaxStack {
+        Stack<Integer> stack = new Stack<>();
+        Stack<Integer> minimums = new Stack<>();
+        Stack<Integer> maximums = new Stack<>();
+        int currentMinimum;
+        int currentMaximum;
+        
+        public int peek() {
+          // Write your code here.
+          return stack.peek();
+        }
+    
+        public int pop() {
+          // Write your code here.
+          int poppedValue = stack.pop();
+          
+          if(stack.size() == 1) {
+            currentMinimum = stack.peek();
+            currentMaximum = currentMinimum;
+          }
+    
+          if(!stack.empty() && poppedValue == currentMinimum) {
+            currentMinimum = minimums.pop();
+          }
+    
+          if(!stack.empty() && poppedValue == currentMaximum) {
+            currentMaximum = maximums.pop();
+          }
+          
+          return poppedValue;
+        }
+    
+        public void push(Integer number) {
+          // Write your code here.
+          stack.push(number);
+          
+          if(stack.size() == 1) {
+            currentMinimum = stack.peek();
+            currentMaximum = currentMinimum;
+          }
+          
+          if(number <= currentMinimum) {
+            minimums.push(currentMinimum);
+            currentMinimum = number;
+          }
+          
+          if(number >= currentMaximum) {
+            maximums.push(currentMaximum);
+            currentMaximum = number;
+          }
+        }
+    
+        public int getMin() {
+          // Write your code here.
+          return currentMinimum;
+        }
+    
+        public int getMax() {
+          // Write your code here.
+          return currentMaximum;
+        }
+      }
+    }
 }
