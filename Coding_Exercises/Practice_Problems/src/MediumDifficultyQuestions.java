@@ -2516,4 +2516,75 @@ public class MediumDifficultyQuestions {
         }
       }
     }
+
+    class SunsetViewsProgram {
+      //EAST = right
+      //WEST = left
+    
+      public ArrayList<Integer> sunsetViews(int[] buildings, String direction) {
+        // Write your code here.
+        //If direction = "EAST"
+        //  Create an empty stack (sunsetViews) that will contain buildings that can see the sunset.
+        //  Create a variable called minHeight that will keep track of the minimum height a building
+        //  needs to see the sunset. Initialize the variable to zero.
+        //  for(i = buildings.length - 1; i >= 0; i--):
+        //    if buildings[i] >= minHeight:
+        //      sunsetViews.add(i)
+        //      minHeight = buildings[i] + 1
+        //  Create an array called views that will store the buildings that can see the sunset,
+        //  in ascending order.
+        //  while sunsetViews is not empty:
+        //    pop items off the stack and add them to views
+        //  return views
+        //If direction = "WEST":
+        //  Create an array called sunsetViews that will store the buildings that can see the sunset,
+        //  in ascending order.
+        //  Create a variable called minHeight that will keep track of the minimum height a building
+        //  needs to see the sunset. Initialize the variable to zero.
+        //  for(i = 0; i < buildings.length; i++):
+        //    if(buildings[i] >= minHeight):
+        //      sunsetViews.add(i)
+        //      minHeight = buildings[i] + 1;
+        //  return sunsetViews
+    
+        int minHeight = 0;
+        ArrayList<Integer> sunsetViews = new ArrayList<>();
+    
+        if(direction.equals("EAST")) {
+          for(int i = buildings.length - 1; i >= 0; i--) {
+            if(buildings[i] >= minHeight) {
+              sunsetViews.add(i);
+              minHeight = buildings[i] + 1;
+            } 
+          }
+          reverse(sunsetViews);
+        } else {
+          for(int i = 0; i < buildings.length; i++) {
+            if(buildings[i] >= minHeight) {
+              sunsetViews.add(i);
+              minHeight = buildings[i] + 1;
+            }
+          }
+        }
+        
+        return sunsetViews;
+        //Time: O(n) Space: O(n) where n is the size of buildings[].
+      }
+    
+      private void reverse(ArrayList<Integer> array) {
+        int start = 0;
+        int end = array.size() - 1;
+        while(start < end) {
+          swap(array, start, end);
+          start++;
+          end--;
+        }
+      }
+    
+      private void swap(ArrayList<Integer> array, int i, int j) {
+        int temp = array.get(i);
+        array.set(i, array.get(j));
+        array.set(j, temp);
+      }
+    }
 }
