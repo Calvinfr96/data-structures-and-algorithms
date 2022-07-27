@@ -2587,4 +2587,48 @@ public class MediumDifficultyQuestions {
         array.set(j, temp);
       }
     }
+
+    class SortStackProgram {
+      //This is a special recursive algorithm. The path from the initial call to the base
+      //case is linear, but the path from the base case to the last call is not.
+      //With each call post-base-case, we may have to start recursing again.
+      //This requires two recursive functions.
+      //The first one takes us on our linear path from the first call to the base case.
+      //The second one takes on our non-linear path from the base case to the last call.
+      public ArrayList<Integer> sortStack(ArrayList<Integer> stack) {
+        // Write your code here.
+        if(stack.isEmpty()) {
+          //The base case for the initial recursion, when we hit an empty stack, we
+          //don't want to do anything with it, so we just return it.
+          return stack;
+        }
+    
+        int top = stack.remove(stack.size() - 1);
+        //The initial recursion, where we remove all elements from the stack.
+        sortStack(stack);
+        //Now that all elements have been removed, we start adding them back in.
+        insert(stack, top);
+        //We finish each call by simply returning the stack. This allows the first call
+        //(the last to be popped of the call stack) to return the sorted stack.
+        return stack;
+        //Time: O(n^2) Space: O(n)
+      }
+    
+      private void insert(ArrayList<Integer> stack, int value) {
+        if(stack.isEmpty() || stack.get(stack.size() - 1) <= value) {
+          //The base case. If the stack is empty or the element we want to add is in
+          //sorted order, we add it to the stack.
+          stack.add(value);
+        } else {
+          //The recursive case. If the element we want to add is not in sorted order,
+          //we remove it from the stack and save it as a variable in the call stack frame.
+          int top = stack.remove(stack.size() - 1);
+          //We attempt to add the value again, recursively.
+          insert(stack, value);
+          //When the value has been successfully added, we take the value we saved and add
+          //it back on to the stack.
+          stack.add(top);
+        }
+      }  
+    }
 }
