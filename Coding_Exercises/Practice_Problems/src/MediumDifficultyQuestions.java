@@ -2631,4 +2631,74 @@ public class MediumDifficultyQuestions {
         }
       }  
     }
+
+    class NextGreaterElementNaiveProgram {
+
+      public int[] nextGreaterElement(int[] array) {
+        // Write your code here.
+        int[] result = new int[array.length];
+        for(int i = 0; i < array.length; i++) {
+          result[i] = findNextGreaterElement(array, i);
+        }
+        
+        return result;
+        //Time: O(n^2) Space: O(n)
+      }
+    
+      public int findNextGreaterElement(int[] array, int start) {
+        int nextGreaterElement = -1;
+        for(int i = start + 1; i < start + array.length; i++) { //i < 9
+          int index = i % array.length;
+          if(array[index] > array[start]) {
+            nextGreaterElement = array[index];
+            break;
+          }
+        }
+    
+        return nextGreaterElement;
+      }
+    }
+
+    class NextGreaterElementProgram {
+
+      public int[] nextGreaterElement(int[] array) {
+        // Write your code here.
+        //For array problems like this, there is typically an O(n^2) solution that
+        //runs in constant space. For each of these solutions, there is typically an
+        //optimized solution that runs in O(n) time and O(n) space. The use of additional
+        //space allows you to complete the algorithm more quickly.
+    
+        //This algorithm uses a stack and runs through the array twice.
+        //During the first pass through the array, you add the index of first element in the array
+        //to the top of the stack.
+        //During each subsequent iteration, you compare the current element in the array to the element
+        //at the top of the stack.
+        
+        //If the current element is greater than the element at the top of the stack, you
+        //pop the element off of the stack and add the current element's (array) value to the
+        //result array. Where i is the index from the stack and j is the current index in your
+        //loop, results[i] = array[j].
+        //After adding to the results array, you append j to the stack.
+    
+        //If the current element is less than the element at the top of the stack, you add its
+        //index to the stack.
+    
+        int[] results = new int[array.length];
+        Arrays.fill(results, -1);
+        Stack<Integer> stack = new Stack<>();
+    
+        for(int i = 0; i < 2*array.length; i++) {
+          int index = i % array.length;
+    
+          while(!stack.empty() && array[stack.peek()] < array[index]) {
+            int top = stack.pop();
+            results[top] = array[index];
+          }
+    
+          stack.push(index);
+        }
+        
+        return results;
+      }
+    }
 }
