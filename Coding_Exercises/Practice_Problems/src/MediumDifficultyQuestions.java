@@ -2701,4 +2701,42 @@ public class MediumDifficultyQuestions {
         return results;
       }
     }
+
+    class longestPanlindromeNaiveProgram {
+      public static String longestPalindromicSubstring(String str) {
+        // Write your code here.
+        //Find all possible substrings of a string and check if each substring is a palindrome.
+        String longestPalindrome = str.substring(0, 1);
+        
+        for(int i = 0; i < str.length(); i++) {
+          for(int j = i + 1; j <= str.length(); j++) {
+            String substring = str.substring(i, j);
+            if(isPalindrome(substring) && substring.length() > longestPalindrome.length()) {
+              longestPalindrome = substring;
+            }
+          }
+        }
+        return longestPalindrome;
+        //Time: O(n^3) Space: O(n);
+      }
+    
+      private static boolean isPalindrome(String str) {
+        //abba
+        int start = 0; 
+        int end = str.length() - 1;
+    
+        while(start < end) {
+          char leftChar = str.charAt(start);
+          int rightChar = str.charAt(end);
+          if(leftChar != rightChar) {
+            return false;
+          }
+    
+          start++;
+          end--;
+        }
+    
+        return true;
+      }
+    }
 }
