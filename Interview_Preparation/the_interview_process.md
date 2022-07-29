@@ -1,0 +1,23 @@
+# Introduction
+- -	Algorithm and coding problems take up most of the interview process at most companies. By asking these questions, recruiters are looking to assess your ability to solve algorithm problems you haven't seen before.
+    - You normally only get through one question per interview.
+-	During the interview, you should discuss the problem with your interviewer and allow them to provide feedback when appropriate. The interviewer is mainly looking to assess your analytical skills, coding skills, and technical knowledge; they also assess your experience and cultural fit with the company, but the first three are most important.
+-	Companies structure their interviews to be this rigorous for several reasons.
+    - They’re trying to avoid false negatives, where bad candidates make it through the interview process and get hired.
+    - The problem-solving skills assessed in the interview are very valuable.
+    - Basic DSA knowledge is useful. It’s also hard to ask questions that don’t involve DSA to some degree.
+    - Good knowledge of basic DSA principles correlates well to being a good developer.
+    - Whiteboarding allows you to focus on the more important parts of solving a coding problem, without having to worry about compilation errors.
+-	Interview questions aren’t decided at the company level. Each interviewer individually and independently selects their own set of questions to ask. However, most companies tend to ask very similar questions.
+-	Interviewers assess your performance on each question relative to candidates they’ve interviewed in the past and candidates they’re currently interviewing, so getting a hard question isn’t bad. What’s hard for you was likely hard for a lot of other people.
+# Behind the Scenes
+- Once selected for an interview, the first step in the process often involves an over-the-phone interview, often called a phone screen.
+    - Phone screens often involve coding and algorithms questions that are asked during technical interviews. You’ll usually conduct two phone screens before being invited to on-site interviews.
+    - For coding questions you’ll typically be asked to write code on a shared document editor. Sometimes, you’ll be asked to write code on a piece of paper and read it back to the interviewer.
+- The on-site interview round typically consists of 3 to 6 in-person interviews. These interviews involve a combination of coding/algorithms, design/architecture, and behavioral/experience questions. Companies and teams within companies prioritize different categories over others.
+- Decisions can be made in as little as a few hours, and usually don’t take more than a week. If you reach out to a recruiter regarding the status of your application and they don’t respond this doesn’t been you’ve been rejected, delays can and do occur.
+    - For example, Microsoft gives individual teams within the company much more flexibility than other companies on how they conduct interviews and hire candidates.
+- At Amazon, you typically conduct one or two phone screens before being flown down to the office of the site you’re interested in. There, you’ll conduct 4 to 5 interviews that will assess your readiness for the role in different aspects. 
+    - One of these interviews, called the “bar raiser” will be significantly harder and more technical than the other interviews. Your performance is assessed relative to other candidates interviewing for the same position.
+    - The interviewers meet after all rounds have been conducted to make a final decision. The hiring managers don’t make the decision.
+    - Amazon interviews **typically focus on questions involving scalability and object-oriented design**.
