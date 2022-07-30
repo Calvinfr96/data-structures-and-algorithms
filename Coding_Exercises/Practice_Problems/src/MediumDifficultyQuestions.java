@@ -2739,4 +2739,89 @@ public class MediumDifficultyQuestions {
         return true;
       }
     }
+
+    class GroupAnagramsProgram {
+      public static List<List<String>> groupAnagrams(List<String> words) {
+        // Write your code here.
+        List<List<String>> groups = new ArrayList<>();
+        
+        for(String word : words) {
+          if(groups.isEmpty()) {
+            groups.add(new ArrayList<String>(Arrays.asList(word)));
+          } else {
+            boolean anagramFound = false;
+            
+            for(List<String> group : groups) {
+              if(isAnagram(word, group.get(0))) {
+                anagramFound = true;
+                group.add(word);
+              }
+            }
+    
+            if(!anagramFound) {
+              groups.add(new ArrayList<String>(Arrays.asList(word)));
+            }
+          }
+        }
+        
+        return groups;
+        //Time: O(w*m^2) where n is the number of words and m is the number of groups.
+        //Space: O(w*n) where n is the length of the longest word.
+      }
+    
+      private static boolean isAnagram(String first, String second) {
+        if(first.length() != second.length()) {
+          return false;
+        }
+    
+        Map<Character, Integer> frequencies = new HashMap<>();
+        for(int i = 0; i < first.length(); i++) {
+          Integer frequency = frequencies.getOrDefault(first.charAt(i), 0);
+          frequency++;
+          frequencies.put(first.charAt(i), frequency);
+        }
+    
+        for(int i = 0; i < second.length(); i++) {
+          if(!frequencies.containsKey(second.charAt(i))) {
+            return false;
+          } else if(frequencies.get(second.charAt(i)) == 0) {
+            return false;
+          } else {
+            Integer frequency = frequencies.get(second.charAt(i));
+            frequency--;
+            frequencies.put(second.charAt(i), frequency);
+          }
+        }
+    
+        return true;
+        //Time: O(n + m) where m and n are the lengths of the strings.
+        //Space: O(n) where n is the length of the first string.
+      }
+    }
+
+    class GroupAnagramsBetterProgram {
+      public static List<List<String>> groupAnagrams(List<String> words) {
+        // Write your code here. This solution uses an alternative method of finding anagrams by sorting the strings.
+        //By Sorting the strings, you can store the anagrams in a hashmap and access them in constant time. This is
+        //better than storing the original words in a 2d list and accessing them in linear time.
+        List<List<String>> groups = new ArrayList<>();
+        Map<String, List<String>> wordAnagrams = new HashMap<>();
+        for(String word : words) {
+          char[] characters = word.toCharArray();
+          Arrays.sort(characters);
+          String sortedWord = new String(characters);
+    
+          wordAnagrams.putIfAbsent(sortedWord, new ArrayList<>());
+          wordAnagrams.get(sortedWord).add(word);
+        }
+    
+        for(List<String> anagrams : wordAnagrams.values()) {
+          groups.add(anagrams);
+        }
+        
+        return groups;
+        //Time: O(w*log(n)) where w is the number of words and n is the length of the longest word.
+        //Space: O(w*n).
+      }
+    }
 }
