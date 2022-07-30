@@ -2824,4 +2824,77 @@ public class MediumDifficultyQuestions {
         //Space: O(w*n).
       }
     }
+
+    class ValidIPAddressesProgram {
+
+      public ArrayList<String> validIPAddresses(String string) {
+        // Write your code here.
+        //To start off this algorithm, you need to find the first valid position for the first period.
+        //The farthest you'll be able to place the first period is the third digit.
+        //After placing the first period, you need to check if the first section of the IP address,
+        //formed by that period, is valid (0 - 255).
+        //You apply the same logic to the placement of the secod period.
+        //For the placement of the last period, you need to check the third and fourth sections
+        //for validity. If the third section is valid, but the fourth is not, it means the placement
+        //of the third period is invalid.
+    
+        //You then need to start finding other valid positions for the second period by moving it
+        //over one. Each time you do this, you also need to find valid positions for the third period.
+        //You then need to start finding other valid positions for the first period by moving it
+        //over one. Each time you do this, you also need to find valid positions for the second and
+        //third periods.
+    
+        ArrayList<String> ipAddressesFound = new ArrayList<>();
+    
+        for(int i = 1; i < Math.min((int) string.length(), 4); i++) {
+          String[] currentIPAddressParts = new String[] {"", "", "", ""};
+    
+          currentIPAddressParts[0] = string.substring(0,i);
+          if(!isValidPart(currentIPAddressParts[0])) {
+            continue;
+          }
+    
+          for(int j = i + 1; j < i + Math.min((int) string.length() - i, 4); j++) {
+            currentIPAddressParts[1] = string.substring(i, j);
+            if(!isValidPart(currentIPAddressParts[1])) {
+            continue;
+            }
+    
+            for(int k = j + 1; k < j + Math.min((int) string.length() - j, 4); k++) {
+              currentIPAddressParts[2] = string.substring(j, k);
+              currentIPAddressParts[3] = string.substring(k);
+              
+              if(isValidPart(currentIPAddressParts[2]) && isValidPart(currentIPAddressParts[3])) {
+                ipAddressesFound.add(join(currentIPAddressParts));
+              }
+            }
+          }
+        }
+        
+        return ipAddressesFound;
+        //Time: O(1) since there is a constant upper bound of 2^32 valid IP Addresses.
+        //Space: O(1) for the same reason.
+      }
+    
+      public boolean isValidPart(String string) {
+        int stringAsInt = Integer.parseInt(string);
+        if(stringAsInt > 255) {
+          return false;
+        }
+    
+        return string.length() == Integer.toString(stringAsInt).length();
+      }
+    
+      public String join(String[] strings) {
+        StringBuilder sb = new StringBuilder();
+        for(int l = 0; l < strings.length; l++) {
+          sb.append(strings[l]);
+          if(l < strings.length - 1) {
+            sb.append(".");
+          }
+        }
+    
+        return sb.toString();
+      }
+    }
 }
