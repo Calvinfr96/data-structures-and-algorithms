@@ -2981,4 +2981,69 @@ public class MediumDifficultyQuestions {
         return frequencies;
       }
     }
+
+    class SuffixTrieConstructionProgram {
+      // Do not edit the class below except for the
+      // populateSuffixTrieFrom and contains methods.
+      // Feel free to add new properties and methods
+      // to the class.
+      static class TrieNode {
+        Map<Character, TrieNode> children = new HashMap<Character, TrieNode>();
+      }
+    
+      static class SuffixTrie {
+        TrieNode root = new TrieNode();
+        char endSymbol = '*';
+    
+        public SuffixTrie(String str) {
+          populateSuffixTrieFrom(str);
+        }
+    
+        public void populateSuffixTrieFrom(String str) {
+          // Write your code here.
+          for(int i = 0; i < str.length(); i++) {
+            addWord(str.substring(i));
+          }
+          //Time: O(n^2) Space: O(n^2) where n is the length of the input string.
+          //Space: O(n^2) in the worst case (where the string has all unique characters).
+        }
+    
+        private void addWord(String string) {
+          TrieNode currentNode = this.root;
+          Map<Character, TrieNode> currentChildren = currentNode.children;
+    
+          for(int i = 0; i < string.length(); i++) {
+            Character currentChar = string.charAt(i);
+            if(!currentChildren.containsKey(currentChar)) {
+              currentChildren.put(currentChar, new TrieNode());
+            }
+            currentNode = currentChildren.get(currentChar);
+            currentChildren = currentNode.children;
+          }
+    
+          if(!currentChildren.containsKey(endSymbol)) {
+            currentChildren.put(endSymbol, null);
+          }
+        }
+    
+        public boolean contains(String str) {
+          // Write your code here.
+          TrieNode currentNode = this.root;
+          Map<Character, TrieNode> currentChildren = currentNode.children;
+          
+          for(int i = 0; i < str.length(); i++) {
+            Character currentChar = str.charAt(i);
+            if(!currentChildren.containsKey(currentChar)) {
+              return false;
+            }
+            currentNode = currentChildren.get(currentChar);
+            currentChildren = currentNode.children;
+          }
+          
+          return currentChildren.containsKey(endSymbol);
+          //Time: O(m) where m is the length of the input string.
+          //Space: O(1)
+        }
+      }
+    }
 }
