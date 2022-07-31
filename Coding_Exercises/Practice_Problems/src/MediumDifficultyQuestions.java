@@ -2936,4 +2936,49 @@ public class MediumDifficultyQuestions {
         return components;
       }
     }
+
+    class MinimumCharactersForWordsProgram {
+
+      public char[] minimumCharactersForWords(String[] words) {
+        // Write your code here.
+        Map<Character, Integer> highestFrequencies = new HashMap<>();
+        List<Character> characters = new ArrayList<>();
+    
+        for(String word : words) {
+          Map<Character, Integer> frequencies = getFrequencies(word);
+          for(Map.Entry<Character, Integer> entry : frequencies.entrySet()) {
+            Integer currentHighestFrequency = highestFrequencies.getOrDefault(entry.getKey(), 0);
+            Integer highestFrequency = Math.max(entry.getValue(), currentHighestFrequency);
+            highestFrequencies.put(entry.getKey(), highestFrequency);
+          }
+        }
+    
+        for(Map.Entry<Character, Integer> entry : highestFrequencies.entrySet()) {
+          for(int i = 0; i < entry.getValue(); i++) {
+            characters.add(entry.getKey());
+          }
+        }
+    
+        char[] charactersArray = new char[characters.size()];
+        for(int i = 0; i < characters.size(); i++) {
+          charactersArray[i] = characters.get(i);
+        }
+        
+        return charactersArray;
+        //Time: O(n*w) where n is the number of words and w is the length of the longest word.
+        //Space: O(c) where c is the number of unique characters
+      }
+    
+      private Map<Character, Integer> getFrequencies(String word) {
+        Map<Character, Integer> frequencies = new HashMap<>();
+        
+        for(int i = 0; i < word.length(); i++) {
+          Integer frequency = frequencies.getOrDefault(word.charAt(i), 0);
+          frequency++;
+          frequencies.put(word.charAt(i), frequency);
+        }
+        
+        return frequencies;
+      }
+    }
 }
