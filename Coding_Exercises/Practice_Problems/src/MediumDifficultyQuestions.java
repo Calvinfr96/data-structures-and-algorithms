@@ -2897,4 +2897,43 @@ public class MediumDifficultyQuestions {
         return sb.toString();
       }
     }
+
+    class ReverseWordsInStringProgram {
+      public String reverseWordsInString(String string) {
+        // Write your code here.
+        List<String> stringComponents = splitString(string);
+        StringBuilder reversedWord = new StringBuilder();
+    
+        for(int i = stringComponents.size() - 1; i >= 0; i--) {
+          reversedWord.append(stringComponents.get(i));
+        }
+        
+        return reversedWord.toString();
+        //Time: O(n) Space: O(n) where n is the length of the input string.
+      }
+    
+      private static List<String> splitString(String string) {
+        List<String> components = new ArrayList<>();
+        StringBuilder word = new StringBuilder();
+        StringBuilder space = new StringBuilder();
+    
+        for(int i = 0; i < string.length(); i++) {
+          if(string.charAt(i) != ' ') {
+            if(space.length() != 0) {
+              components.add(space.toString());
+              space = new StringBuilder();
+            }
+            word.append(string.charAt(i));
+          } else {
+            space.append(string.charAt(i));
+            components.add(word.toString());
+            word = new StringBuilder();
+          }
+        }
+        components.add(space.toString());
+        components.add(word.toString());
+    
+        return components;
+      }
+    }
 }
